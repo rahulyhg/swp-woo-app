@@ -14,3 +14,25 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+
+    ion-title{
+        font-family: raleway;
+        font-weight: bold;
+    }
+
+
+    $font-family-base: "Montserrat" !default;
+    body{
+    font-family: "Montserrat" !important;
+    font-weight: 400 !important;
+    }
+    
+    h1,h3, button {
+    font-family: "Raleway" !important;
+    }
+    h2 {
+        font-family: "Montserrat" !important;
+        }
+
+   

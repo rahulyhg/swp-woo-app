@@ -19,6 +19,13 @@ import { HomePage } from '../pages/home/home';
 import { CategoriesPage } from '../pages/categories/categories';
 import { DetailCategoryPage } from '../pages/detail-category/detail-category';
 import { SearchPage } from '../pages/search/search';
+import { ProductDetailsPage } from '../pages/product-details/product-details';
+import { CartPage } from '../pages/cart/cart';
+import { CheckoutPage } from '../pages/checkout/checkout';
+import { WishlistPage } from '../pages/wishlist/wishlist';
+import { SignupPage } from '../pages/signup/signup';
+import {SigninPage} from '../pages/signin/signin';
+
 
 
 @NgModule({
@@ -27,12 +34,20 @@ import { SearchPage } from '../pages/search/search';
     HomePage,
     CategoriesPage,
     DetailCategoryPage,
-    SearchPage
+    SearchPage,
+    ProductDetailsPage,
+    CartPage,
+    CheckoutPage,
+    WishlistPage,
+    SignupPage,
+    SigninPage
+   
   ],
   imports: [
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot(),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -40,13 +55,20 @@ import { SearchPage } from '../pages/search/search';
     HomePage,
     CategoriesPage,
     DetailCategoryPage,
-    SearchPage
+    SearchPage,
+    ProductDetailsPage,
+    CartPage,
+    CheckoutPage,
+    WishlistPage,
+    SignupPage,
+    SigninPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    HttpClientModule
+    HttpClientModule,
+   
   ]
 })
 export class AppModule {}

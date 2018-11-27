@@ -2,12 +2,36 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>detail-category</ion-title>
+    <ion-title>{{categoryDetails.name}}</ion-title>
+    <ion-buttons right>
+        <button ion-button icon-only>
+            <ion-icon name="cart" (click)="swp_OpenCartPage()"></ion-icon>
+        </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content  class="outer-content">
+   <!-- products in list view-->
+   <!--<ion-list  *ngIf="0 < categoryProducts.length">  -->
+      <ion-item  *ngFor ="let product of categoryProducts" (click)="swp_OpenProductDetailsPage(event,product.id)">
+   <ion-card>
+       <ion-row>
+           <ion-col col-4>
+                <ion-thumbnail item-left>  <!--item left to show thumbnail at left -->
+                    <img src="{{product.images[0].src}}"/>              
+            </ion-thumbnail> 
+           </ion-col>
+           <ion-col col-8>
+                <h2>{{product.name}}</h2>
+                <h2 [innerHTML]="product.price_html"></h2>
+                <span [innerHTML]="product.short_description.substr(0,50) + '...'"></span> 
+           </ion-col>
+        </ion-row>
+    </ion-card>
+       </ion-item>
+  <!--  </ion-list> -->
 
 </ion-content>

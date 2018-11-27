@@ -1,0 +1,78 @@
+
+<!--<ion-header>
+  <ion-navbar>
+    <ion-title>wishlist</ion-title>
+    <ion-buttons right>
+      <button ion-button icon-only>
+          <ion-icon name="cart" (click)="swp_OpenCartPage()"></ion-icon>
+      </button>
+  </ion-buttons>
+  </ion-navbar>
+</ion-header> -->
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Wish List</ion-title>
+    <ion-buttons right>
+            <button ion-button icon-only>
+                <ion-icon name="cart" (click)="swp_OpenCartPage()"></ion-icon>
+            </button>
+        </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+      <ion-list *ngIf="0 < products.length">
+          <ion-item-sliding *ngFor ="let product of products; let i=index ">
+            <ion-item> 
+                <ion-thumbnail item-left>  <!--item left to show thumbnail at left -->
+                  <img src="{{product.images[0].src}}"/>              
+          </ion-thumbnail>  
+          <h2>{{product.name}}</h2>
+          <h2 [innerHTML]="product.price_html"></h2>            
+          </ion-item>
+          <ion-item-options side="right"> 
+            <button drager (click)="removeFromWishlist($event,i)" ion-button>
+               <ion-icon [style.color]="' danger' " name="heart"></ion-icon>
+               remove
+            </button>
+          </ion-item-options> 
+          <ion-item-options side="left">
+            <button ion-button (click)="addToCart($event,product,i)">
+                <ion-icon [style.color]="' danger' " name="cart"></ion-icon>
+                Add to cart
+              </button>
+          </ion-item-options>
+         </ion-item-sliding>
+        </ion-list>
+
+</ion-content>
+<ion-footer>
+  
+   <!--  <ion-toolbar no-padding-hard>
+        <ion-row *ngIf="products.length > 0">
+          <ion-col border-right no-padding>
+            <button ion-button full clear color="dark" (click)="share()" class="disable-hover">
+            <ion-icon icon-big name="share"></ion-icon>
+          </button>
+          </ion-col>
+          <ion-col no-padding>
+            <button ion-button full clear class="disable-hover" color="dark" [navPush]="cartPage" [navParams]="products">
+            <ion-icon icon-big name="cart"></ion-icon>
+            <ion-badge absolute>5</ion-badge>
+          </button>
+          </ion-col>
+       <ion-col width-50 primary-bg text-center no-padding>
+            <button ion-button full clear class="disable-hover" [disabled]="!(detail.price*1) && detail.price.html == ''" color="light" (click)="addToCart()">
+              <h5 no-margin *ngIf="detail.type!='external'">{{'detail.addToCart'|translate}}</h5>
+              <span *ngIf="detail.type=='external'" no-wrap-ellipsis>
+                <ion-icon name="icon-link"></ion-icon>
+                <span>{{detail.button_text}}</span>
+              </span>
+            </button>
+          </ion-col>  
+        </ion-row>
+      </ion-toolbar>
+--> 
+</ion-footer>
