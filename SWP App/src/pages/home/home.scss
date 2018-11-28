@@ -1,11 +1,5 @@
 page-home {
 
-    .header-banner{
-        height:auto;
-        min-height:200px;
-       
-      }
-
       .slider{
         height:200px !important; //auto
         .swiper-wrapper {
@@ -23,23 +17,25 @@ page-home {
     
         .scroll-item {
           display: inline-block;
-          height: 120px;
+         height: 120px;
           text-align: center;
           padding: 2px;
+          margin:8px;
           align-items: center ;
         }
         
-        ion-avatar img{
-          margin: 10px;
-          height: 50px;
-          width :50px;
+  
+      ion-avatar img{
+        margin: 10px;
+         height: 50px;
+        width :50px;
         }
 
-        ion-avatar span{
-          text-align: center;
-          font-size: 12px;
-          font-weight: bold;
-        }
+       // ion-avatar span{
+         // text-align: center;
+        //  font-size: 12px;
+         // font-weight: bold;
+       // }
       }
     
       ion-scroll[scroll-avatar]{
@@ -67,35 +63,55 @@ page-home {
     @media (min-width: 0px) {
       .images {
           column-count: 2;
-          padding:2%;
+         // padding:2%;
       }
   }
 
   @media (min-width: 420px) {
       .images {
           column-count: 3;
-          padding:2%;
+         // padding:2%;
       }
   }
 
   @media (min-width: 720px) {
       .images {
           column-count: 4;
-          padding:2%;
+          //padding:2%;
       }
   }
 
+  
   .one-image {
       margin: 2px;
       margin-bottom: 2px;
   }
   
-  .featured-product-price{
-    font-size: 10px;
-    font-weight: bold;
-
+  .featured-product{
+    font-size: 15px;
+    margin-top:2px;
   }
-      
-
+  .product-price{
+      font-family: "monteserrat";
+      font-weight: bolder;
+      color: #333333;
+    }
+    .product-name{
+      font-family: "raleway";
+      font-weight: bold;
+      color: #c1a485;
+    }
+    
+    .category-name{
+      display: inline;
+      font-family: "raleway";
+      font-weight: bolder;
+      color: #333333;
+    }
   }
+
+
+  
+
+ 
   

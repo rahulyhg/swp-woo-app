@@ -34,15 +34,14 @@ $app-direction: ltr;
 // The "primary" color is the only required color in the map.
 
 $colors: (
-  primary:    #488aff,
-  secondary:  #32db64,
-  danger:     #f53d3d,
-  light:      #f4f4f4,
-  dark:       #222
+  primary:#EFDECC,
+  secondary:  #C1A485,
+  light:      #777777,
+  dark:       #333333,
+  gray:       #888580,
+
+
 );
-
-
-
 
 @font-face{
   font-family: Montserrat;
@@ -54,6 +53,30 @@ $colors: (
      src: url('../assets/fonts/raleway.woff2') format('woff2');
       }
        
+
+  //change this    
+$toolbar-background: #fff;
+$tabs-background: #fff;
+$tabs-ios-tab-font-size: 11px;
+$tabs-ios-tab-opacity: 1;
+$tabs-tab-color-inactive: #000;
+$text-color: #5a5a5a;
+$toolbar-ios-button-color: #000;
+$button-ios-text-transform: none;
+$button-ios-font-size: 1.4rem;
+$item-ios-body-text-font-size: 1.5rem;
+$toolbar-ios-border-color: rgba(0, 0, 0, .1);
+$toolbar-ios-button-font-size: 1.4rem;
+$alert-ios-background-color: #fff;
+$alert-ios-message-text-color: #000;
+$alert-ios-button-text-color: #000;
+$list-ios-border-color: #f3f3f3;
+$refresher-border-color: none;
+$alert-ios-button-border-color: #ECEAEA;
+$list-ios-margin-bottom: 16px;
+$hairlines-width: 1px;
+$toolbar-ios-title-font-size: 1.8rem;
+$toolbar-ios-title-font-weight: 400;
       
 // App iOS Variables
 // --------------------------------------------------

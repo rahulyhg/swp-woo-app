@@ -24,9 +24,10 @@
                     <img src="{{product.images[0].src}}"/>              
             </ion-thumbnail> 
            </ion-col>
-           <ion-col col-8>
+           <ion-col col-8 padding-2 text-wrap>
                 <h2>{{product.name}}</h2>
-                <h2 [innerHTML]="product.price_html"></h2>
+                <br>
+                <h3 [innerHTML]="product.price_html"></h3>
                 <span [innerHTML]="product.short_description.substr(0,50) + '...'"></span> 
            </ion-col>
         </ion-row>

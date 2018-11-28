@@ -53,10 +53,10 @@
       <ion-item no-lines>
         <ion-scroll scrollX="true">
             <ion-avatar >
-                <div class="scroll-item" *ngFor="let category of categories"  [navPush]=" DetailCategoryPage" [navParams]="{category_id:category.id}" (click) = "swp_OpenDetailCategoryPage($event,category.id)">
-                    <img  *ngIf="category.image && category.image.src" [src]="category.image.src" />
-                    <img  *ngIf="!category.image" src = "assets/images/no-img.png" /> 
-                    <h2>{{category.name | slice: 0:10}}</h2>
+                <div class="scroll-item" center *ngFor="let category of categories"  [navPush]=" DetailCategoryPage" [navParams]="{category_id:category.id}" (click) = "swp_OpenDetailCategoryPage($event,category.id)">
+                    <img center *ngIf="category.image && category.image.src" [src]="category.image.src" />
+                    <img  center *ngIf="!category.image" src = "assets/images/no-img.png" /> 
+                    <div text-wrap class="category-name">{{category.name}}</div>
                 <!--   <div margin-auto light text-center [innerHTML]="category.name" ></div> --> 
                 </div>
              </ion-avatar>
@@ -77,14 +77,15 @@
 
 
   <!-- Featured Products-->
+  <div class = "featured-product"></div>
     <div class="images" nowrap center mark absolute >
      <ion-item *ngFor ="let product of featuredProducts | slice:0:5; let i=index" [navPush]="ProductDetailsPage" [navParams]="{product_id:product.id}" (click) = " swp_OpenProductDetailsPage($event,product.id)" >
     <ion-card>
       <div class="one-image">
         <img src="assets/images/11.jpg"> 
      <!-- <img src="{{product.images[0].src}}"/> -->
-        <h3>{{product.name | slice :0:50}} </h3>
-        <div class="featured-product-price" [innerHTML]="product.price_html"></div>
+        <div class="featured-product product-price" [innerHTML]="product.price_html"></div>
+        <div class=" featured-product product-name" text-wrap >{{product.name | slice :0:50}} </div>
      </div>
     </ion-card>
      </ion-item>

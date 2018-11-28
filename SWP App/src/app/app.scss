@@ -15,12 +15,17 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
+// change this values based on req
+html{    
+        &.small{font-size:56.25%;} // 15pt
+        &.normal{font-size:62.5%;} //20 
+        &.large{font-size:68.75%;}  //25 
+        &.extra_large{font-size:75%;} //35
+}
 
-    ion-title{
-        font-family: raleway;
-        font-weight: bold;
-    }
-
+[textR]{font-family: "raleway"}
+[textM]{font-family: "montserrat"}
+[bg-transparent]{background:transparent}
 
     $font-family-base: "Montserrat" !default;
     body{
@@ -28,11 +33,4 @@
     font-weight: 400 !important;
     }
     
-    h1,h3, button {
-    font-family: "Raleway" !important;
-    }
-    h2 {
-        font-family: "Montserrat" !important;
-        }
-
-   
+  

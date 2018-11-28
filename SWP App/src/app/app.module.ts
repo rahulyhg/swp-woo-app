@@ -25,6 +25,8 @@ import { CheckoutPage } from '../pages/checkout/checkout';
 import { WishlistPage } from '../pages/wishlist/wishlist';
 import { SignupPage } from '../pages/signup/signup';
 import {SigninPage} from '../pages/signin/signin';
+import { UserLoginProvider } from '../providers/user-login/user-login';
+import { MyordersPage } from '../pages/myorders/myorders';
 
 
 
@@ -40,7 +42,8 @@ import {SigninPage} from '../pages/signin/signin';
     CheckoutPage,
     WishlistPage,
     SignupPage,
-    SigninPage
+    SigninPage,
+    MyordersPage
    
   ],
   imports: [
@@ -61,13 +64,15 @@ import {SigninPage} from '../pages/signin/signin';
     CheckoutPage,
     WishlistPage,
     SignupPage,
-    SigninPage
+    SigninPage,
+    MyordersPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     HttpClientModule,
+    UserLoginProvider,
    
   ]
 })

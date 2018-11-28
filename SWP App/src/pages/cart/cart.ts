@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {  NavController, NavParams, ViewController, ModalController } from 'ionic-angular';
 import {Storage} from '@ionic/Storage';
 import { CheckoutPage } from '../checkout/checkout';
+import { SigninPage } from '../signin/signin';
 //import { LoginPage } from '../login/login';
 
 @Component({
@@ -132,7 +133,7 @@ swp_decreaseQty(item,i){
         this.navCtrl.push(CheckoutPage);
       }
       else{ 
-      //  this.navCtrl.push(LoginPage,{next: CheckoutPage}); // here after login user will be taken to checkout page directly with the help of next paramenter
+       this.navCtrl.push(SigninPage,{next: CheckoutPage}); // here after login user will be taken to checkout page directly with the help of next paramenter
       }
     })
     

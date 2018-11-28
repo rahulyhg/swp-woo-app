@@ -6,6 +6,7 @@ import { FormControl } from '@angular/forms';
 import 'rxjs/add/operator/debounceTime';
  
 import {ProductDetailsPage} from '../../pages/product-details/product-details';
+import {CartPage} from '../../pages/cart/cart';
 
 import {Storage} from '@ionic/Storage';
 import {WC_url} from '..';
@@ -91,5 +92,9 @@ json2array(json){
 
 swp_OpenProductDetailsPage(event,product_id){
   this.navCtrl.push(ProductDetailsPage,{product_id:product_id});
+}
+
+swp_OpenCartPage(){
+  this.navCtrl.push(CartPage);
 }
 }

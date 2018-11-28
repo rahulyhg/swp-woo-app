@@ -39,7 +39,7 @@ constructor(public navCtrl: NavController,
     this.categories = [];
 
 
-    let data ={username: 'xyz',password: 'xyz'}
+    
 
     this.http.post(WC_url + '/wp-json/jwt-auth/v1/token',data)
    .subscribe(
