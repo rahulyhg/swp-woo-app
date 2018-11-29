@@ -1,10 +1,15 @@
 <?php
-
-if(! function_exists( 'swp_flag_order_meta' )){
-   function swp_flag_order_meta(){
-
-        function swp_flag_order_column($columns)
-        {
+if (! class_exists ('swp_flag_order_meta')){
+    class swp_flag_order_meta{
+       
+        function __construct(){
+            add_filter( 'manage_edit-shop_order_columns',  array( $this, 'swp_flag_order_column') , 11 );
+            add_action( 'manage_shop_order_posts_custom_column' , array( $this, 'swp_flag_order_column_content' ) , 10,2  );
+            add_action( 'rest_api_init', array( $this, 'swp_mobile_product_orders' ) );
+        }
+        
+        function swp_flag_order_column($columns){
+        
             $reordered_columns = array();
 
             // Inserting columns to a specific location
@@ -12,34 +17,73 @@ if(! function_exists( 'swp_flag_order_meta' )){
                 $reordered_columns[$key] = $column;
                 if( $key ==  'order_status' ){
                     // Inserting after "Status" column
-                    $reordered_columns['flag_status'] = __( 'Mobile App Flag','theme_domain');
+                    $reordered_columns['flag_status'] = __( 'Mobile Order','swpappconnector');
                 }
             }
             return $reordered_columns;
         }
-        add_filter( 'manage_edit-shop_order_columns', 'swp_flag_order_column',20);
         
         // Adding custom fields meta data for each new column (example)
-        function swp_flag_order_column_content( $column, $post_id )
-        {
-          switch ( $column )
-            {
-                case 'flag_status' :
-                    // Get custom post meta data
-                    $flag_status = get_post_meta( $post_id, '_the_meta_key1', true );
-                    if(!empty($flag_status))
-                        echo $flag_status;
+        function swp_flag_order_column_content( $column ){
+          
+           global $post, $woocommerce;
+	       $order_id = $post->ID;
+              switch ( $column )
+                {
+                    case 'flag_status' :
+                        // Get custom post meta data
+                        $flag_status = get_post_meta( $order_id, 'swp_mobile_order', true );
+                        if(!empty($flag_status))
+                            echo "yes";
 
-                    // Testing (to be removed) - Empty value case
-                    else
-                        echo '1';
+                        // Testing (to be removed) - Empty value case
+                        else
+                            echo '-';
 
-                    break;
+                        break;
 
-            }
+                }
         }
-        add_action( 'manage_shop_order_posts_custom_column' , 'swp_flag_order_column_content', 20,2  );
+        
+        function swp_mobile_product_orders(){
+                
+            $swp_mobile_order_schema = array(
+                'description' => 'Mobile order flag',
+                'type' => 'boolean',
+                'context' => array('view','edit'),
+                'default' => false
+            );
+            //register product title
+               register_rest_field( 'shop_order', 'swp_mobile_order', array(
+                'get_callback'    =>  array( $this, 'swp_get_mobile_product_order_callback' ),
+                'update_callback' => array( $this, 'swp_update_mobile_product_order_callback' ),
+                'schema' => $swp_mobile_order_schema,
+            ));
+        }
 
+        // Get product orders
+        function swp_get_mobile_product_order_callback($order, $field_name, $request) {
+            
+            return get_post_meta( $order['id'], $field_name, true ); // *** $order['id'] use for call array of order use only for get_post_meta 
+        }
+        
+        // Update Product Orders
+         function swp_update_mobile_product_order_callback($value, $order, $field_name ) {
+            if(!empty($field_name)){
+              return update_post_meta( $order->ID, 'swp_mobile_order', $value ); //*** $order->ID use for call object of order use only for update_post_meta
+            }
+             else{
+                return ;
+             }
+            
+           }
     }
-
 }
+            
+        
+            
+        
+    
+    
+
+  
