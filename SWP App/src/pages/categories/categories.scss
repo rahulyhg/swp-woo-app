@@ -1,0 +1,25 @@
+page-categories {
+
+    .item-category{
+		display: -webkit-flex;
+		flex-direction: column;
+		-webkit-flex-direction: column;
+		.row {
+			display: flex;
+			align-items: center;
+		}
+		.col{
+			display: flex;
+			align-content: center;
+		}
+		//[mark]{@include background-opacity(#000, 0.4);}
+		.name{
+			display:inline-block;
+			padding:5px 10px;
+			border:1px solid;
+			border-radius:2px;
+		}
+	}
+
+	
+}

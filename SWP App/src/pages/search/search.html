@@ -1,0 +1,49 @@
+
+<ion-header>
+
+  <ion-navbar>
+      <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+    
+        <ion-buttons end (click)="swp_OpenCartPage()">
+            <button ion-button icon-only>
+                <ion-icon name="cart" ></ion-icon>
+            </button>
+        </ion-buttons>
+    
+        <ion-title><img alt="logo" height="40"   src="assets/images/logo.png" ></ion-title>
+      
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+ <ion-searchbar #mySearchbar autocomplete = "on" 
+ [(ngModel)]="searchTerm" [formControl]="searchControl" 
+ (search)="onSearchInput()"></ion-searchbar>
+ 
+  <div *ngIf="searching" class="spinner-container">
+      <ion-spinner></ion-spinner>
+  </div>
+
+  <ion-list>
+      <ion-item *ngFor="let product of products " [navPush]="ProductDetailsPage" [navParams]="{product_id:product.id}" (click) = " swp_OpenProductDetailsPage($event,product.id)">
+      <ion-row>
+          <ion-col col-4>
+              <ion-thumbnail item-left> 
+                <img src="{{product.images[0].src}}"/>              
+        </ion-thumbnail> 
+          </ion-col >
+          <ion-col col-8>
+               <div item-right text-wrap>{{product.name}} </div>
+                <h2 [innerHTML]="product.price_html"></h2>
+          </ion-col>
+      </ion-row>
+    
+    </ion-item>
+  </ion-list> 
+
+</ion-content>

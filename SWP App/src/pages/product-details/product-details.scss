@@ -1,0 +1,33 @@
+page-product-details {
+
+    .product-imgs{
+        display: inline-block;
+       height:auto; //auto
+    }
+    .img {max-width: 200px;
+    }
+        
+    .product-price{
+        font-size: large;
+        font-weight: bold;
+        font-family: cursive;
+    }
+    
+    .product-name{
+        font-family: cursive;
+        font-size:medium;
+    }
+
+    .discription{
+        text-align: left;
+        font-family: cursive;
+    }
+
+    ion-icon{
+        font-weight: bold;
+        font-size: 40px;
+    }
+    ion-list {
+        display: inline-flex;
+    }
+}

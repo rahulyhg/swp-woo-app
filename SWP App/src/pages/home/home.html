@@ -1,0 +1,99 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+
+    <ion-buttons end (click)="swp_OpenSearchPage()">
+        <button ion-button icon-only>
+            <ion-icon name="search"></ion-icon>
+        </button>
+    </ion-buttons>
+    
+
+    <ion-buttons right (click)="swp_OpenCartPage()">
+        <button ion-button icon-only>
+            <ion-icon name="cart" ></ion-icon>
+        </button>
+    </ion-buttons>
+
+    <ion-title><img alt="logo" height="40"   src="assets/images/logo.png" ></ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content  class="outer-content">
+
+  <!--Popup-->
+
+  <!-- Refresh 
+<ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      [pullingIcon]="'general.pullingIcon'|translate"
+      [pullingText]="'general.pullToRefresh'|translate"
+      [refreshingSpinner]="'general.refreshingSpinner'|translate"
+      [refreshingText]="'general.refreshing'|translate">
+    </ion-refresher-content>
+  </ion-refresher> -->
+
+
+<!-- Slider-->
+
+<ion-slides #slide_update *ngIf="slider && 0 < slider.length" class="slider" pager="true" loop="true" autoplay="5000">
+	<!--<ion-slide *ngFor="let slide of slides" tappable (click)="swp_OpenSliderLink(slide.url)"> -->
+      <ion-slide *ngFor="let slide of slider" tappable > 
+    <img [src]="slide.images[0].src" float-left />
+		<!--<img [src]="slide.slider_images" float-left /> -->
+	</ion-slide>
+</ion-slides>
+
+<!-- categories -->
+<div>
+  <ion-card>
+    <ion-row center mark absolute width-100 height-100>
+      <ion-item no-lines>
+        <ion-scroll scrollX="true">
+            <ion-avatar >
+                <div class="scroll-item" center *ngFor="let category of categories"  [navPush]=" DetailCategoryPage" [navParams]="{category_id:category.id}" (click) = "swp_OpenDetailCategoryPage($event,category.id)">
+                    <img center *ngIf="category.image && category.image.src" [src]="category.image.src" />
+                    <img  center *ngIf="!category.image" src = "assets/images/no-img.png" /> 
+                    <div text-wrap class="category-name">{{category.name}}</div>
+                <!--   <div margin-auto light text-center [innerHTML]="category.name" ></div> --> 
+                </div>
+             </ion-avatar>
+             </ion-scroll>
+      </ion-item>
+    </ion-row>
+  </ion-card>
+  </div>
+
+  <!-- Deals of the day-->
+  <ion-card>
+  <ion-row nowrap center mark absolute width-100 height-80 *ngFor = "let number of [1,2]"> <!-- Add ngIF-->
+    <ion-item no-lines> 
+        <img src= "./assets/images/{{number}}.jpg"/>  
+    </ion-item>
+  </ion-row>
+</ion-card>
+
+
+  <!-- Featured Products-->
+  <div class = "featured-product"></div>
+    <div class="images" nowrap center mark absolute >
+     <ion-item *ngFor ="let product of featuredProducts | slice:0:5; let i=index" [navPush]="ProductDetailsPage" [navParams]="{product_id:product.id}" (click) = " swp_OpenProductDetailsPage($event,product.id)" >
+    <ion-card>
+      <div class="one-image">
+        <img src="assets/images/11.jpg"> 
+     <!-- <img src="{{product.images[0].src}}"/> -->
+        <div class="featured-product product-price" [innerHTML]="product.price_html"></div>
+        <div class=" featured-product product-name" text-wrap >{{product.name | slice :0:50}} </div>
+     </div>
+    </ion-card>
+     </ion-item>
+    </div>  
+
+    <!-- infinite scroll-->
+
+    <!--Footer-->
+
+
+</ion-content>
