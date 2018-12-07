@@ -20,7 +20,7 @@ class swp_product_cat_on_mobile{
         add_action( 'admin_enqueue_scripts', array( $this, 'swp_load_media' ) );
         add_action( 'admin_footer', array ( $this, 'swp_add_script' ) );
 
-        add_action( 'rest_api_init', array( $this , 'swp_hide_product_category' ) );
+        //add_action( 'rest_api_init', array( $this , 'swp_hide_product_category' ) );
         
     }
 
