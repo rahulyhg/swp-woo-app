@@ -39,9 +39,8 @@ if(! function_exists( 'SWPApp' ) ){
             require_once( 'includes/swpauthentication/jwt/class-mobionnector-jwt-core.php' );
             
             //add meta column in product order list
-            require_once( 'includes/swp-mobile-orders-meta.php' );
-            require_once( 'includes/class-app-disable-category-on-mobile.php' );
-            $swp_flag_order_meta = new swp_flag_order_meta();
+            require_once( 'includes/swp-app-includes.php' );
+            $SWPappinludes = new SWPappinludes();
             //backend view
             require_once( 'settings/class-mobiconnector-settings-api.php' );
             require_once( 'settings/class-app-connector-backend-settings.php' );
@@ -49,9 +48,7 @@ if(! function_exists( 'SWPApp' ) ){
            // require_once( 'settings/app-connector-tab-settings.php' );
             // Include the endpoints class.
             require( plugin_dir_path( __FILE__ ) . 'endpoints/swp-app-connector-endpoints.php');
-            //mobile user access  
-            require_once( 'endpoints/swp-user-access.php' );
-        }
+            }
         
         // Main instance of plugin.
         function swp_app_general_setting_endpoints() {

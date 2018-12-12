@@ -23,7 +23,7 @@ class SWPsettingslider
             'swp_app_slider_option',                     
             'swp_app_slider_header',
             array(
-                'swp_app_slider_add_slide_title' 
+                'swp_app_slider_add_slide' 
             ) 
         );
         add_settings_field(  

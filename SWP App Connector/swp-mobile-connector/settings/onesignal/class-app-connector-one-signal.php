@@ -184,7 +184,7 @@ class SWPsettingform
 
         $options = get_option('swp_app_general_options'); 
 
-        query_posts( $options );
+        query_posts( $args );
 
 
         echo '<select id="featured_post" name="swp_app_general_options[featured_post]">';
@@ -215,7 +215,6 @@ class SWPsettingform
                 <a href="?page=swp-app-general-setting-options&tab=header_options" class="nav-tab <?php echo $active_tab == 'header_options' ? 'nav-tab-active' : ''; ?>">About Us</a>
                 <a href="?page=swp-app-general-setting-options&tab=swp_app_slider_settings" class="nav-tab <?php echo $active_tab == 'swp_app_slider_settings' ? 'nav-tab-active' : ''; ?>">Slider</a>
                 <a href="?page=swp-app-general-setting-options&tab=swp_app_popup_settings" class="nav-tab <?php echo $active_tab == 'swp_app_popup_settings' ? 'nav-tab-active' : ''; ?>">Popup</a>
-                <a href="?page=swp-app-general-setting-options&tab=swp_app_deals_settings" class="nav-tab <?php echo $active_tab == 'swp_app_deals_settings' ? 'nav-tab-active' : ''; ?>">Deals</a>
                 <a href="?page=swp-app-general-setting-options&tab=swp_app_footer_settings" class="nav-tab <?php echo $active_tab == 'swp_app_footer_settings' ? 'nav-tab-active' : ''; ?>">Footer</a>
             </h2>  
 
@@ -231,13 +230,10 @@ class SWPsettingform
                     $SWPsettingaboutus->swp_about_us_setting_page();
                 }else if( $active_tab == 'swp_app_slider_settings' ) {
                      $SWPsettingslider = new SWPsettingslider();
-                     $SWPsettingslider->swp_slider_setting_page();
+                    $SWPsettingslider->swp_about_us_settings_page();
                 }else if( $active_tab == 'swp_app_popup_settings' ) {
-                     $SWPsettingpopup = new SWPsettingpopup();
-                     $SWPsettingpopup->swp_popup_setting_page();
-                }else if( $active_tab == 'swp_app_deals_settings' ) {
-                     $SWPsettingdeals = new SWPsettingdeals();
-                     $SWPsettingdeals->swp_deals_setting_page();
+                     $SWPsettingaboutus = new SWPsettingaboutus();
+                    $SWPsettingaboutus->swp_about_us_setting_page();
                 }else if( $active_tab == 'swp_app_footer_settings' ) {
                     $SWPsettingfooter = new SWPsettingfooter();
                     $SWPsettingfooter->swp_footer_setting_page();
