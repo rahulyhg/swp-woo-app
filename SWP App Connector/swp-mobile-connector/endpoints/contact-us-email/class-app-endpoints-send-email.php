@@ -29,12 +29,21 @@ if( !class_exists( 'swp_endpoint_send_email' ) ){
                 array(
                     'methods' => 'POST',
                     'callback' => array( $this, 'swp_endpoint_send_email_details_callback' ),
-                )
-            );
+                     'args' => array(
+                            'message' => array(
+                                'sanitize_callback' => 'esc_sql'
+                            ),
+                            'email' => array(
+                                'required' => true,
+                                'sanitize_callback' => 'esc_sql'
+                            )
+                        ),
+                    )
+                );
          }
         
        /***** callback function for email details *****/    
-       public function swp_endpoint_send_email_details_callback( $user_id, $notify = '' ) {
+       public function swp_endpoint_send_email_details_callback( $user_id, $args ) {
             
             global $wpdb;
             $user = get_userdata( $user_id );
@@ -44,10 +53,13 @@ if( !class_exists( 'swp_endpoint_send_email' ) ){
             
             /***** email send to admin *****/
            
-            $message = "testting";
-                //$message .= sprintf( __( 'message: %s' ), $user->user_email ) . "\r\n";
-            $to = 'nawales@sortedpixel.com';
-
+//            $message = "testting";
+//                //$message .= sprintf( __( 'message: %s' ), $user->user_email ) . "\r\n";
+//            $to = 'nawales@sortedpixel.com';
+                $GLOBALS['email'] = $args['email'];
+                $GLOBALS['message'] = $args['message'];
+                $to = $email;
+                $message = $message;
             wp_mail( $to , sprintf( __( 'user contact from : [%s]' ), $blogname ), $message );
             
             return "Thank you for contact with us";

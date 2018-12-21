@@ -21,7 +21,9 @@ if( !class_exists( 'SWPappinludes' ) ){
             require_once( 'disable-category-on-mobile/class-app-disable-category-on-mobile.php' );
             //$swp_product_cat_on_mobile = new swp_product_cat_on_mobile();
             require_once( 'user/class-app-user.php' );
-
+            
+            /***** notices *****/
+            require_once( 'functions-notices/swp-functions-notices.php' );    
         }
     }
 

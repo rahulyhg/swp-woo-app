@@ -28,7 +28,6 @@ if( !class_exists( 'SWPappgeneralsettings' ) ){
             require_once('popup/class-app-connector-setting-popup.php');
             require_once('footer/class-app-connector-setting-footer.php');
             require_once( 'deals/class-app-connector-setting-deals.php' );
-            require_once( 'test/class-app-connector-setting-testting.php' );
             //require_once( 'class-app-connector-setting-deals.php' );
             //require_once( 'class-app-connector-backend-footer.php' );
 
@@ -52,6 +51,14 @@ if( !class_exists( 'SWPappgeneralsettings' ) ){
                 'manage_options',
                 'swp-app-general-setting-options',
                 array($this, 'swp_app_general_setting_page')
+            );
+            add_submenu_page(
+                'appconnector-settings',
+                __('Push Notification','appconnector'),
+                __('Push Notification','appconnector'),
+                'manage_options',
+                'swpapp-notification',
+                array($this,'swpapp_redirect_to_notification')
             );
             add_submenu_page(
                 'appconnector-settings',
@@ -99,11 +106,12 @@ if( !class_exists( 'SWPappgeneralsettings' ) ){
             //register section and fields for footer
             $SWPsettingfooter = new SWPsettingfooter();
                 $SWPsettingfooter->swp_settings_footer_register_field();
-            //testing
-//            $swp_testing = new swp_testing();
-//                $swp_testing->swp_general_settings_testing_register_field();
         }
 
+
+        public function swpapp_redirect_to_notification(){
+
+        }
 
         /*** callback funtion from form setting file***/ 
         public function swp_app_general_setting_page() {
