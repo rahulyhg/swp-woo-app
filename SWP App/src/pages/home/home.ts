@@ -7,13 +7,13 @@ import {Storage} from '@ionic/Storage';
 import {DetailCategoryPage} from '../detail-category/detail-category';
 
 //services
-
+import {AuthServiceProvider} from '../../providers/auth-service/auth-service';
 
 //constants
-import {WC_url} from '..';
 import { SearchPage } from '../search/search';
 import { ProductDetailsPage } from '../product-details/product-details';
 import { CartPage } from '../cart/cart';
+import {WC_url} from '../../assets/Settings/settings';
 
 
 @Component({
@@ -29,49 +29,78 @@ export class HomePage {
   categories: any[];
   deals: any[];
   featuredProducts: any[];
+  RestApi: any;
+  tempPro: any []=[];
 
 
 constructor(public navCtrl: NavController,
   public http: Http,
-  public storage: Storage) {
+  public storage: Storage,
+  public WcAuth: AuthServiceProvider) {
     this.products =[];
     this.slider =[];
     this.categories = [];
+    this.featuredProducts =[];
 
+    this.RestApi= this.WcAuth.init();
 
+//Get Products
+    this.RestApi.getAsync("products").then (
+      (data)=>{
+          this.products= JSON.parse(data.body)
+          console.log(this.products);
+              },
+      (err)=>{console.log(err)}
+          ); 
     
 
-    this.http.post(WC_url + '/wp-json/jwt-auth/v1/token',data)
+
+
+/*
+  
+this.http.post(WC_url + '/wp-json/jwt-auth/v1/token',data)
    .subscribe(
      response => { 
-      console.log(response.json());
-      this.token = response.json().token;
+     this.token = response.json().token;
     
 this.storage.set("AdminUser",response.json()).then((admin)=>{
  this.adminUsername= response.json().username;
  this.adminUserPassword = data.password;
  this.token = response.json().token;
-})
+  })
 
     let headers = new Headers();
-        headers.append('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-        headers.append('Authorization', 'Bearer ' + this.token);
+     headers.append('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+    headers.append('Authorization', 'Bearer ' + this.token);
 
-        let options ={headers:headers};
-        console.log(options)
+    let options ={headers:headers};
+        //console.log(options)
   
-        this.http.get(WC_url + '/wp-json/wc/v2/products',options).subscribe(res=>{
-          console.log(res.json());
-          this.products= res.json();
-        })
+    this.http.get(WC_url + '/wp-json/wc/v2/products',options).subscribe(res=>{
+         // console.log(res.json());
+         // this.products= res.json();
+    })
 
-        this.swp_getSlider();
-        this.swp_getCategories();
-        this.swp_getFeaturedPRoducts();
-      },
-      error =>{
-        console.log("token cannot be generated for this user");
-      })
+      //},
+      //error =>{
+       // console.log("token cannot be generated for this user");
+      //})
+          }) */
+
+
+this.RestApi.getAsync("products").then (
+  (data)=>{
+      this.products= JSON.parse(data.body)
+      console.log(this.products);
+          },
+  (err)=>{console.log(err)}
+      ); 
+
+
+ this.swp_getSlider();
+      this.swp_getCategories();
+      this.swp_getFeaturedPRoducts();
+
   }
 
 
@@ -81,7 +110,16 @@ this.storage.set("AdminUser",response.json()).then((admin)=>{
    */
   swp_getSlider()
   {
-    console.log(this.token);
+
+    this.RestApi.getAsync("products?per_page=5").then (
+      (data)=>{
+          this.slider= JSON.parse(data.body)
+          console.log(this.slider);
+              },
+      (err)=>{console.log(err)}
+          ); 
+    
+   /* console.log(this.token);
      let headers = new Headers();
     headers.append('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
     headers.append('Authorization', 'Bearer ' + this.token );
@@ -89,9 +127,9 @@ this.storage.set("AdminUser",response.json()).then((admin)=>{
     let options ={headers:headers};
 
     this.http.get(WC_url + '/wp-json/wc/v2/products?per_page=5',options).subscribe(res=>{
-     this.slider = res.json(); 
+    // this.slider = res.json(); 
      console.log(this.slider)
-    })
+    }) */
  
   }
 
@@ -102,7 +140,24 @@ this.storage.set("AdminUser",response.json()).then((admin)=>{
    */
   swp_getCategories(){
 
-    let headers = new Headers();
+    this.RestApi.getAsync("products/categories").then (
+      (data)=>{
+        
+      let temp :any [] = JSON.parse(data.body);
+      for (let i =0 ; i< temp.length; i++)
+      {
+        if(temp[i].parent == 0) 
+        {
+          this.categories.push(temp[i]);
+        }
+      } 
+      console.log(this.categories);
+              },
+      (err)=>{console.log(err)}
+          ); 
+    
+
+/*    let headers = new Headers();
     headers.append('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
     headers.append('Authorization', 'Bearer ' + this.token);
 
@@ -115,13 +170,13 @@ this.storage.set("AdminUser",response.json()).then((admin)=>{
       {
         if(temp[i].parent == 0) 
         {
-          this.categories.push(temp[i]);
+     //     this.categories.push(temp[i]);
         }
       } 
       console.log(this.categories);
       },
         (err)=>{console.log("err")
-      })
+      }) */
   }
 
 
@@ -134,7 +189,8 @@ this.storage.set("AdminUser",response.json()).then((admin)=>{
 
     this.deals=[];
     
-    // console.log(this.token);
+    /*
+     console.log(this.token);
     //let headers = new Headers();
     //headers.append('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
     //headers.append('Authorization', 'Bearer ' + this.token );
@@ -144,14 +200,23 @@ this.storage.set("AdminUser",response.json()).then((admin)=>{
   //  this.http.get(WC_url + '/wp-json/wc/v2/products?per_page=5',options).subscribe(res=>{
     // this.slider = res.json(); 
      //console.log(this.slider)
-    //})
+    //}) */
  
   }
 
 
   swp_getFeaturedPRoducts()
   {
-  console.log(this.token);
+
+    this.RestApi.getAsync("products?featured=true").then (
+      (data)=>{
+          this.featuredProducts= JSON.parse(data.body)
+          console.log(this.featuredProducts);
+              },
+      (err)=>{console.log(err)}
+          ); 
+
+  /*console.log(this.token);
   let headers = new Headers();
    headers.append('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
    headers.append('Authorization', 'Bearer ' + this.token );
@@ -159,9 +224,10 @@ this.storage.set("AdminUser",response.json()).then((admin)=>{
    let options ={headers:headers};
 
    this.http.get(WC_url + '/wp-json/wc/v2/products?per_page=4',options).subscribe(res=>{
-    this.featuredProducts = res.json(); 
+    //this.featuredProducts = res.json(); 
     console.log(this.featuredProducts)
-   })
+    console.log(this.featuredProducts.length);
+   }) */
 
   }
 
@@ -173,12 +239,12 @@ this.storage.set("AdminUser",response.json()).then((admin)=>{
 
 
 /** Go to Search page   */   
-  swp_OpenSearchPage(){
+  swp_OpenSearchPage(event){
     this.navCtrl.push(SearchPage)
   }
 
   /** Go to cart PAge */
-  swp_OpenCartPage()
+  swp_OpenCartPage(event)
   {
     this.navCtrl.push(CartPage);
   }
@@ -188,5 +254,24 @@ this.storage.set("AdminUser",response.json()).then((admin)=>{
     this.navCtrl.push(ProductDetailsPage,{product_id:product_id});
   }
 
- 
+  /** Infinte Scroll content for more products */
+  swp_doInfinite(infiniteScroll){
+
+    setTimeout(() => {
+      if(this.featuredProducts.length)
+      for (let i = 0; i < this.featuredProducts.length; i++) {
+    // this.featuredProducts.push( this.items.length );
+      }
+
+      console.log('Async operation has ended');
+   //   infiniteScroll.complete();
+    }, 500);
+  }
+
+
+  swp_moreFeaturedProducts()
+  {
+    
+  }
+
 }

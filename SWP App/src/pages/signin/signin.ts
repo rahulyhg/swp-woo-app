@@ -1,10 +1,16 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams, ToastController , AlertController} from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { NavController, NavParams, ToastController , AlertController, Menu} from 'ionic-angular';
 import {Http,Headers} from '@angular/http';
-import {Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { WC_url } from '..';
+import {Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import {Storage} from '@ionic/Storage';
-import { HomePage } from '../home/home';
+
+//providers
+import {AuthServiceProvider} from '../../providers/auth-service/auth-service';
+
+//pages
+import {SignupPage} from '../signup/signup';
+import { CartPage } from '../cart/cart';
+
 
 @Component({
   selector: 'page-signin',
@@ -13,28 +19,43 @@ import { HomePage } from '../home/home';
 export class SigninPage {
 
   formLogin: FormGroup;
-  token: any;
+  
+  
   username: any;
   userPassword: any;
   userEmail: any;
+  SignupPage: SignupPage;
+  RestApi: any;
+  SigninPage = SigninPage;
 
+  passwordType: string = 'password';
+  passwordIcon: string = 'eye-off';
+ 
 
+  user: any ;
  
   response: any;
+
+  @ViewChild('content') childNavCtrl: NavController; 
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public toastCtrl: ToastController,
     public http: Http,
     public storage:Storage,
     public alertCtrl: AlertController,
-    private formBuilder: FormBuilder,) {
+    private formBuilder: FormBuilder,
+    public WcAuth: AuthServiceProvider) {
+
+      this.RestApi = this.WcAuth.init();
 
       this.userEmail = "";
       this.userPassword = "";
-      this.username = "";
-
+     
       this.formLogin = formBuilder.group({
-        username: ['', Validators.required],
+         userEmail: new FormControl('', Validators.compose([
+          Validators.required,
+          Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
+        ])),
         password: ['', Validators.required]
       });
 
@@ -42,53 +63,110 @@ export class SigninPage {
 
 
   swp_signIn() {
-    console.log(this.formLogin.value);
+    console.log(this.formLogin.value.userEmail);
 
-    this.http.post(WC_url + '/wp-json/jwt-auth/v1/token',this.formLogin.value)
-    .subscribe(
-      response => { 
-       console.log(response.json());
-       this.token = response.json().token;
+    this.RestApi.getAsync('customers?email='+ this.formLogin.value.userEmail).
+    then((res)=>{
 
+      //if(fc.value.toLowerCase() === "abc123" || fc.value.toLowerCase() === "123abc"){
+      //return ({validUsername: true});
+    //} else {
+     // return (null);
+   // }
+    
+      this.user = JSON.parse(res.body)
 
-      this.alertCtrl.create({
-        title: "Login Successful",
-       message: "Logged in successfully.",
-        buttons: [{
-        text: "OK",
-         handler: () => {
-           this.navCtrl.push(HomePage);
-       //  if(this.navParams.get("next")){
-         //this.navCtrl.push(this.navParams.get("next"));
-         //} else {
-         //this.navCtrl.pop();
-         //}             
-       }
-      }]
-      }).present();
-
-     
-      this.storage.set("UserLoginInfo",response.json()).then((admin)=>{
-        this.username = admin.username;
-        this.userEmail = admin.email;
-        this.userPassword =admin.password;
-        this.token = admin.token;
+//if(this.formLogin.value.userPassword  //endpointPassword
+  // )
+{
+  this.storage.set("UserLoginInfo",this.user).then((user)=>{
+    console.log(user)
         })
-      }, 
-      err=>{
-      let toast = this.toastCtrl.create({
-      message: "Invalid username or password",
-     duration: 3000,
-     position: 'top'
-   });
-  toast.present();
+
+    this.alertCtrl.create({
+      title: "Login Successful",
+     message: "Logged in successfully.",
+    buttons: [{
+     text: "OK",
+        handler: () => {
+         if(this.navParams.get("next")){
+          this.navCtrl.push(this.navParams.get("next"));
+          } else {
+         this.navCtrl.pop();
+         }             
+      }
+     }]
+    }).present();
+}
+//else
+//{
+  //this.toastCtrl.create({
+   // message: "Invalid password",
+   // duration: 2000,
+   ///position: 'top'
+  // }).present();
+//}
+     })
+}    
+
+
+  sendReset() {
+  // this.auth.requestPasswordReset(this.emailAddress).then( (res)=> {
+      //On success
+    //  this.resetInProgress = true;
+
+      //Pop some toast
+   //   let toast = this.toastCtrl.create({
+     //   message: 'A password reset email has been sent.  Check your inbox!',
+    //    duration: 3000
+     // });
+     // toast.present();
+   // }, (rej)=> {
+      //Pop some toast
+      //let toast = this.toastCtrl.create({
+       // message: 'There was a problem resetting your password.  Please try again!',
+       // duration: 3000
+      //});
+      //toast.present();
+
+     // console.log('Error resetting password: ', rej);
+   // });
+
+
+
+
+   //user validation
+  // static validUsername(fc: FormControl){
+    //if(fc.value.toLowerCase() === "abc123" || fc.value.toLowerCase() === "123abc"){
+      //return ({validUsername: true});
+    //} else {
+     // return (null);
+   // }
+ // }
+  }
+
+  swp_openSignup()
+  {
+  let currentIndex = this.navCtrl.getActive().index;
+    console.log(currentIndex);
+    this.navCtrl.push(SignupPage).then(() => {
+  //  if(this.navCtrl.getPrevious() && this.navCtrl.getPrevious().component == SignupPage)
+    this.navCtrl.remove(currentIndex);
+
 });
 
-this.storage.forEach( (value, key, index) => {
-  console.log("This is the value", value)
-  console.log("from the key", key)
-  console.log("Index is", index)
-})
- 
+   // if(this.navCtrl.getPrevious() && this.navCtrl.getPrevious().component == CartPage)
+    //this.navCtrl.popToRoot();
+   // this.navCtrl.push(SignupPage);
+     //  else 
+  //  this.navCtrl.push(SignupPage);
+  
+ //    };
   }
+
+
+  swp_hideShowPassword() {
+    this.passwordType = this.passwordType === 'text' ? 'password' : 'text';
+    this.passwordIcon = this.passwordIcon === 'eye-off' ? 'eye' : 'eye-off';
+}
 }

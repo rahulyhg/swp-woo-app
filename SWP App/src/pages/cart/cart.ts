@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import {  NavController, NavParams, ViewController, ModalController } from 'ionic-angular';
+import {  NavController, NavParams, ViewController, ModalController,AlertController } from 'ionic-angular';
 import {Storage} from '@ionic/Storage';
 import { CheckoutPage } from '../checkout/checkout';
 import { SigninPage } from '../signin/signin';
+import { SignupPage } from '../signup/signup';
+import { AddressPage } from '../address/address';
 //import { LoginPage } from '../login/login';
 
 @Component({
@@ -12,7 +14,7 @@ import { SigninPage } from '../signin/signin';
 
 export class CartPage {
 
-
+checklogin: boolean;
   cartItems: any [];
   cartTotal: any;
   showEmptyCartMsg: boolean = false;
@@ -20,7 +22,8 @@ export class CartPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public storage: Storage,
     public viewCtrl: ViewController,
-    public modalCtrl: ModalController) {
+    public modalCtrl: ModalController,
+    public alertCtrl: AlertController) {
       
         
    this.storage.forEach( (value, key, index) => {
@@ -32,22 +35,23 @@ export class CartPage {
     this.cartTotal = 0.0;
     this.cartItems =[];
 
+
     this.storage.ready().then(()=>{
       this.storage.get("cart").then((data)=>{
         this.cartItems = data;
-        console.log(this.cartItems);
-        console.log(this.cartItems[0].product.image.src)
 
-        if(this.cartItems.length > 0){
-
-          this.cartItems.forEach( (item, index)=> {
-            this.cartTotal = this.cartTotal + (item.product.price * item.qty) ;
-            console.log(this.cartTotal);
-          })
-        }
-        else 
+        if(this.cartItems == null || this.cartItems == undefined || this.cartItems.length < 0)
         {
-          this.showEmptyCartMsg = true;
+         
+          console.log("no products in cart");
+          
+        }else
+        {
+          this.cartItems.forEach((item, index)=> {
+            this.cartTotal = this.cartTotal + item.amount;
+            console.log(this.cartTotal);
+
+          })
         }
 
       })
@@ -127,19 +131,30 @@ swp_decreaseQty(item,i){
   }
 
   swp_checkout(){
+
+
+
+    
     this.storage.get('UserLoginInfo').then((data)=>{
       if(data != null)
       {
-        this.navCtrl.push(CheckoutPage);
+      //  this.checklogin =true;
+        
+       this.navCtrl.push(CheckoutPage);
       }
       else{ 
-       this.navCtrl.push(SigninPage,{next: CheckoutPage}); // here after login user will be taken to checkout page directly with the help of next paramenter
+     //   this.checklogin =false;
+       this.navCtrl.push(SigninPage,{next: CheckoutPage});
+      // here after login user will be taken to checkout page directly with the help of next paramenter
       }
     })
-    
   }
 
-  
+  swp_ContinueShop(){
+    this.viewCtrl.dismiss();
+    this.navCtrl.popToRoot();
+  }
+
 
 
 }

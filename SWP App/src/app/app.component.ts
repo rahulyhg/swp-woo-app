@@ -11,6 +11,8 @@ import { WishlistPage } from '../pages/wishlist/wishlist';
 import {SignupPage} from '../pages/signup/signup';
 import { SigninPage } from '../pages/signin/signin';
 import { MyordersPage } from '../pages/myorders/myorders';
+import { MenuPage } from '../pages/menu/menu';
+
 
 @Component({
   templateUrl: 'app.html'
@@ -18,9 +20,11 @@ import { MyordersPage } from '../pages/myorders/myorders';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = HomePage;
+  rootPage: any = MenuPage;
 
-  pages: Array<{title: string, component: any}>;
+ pages: Array<{title: string, component: any}>;
+ 
+ pages2: Array<{title: string, component: any}>;
 
   constructor(public platform: Platform, 
     public appCtrl: App,
@@ -30,13 +34,13 @@ export class MyApp {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
-    this.pages = [
-      { title: 'Home', component: HomePage },
-      { title: 'Shop By category', component: CategoriesPage },
-      { title: 'My Cart', component: CartPage},
-      { title: 'My Wishlist', component: WishlistPage},
-      { title: 'Sign in', component: SigninPage},
-    ];
+ //this.pages = [
+ //{ title: 'Home', component: HomePage },
+//{ title: 'Shop By category', component: CategoriesPage },
+//{ title: 'My Cart', component: CartPage},
+ //{ title: 'My Wishlist', component: WishlistPage},
+ //{ title: 'Sign in', component: SigninPage},
+//];
 
   }
 
@@ -55,8 +59,5 @@ export class MyApp {
   this.nav.setRoot(page.component);
   //this.nav.push(page.component);
   }
-
-
-
    
 }

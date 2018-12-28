@@ -3,16 +3,18 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-buttons right>
-        <button ion-button icon-only>
-            <ion-icon name="cart" (click)="swp_OpenCartPage()"></ion-icon>
+    
+    <ion-buttons right >
+        <button ion-button icon-only (click)="swp_OpenCartPage($event)">
+            <ion-icon name="cart" ></ion-icon>
         </button>
     </ion-buttons>
+
     <ion-title><img alt="logo" height="40"   src="assets/images/logo.png" ></ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content  class="outer-content">
+<ion-content   class="card-background-page">
 
   <!-- Empty categories array -->
 	<ion-row *ngIf="categories.length < 1" ion-fixed width-100 height-100 (swipe)="onSwipeContent($event)">
@@ -42,7 +44,7 @@
 </ion-grid> -->
 
 
-<!--<ion-grid no-padding class="item-category" width-100 height-100> -->
+<!--<ion-grid no-padding class="item-category" width-100 height-100> 
   <ion-row class="scroll-content" *ngIf="0 < categories.length" wrap padding-4>
     <ion-col col-6 *ngFor="let category of categories"  [navPush]=" DetailCategoryPage" [navParams]="{category_id:category.id}">
      <ion-row (click) = "swp_OpenDetailCategoryPage($event,category.id)" relative size-full overflow>
@@ -55,9 +57,27 @@
      </ion-col>
      </ion-row>
      </ion-col>
-  </ion-row>
-   
+  </ion-row> -->
 
-
+  <ion-row  wrap padding-4 *ngIf="0 < categories.length">
+      <ion-col col-6 width-50 *ngFor="let category of categories" 
+      padding-4 [navPush]=" DetailCategoryPage" [navParams]="{category_id:category.id}" >
+        <div relative size-full overflow (click) = " swp_OpenDetailCategoryPage($event,category.id)">
+          <ion-card >
+              <img float-left *ngIf="category.image && category.image.src" [src]="category.image.src" />
+              <img float-left *ngIf="!category.image" src = "assets/images/no-img.png" /> 
+              <div relative float-left wrap aling-center margin-auto><b [innerHtml]="category.name"></b></div>
+                    
+            <!--  <ion-row mark absolute top left width-100 height-100 center>
+            <ion-col text-center light>
+                
+               <div class="featured-product product-price" [innerHTML]="product.price_html"></div>
+                <div class=" featured-product product-name" text-wrap >{{product.name | slice :0:50}} </div>
+            </ion-col>
+          </ion-row> -->
+        </ion-card>
+         </div>
+      </ion-col>
+    </ion-row>
 
 </ion-content>

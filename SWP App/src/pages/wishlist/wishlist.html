@@ -14,35 +14,51 @@
 
   <ion-navbar>
     <ion-title>Wish List</ion-title>
-    <ion-buttons right>
-            <button ion-button icon-only>
-                <ion-icon name="cart" (click)="swp_OpenCartPage()"></ion-icon>
-            </button>
-        </ion-buttons>
+    
+    <ion-buttons end (click)="swp_OpenCartPage($event)">
+        <button ion-button icon-only>
+            <ion-icon name="cart" ></ion-icon>
+        </button>
+    </ion-buttons>
+
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-      <ion-list *ngIf="0 < products.length">
+  <span *ngIf="products.length == 0"> Add Products to Wishlist </span>
+      <ion-list no-lines *ngIf="0 < products.length">
           <ion-item-sliding *ngFor ="let product of products; let i=index ">
             <ion-item> 
+              <ion-row>
+                <ion-col col-3>
                 <ion-thumbnail item-left>  <!--item left to show thumbnail at left -->
                   <img src="{{product.images[0].src}}"/>              
           </ion-thumbnail>  
-          <h2>{{product.name}}</h2>
-          <h2 [innerHTML]="product.price_html"></h2>            
+        </ion-col>
+        <ion-col>
+         <ion-row><h2>{{product.name}}</h2> </ion-row> 
+         <ion-row> <h2 [innerHTML]="product.price_html"></h2> </ion-row>   
+        </ion-col>
+        <ion-col col-2>
+            <ion-icon class="icon-wishlist" float-right [style.color]="'red' "name="heart"></ion-icon>
+        </ion-col>
+        </ion-row>
           </ion-item>
           <ion-item-options side="right"> 
             <button drager (click)="removeFromWishlist($event,i)" ion-button>
-               <ion-icon [style.color]="' danger' " name="heart"></ion-icon>
+               <ion-icon outline [style.color]="'danger' " name="trash"></ion-icon>
                remove
             </button>
           </ion-item-options> 
           <ion-item-options side="left">
-            <button ion-button (click)="addToCart($event,product,i)">
+           <!-- <button ion-button *ngIf ="product.type != 'variable'" (click)="swp_addToCart($event,product,i)">
                 <ion-icon [style.color]="' danger' " name="cart"></ion-icon>
                 Add to cart
-              </button>
+              </button> -->
+              <button ion-button (click)="swp_OpenProductDetailPage($event,product.id,i)">
+                  <ion-icon outline [style.color]="' danger' " name="cart"></ion-icon>
+              Shop Now
+                </button>
           </ion-item-options>
          </ion-item-sliding>
         </ion-list>

@@ -1,4 +1,4 @@
-import { Component, ComponentFactoryResolver } from '@angular/core';
+import { Component} from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Http,Headers} from '@angular/http';
 import { FormControl } from '@angular/forms';
@@ -9,7 +9,7 @@ import {ProductDetailsPage} from '../../pages/product-details/product-details';
 import {CartPage} from '../../pages/cart/cart';
 
 import {Storage} from '@ionic/Storage';
-import {WC_url} from '..';
+import {WC_url} from '../../assets/Settings/settings';
 
 
 @Component({
@@ -94,7 +94,9 @@ swp_OpenProductDetailsPage(event,product_id){
   this.navCtrl.push(ProductDetailsPage,{product_id:product_id});
 }
 
-swp_OpenCartPage(){
+swp_OpenCartPage(event)
+{
   this.navCtrl.push(CartPage);
 }
+
 }

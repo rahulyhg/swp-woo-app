@@ -8,14 +8,13 @@ page-product-details {
     }
         
     .product-price{
-        font-size: large;
-        font-weight: bold;
-        font-family: cursive;
+       margin: 10px;
+       font-size: 25px;
     }
     
+
     .product-name{
-        font-family: cursive;
-        font-size:medium;
+        font-size:20px;
     }
 
     .discription{
@@ -25,9 +24,29 @@ page-product-details {
 
     ion-icon{
         font-weight: bold;
-        font-size: 40px;
-    }
+        font-size: 15px;
+        }
+
+        .large-icon
+            {
+            font-size: 40px;
+            }
+        
     ion-list {
         display: inline-flex;
     }
+    
+    .text-input-md
+    {
+        margin: 0 !important;
+        font-weight: bolder !important;
+        font-size: large !important;
+
+    }
+
+   .price-qty
+   {
+       font-weight: bolder;
+       font-size: large;
+   }
 }

@@ -1,18 +1,68 @@
 
 <ion-header>
-<button ion-button menuToggle>
-        <ion-icon name="menu"></ion-icon>
-      </button>
-      <ion-buttons right>
-          <button ion-button icon-only>
-              <ion-icon name="cart" (click)="swp_OpenCartPage()"></ion-icon>
-          </button>
-      </ion-buttons>
-      <ion-title><img alt="logo" height="40"   src="assets/images/logo.png" ></ion-title>
-
+    <ion-navbar>
+        <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+    
+        <ion-buttons end (click)="swp_OpenSearchPage($event)">
+            <button ion-button icon-only>
+                <ion-icon name="search"></ion-icon>
+            </button>
+        </ion-buttons>
+        
+    
+        <ion-buttons right (click)="swp_OpenCartPage($event)">
+            <button ion-button icon-only>
+                <ion-icon name="cart" ></ion-icon>
+            </button>
+        </ion-buttons>
+    
+        <ion-title><img alt="logo" height="40"   src="assets/images/logo.png" ></ion-title>
+      </ion-navbar>
 </ion-header>
 
 <ion-content >
-  
+    <ion-row item-center width-100 height-100 padding>
+        <ion-col>
+          <div>
+            <ion-list class="signupForm" no-margin>
+              <form [formGroup]="formSignup">
+                <ion-item  bg-transparent>
+                    <ion-label floating><span >Enter Email</span></ion-label>
+                    <ion-input light formControlName="email"></ion-input>
+                    </ion-item>
+                <ion-item  bg-transparent>
+                  <ion-label floating><span >Enter First name</span></ion-label>
+                  <ion-input light formControlName="userFirstName"></ion-input>
+                </ion-item>
+                <ion-item  bg-transparent>
+                    <ion-label floating><span >Enter Last name</span></ion-label>
+                    <ion-input light formControlName="userLastName"></ion-input>
+                  </ion-item>
+                  <ion-item  bg-transparent>
+                      <ion-label floating><span >Enter Username</span></ion-label>
+                      <ion-input light formControlName="userName"></ion-input>
+                    </ion-item>
+                <ion-item bg-transparent >
+                  <ion-label floating >
+                    <span light >password</span>
+                   <!--<span danger *ngIf="wrong">{{'login.wrong'|translate}}</span> -->
+                  </ion-label>
+                  <ion-input light type="password" formControlName="password"></ion-input>
+                 <!--<ion-icon *ngIf="wrong" color="danger" item-right name="icon-info-circle"></ion-icon>--> 
+                </ion-item>
+              </form>
+            </ion-list>
+
+            <button class="signup"ion-button round center text-uppercase (click)="swp_signUp()"[disabled]="formSignup.invalid">  <!-- [disabled]="formSignup.invalid"-->
+              <span>Sign Up</span>
+            </button>
+            <div light margin-top text-center>
+           <span (click)=" swp_openSignin()">Already a member?Sign In</span>
+           </div>
+          </div>
+        </ion-col>
+      </ion-row>
 
 </ion-content>

@@ -25,33 +25,36 @@
             <ion-list class="loginForm" no-margin>
               <form [formGroup]="formLogin">
                 <ion-item  bg-transparent>
-                  <ion-label floating><span >username</span></ion-label>
-                  <ion-input light formControlName="username"></ion-input>
+                  <ion-label floating><span >User Email</span></ion-label>
+                  <ion-input light formControlName="userEmail"></ion-input>
                 </ion-item>
                 <ion-item bg-transparent >
                   <ion-label floating >
-                    <span light >password</span>
+                    <span light >Password</span>
                    <!--<span danger *ngIf="wrong">{{'login.wrong'|translate}}</span> -->
                   </ion-label>
                   <ion-input light type="password" formControlName="password"></ion-input>
+                  <ion-icon item-end [name]="passwordIcon" class="passwordIcon" (click)='swp_hideShowPassword()'></ion-icon>
                  <!--<ion-icon *ngIf="wrong" color="danger" item-right name="icon-info-circle"></ion-icon>--> 
                 </ion-item>
               </form>
             </ion-list>
             <div overflow margin-bottom>
-              <button ion-button float-right clear class="disable-hover" (click)="swp_forgotPassword()">
+              <button ion-button float-right clear (click)="swp_forgotPassword()">
                 <span>Forgot password ?</span>
               </button>
             </div>
-            <button class="signup"ion-button round center text-uppercase (click)="swp_signIn()" [disabled]="formLogin.invalid">
+            <button ion-button round center text-uppercase (click)="swp_signIn()" [disabled]="formLogin.invalid">
               <span>Sign In</span>
             </button>
             <div light margin-top text-center>
-              <span [navPush]="SignupPage">Not a member?Sign Up</span>
+                <span (click)="swp_openSignup()" >Not a member?Sign Up</span> <!-- use [navPush] =" SignupPage instead of func"-->
             </div>
           </div>
         </ion-col>
       </ion-row>
+
+      
      <!-- <div *ngIf="loading" width-100 class="spinnerlogin">
         <ion-spinner margin-auto name="ios"></ion-spinner>
       </div> -->

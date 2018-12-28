@@ -4,14 +4,14 @@
       <ion-icon name="menu"></ion-icon>
     </button>
 
-    <ion-buttons end (click)="swp_OpenSearchPage()">
+    <ion-buttons end (click)="swp_OpenSearchPage($event)">
         <button ion-button icon-only>
             <ion-icon name="search"></ion-icon>
         </button>
     </ion-buttons>
     
 
-    <ion-buttons right (click)="swp_OpenCartPage()">
+    <ion-buttons right (click)="swp_OpenCartPage($event)">
         <button ion-button icon-only>
             <ion-icon name="cart" ></ion-icon>
         </button>
@@ -41,8 +41,8 @@
 <ion-slides #slide_update *ngIf="slider && 0 < slider.length" class="slider" pager="true" loop="true" autoplay="5000">
 	<!--<ion-slide *ngFor="let slide of slides" tappable (click)="swp_OpenSliderLink(slide.url)"> -->
       <ion-slide *ngFor="let slide of slider" tappable > 
-    <img [src]="slide.images[0].src" float-left />
-		<!--<img [src]="slide.slider_images" float-left /> -->
+    <img  *ngIf= "slide.images.length > 0" [src]="slide.images[0].src" float-left />
+		<img *ngIf= "slide.images < 0" src="assets/images/no-img.png" float-left />
 	</ion-slide>
 </ion-slides>
 
@@ -75,25 +75,37 @@
   </ion-row>
 </ion-card>
 
+  <!-- Featured Products -->
+    <ion-row  wrap padding-4  *ngIf = "featuredProducts && featuredProducts.length != 0">
+      <ion-col col-6 width-50 *ngFor="let product of featuredProducts" 
+      padding-4 [navPush]="ProductDetailsPage" [navParams]="{product_id:product.id}"  >
+        <div relative size-full overflow (click) = " swp_OpenProductDetailsPage($event,product.id)">
+          <ion-card  >
+          <img max-height-100 src="assets/images/11.jpg"> 
+          <ion-row mark absolute top left width-100 height-100 center>
+            <ion-col text-center light>
+                <div class="featured-product product-price" [innerHTML]="product.price_html"></div>
+                <div class=" featured-product product-name" text-wrap >{{product.name | slice :0:50}} </div>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+         </div>
+      </ion-col>
+    </ion-row>
+    <button ion-button *ngIf="featuredProducts && featuredProducts.length != 0" clear block color="gray" (click)="swp_moreFeaturedProducts()">More Products</button>
 
-  <!-- Featured Products-->
-  <div class = "featured-product"></div>
-    <div class="images" nowrap center mark absolute >
-     <ion-item *ngFor ="let product of featuredProducts | slice:0:5; let i=index" [navPush]="ProductDetailsPage" [navParams]="{product_id:product.id}" (click) = " swp_OpenProductDetailsPage($event,product.id)" >
-    <ion-card>
-      <div class="one-image">
-        <img src="assets/images/11.jpg"> 
-     <!-- <img src="{{product.images[0].src}}"/> -->
-        <div class="featured-product product-price" [innerHTML]="product.price_html"></div>
-        <div class=" featured-product product-name" text-wrap >{{product.name | slice :0:50}} </div>
-     </div>
-    </ion-card>
-     </ion-item>
-    </div>  
-
+  
     <!-- infinite scroll-->
+    <ion-infinite-scroll (ionInfinite)="swp_doInfinite($event)">
+      <ion-infinite-scroll-content
+        loadingSpinner="bubbles"
+        loadingText="Loading more data...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
 
     <!--Footer-->
+
+    
 
 
 </ion-content>

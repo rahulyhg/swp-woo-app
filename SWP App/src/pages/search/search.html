@@ -6,11 +6,12 @@
           <ion-icon name="menu"></ion-icon>
         </button>
     
-        <ion-buttons end (click)="swp_OpenCartPage()">
-            <button ion-button icon-only>
-                <ion-icon name="cart" ></ion-icon>
-            </button>
-        </ion-buttons>
+        <ion-buttons end>
+                <button ion-button icon-only (click)="swp_OpenCartPage($event)">
+                    <ion-icon name="cart" ></ion-icon>
+                </button>
+            </ion-buttons>
+        
     
         <ion-title><img alt="logo" height="40"   src="assets/images/logo.png" ></ion-title>
       
