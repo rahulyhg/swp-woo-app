@@ -8,12 +8,15 @@ import {DetailCategoryPage} from '../detail-category/detail-category';
 
 //services
 import {AuthServiceProvider} from '../../providers/auth-service/auth-service';
+import {ObjectToUrlProvider} from '../../providers/object-to-url/object-to-url';
 
 //constants
 import { SearchPage } from '../search/search';
 import { ProductDetailsPage } from '../product-details/product-details';
 import { CartPage } from '../cart/cart';
 import {WC_url} from '../../assets/Settings/settings';
+import { MoreProductsPage } from '../more-products/more-products';
+import { jsonpCallbackContext } from '@angular/common/http/src/module';
 
 
 @Component({
@@ -29,6 +32,8 @@ export class HomePage {
   categories: any[];
   deals: any[];
   featuredProducts: any[];
+  latestProducts: any[];
+  displayProducts: any[]=[];
   RestApi: any;
   tempPro: any []=[];
 
@@ -36,12 +41,14 @@ export class HomePage {
 constructor(public navCtrl: NavController,
   public http: Http,
   public storage: Storage,
-  public WcAuth: AuthServiceProvider) {
+  public WcAuth: AuthServiceProvider,
+  public objToUrl: ObjectToUrlProvider) {
     this.products =[];
     this.slider =[];
     this.categories = [];
     this.featuredProducts =[];
-
+    this.latestProducts =[];
+ 
     this.RestApi= this.WcAuth.init();
 
 //Get Products
@@ -57,7 +64,7 @@ constructor(public navCtrl: NavController,
 
 
 /*
-  
+ 
 this.http.post(WC_url + '/wp-json/jwt-auth/v1/token',data)
    .subscribe(
      response => { 
@@ -97,9 +104,11 @@ this.RestApi.getAsync("products").then (
       ); 
 
 
- this.swp_getSlider();
+      this.swp_getSlider();
       this.swp_getCategories();
-      this.swp_getFeaturedPRoducts();
+      this.swp_getFeaturedProducts();
+      this.swp_getDealsOfDay();
+    // this.swp_showProducts();
 
   }
 
@@ -111,6 +120,14 @@ this.RestApi.getAsync("products").then (
   swp_getSlider()
   {
 
+      let param={};
+        this.http.get(WC_url + '/wp-json/swp/v1/product/slider',{
+          search: this.objToUrl.swp_objectToURL(param)
+        }).subscribe((res)=>{
+        this.deals = res.json() ; 
+        });
+      
+  /*
     this.RestApi.getAsync("products?per_page=5").then (
       (data)=>{
           this.slider= JSON.parse(data.body)
@@ -146,7 +163,7 @@ this.RestApi.getAsync("products").then (
       let temp :any [] = JSON.parse(data.body);
       for (let i =0 ; i< temp.length; i++)
       {
-        if(temp[i].parent == 0) 
+        if(temp[i].parent == 0 && temp[i].swp_cat_hide_on_mobile != '1') 
         {
           this.categories.push(temp[i]);
         }
@@ -155,28 +172,6 @@ this.RestApi.getAsync("products").then (
               },
       (err)=>{console.log(err)}
           ); 
-    
-
-/*    let headers = new Headers();
-    headers.append('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-    headers.append('Authorization', 'Bearer ' + this.token);
-
-    let options ={headers:headers};
-
-    this.http.get(WC_url + '/wp-json/wc/v2/products/categories',options).subscribe(res=>{
-     
-      let temp :any [] = res.json();
-      for (let i =0 ; i< temp.length; i++)
-      {
-        if(temp[i].parent == 0) 
-        {
-     //     this.categories.push(temp[i]);
-        }
-      } 
-      console.log(this.categories);
-      },
-        (err)=>{console.log("err")
-      }) */
   }
 
 
@@ -187,50 +182,48 @@ this.RestApi.getAsync("products").then (
   swp_getDealsOfDay()
   {
 
-    this.deals=[];
-    
-    /*
-     console.log(this.token);
-    //let headers = new Headers();
-    //headers.append('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-    //headers.append('Authorization', 'Bearer ' + this.token );
-
-   //    let options ={headers:headers};
-
-  //  this.http.get(WC_url + '/wp-json/wc/v2/products?per_page=5',options).subscribe(res=>{
-    // this.slider = res.json(); 
-     //console.log(this.slider)
-    //}) */
- 
+  let param={};
+    this.http.get(WC_url + '/wp-json/swp/v1/product/deals',{
+      search: this.objToUrl.swp_objectToURL(param)
+    }).subscribe((res)=>{
+    this.deals = res.json() ; 
+    });
   }
 
 
-  swp_getFeaturedPRoducts()
+  swp_getFeaturedProducts()
   {
 
     this.RestApi.getAsync("products?featured=true").then (
       (data)=>{
-          this.featuredProducts= JSON.parse(data.body)
-          console.log(this.featuredProducts);
+        let temp: any [] = JSON.parse(data.body);
+        for(let i=0; i< temp.length ;i++) 
+        this.featuredProducts.push(temp[i]);
               },
       (err)=>{console.log(err)}
           ); 
 
-  /*console.log(this.token);
-  let headers = new Headers();
-   headers.append('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-   headers.append('Authorization', 'Bearer ' + this.token );
 
-   let options ={headers:headers};
+          this.RestApi.getAsync("products").then (
+            (data)=>{
+              let temp: any [] = JSON.parse(data.body);
+              for(let i=0; i< temp.length ;i++) 
+              this.latestProducts[i] = temp[i];
+                    },
+            (err)=>{console.log(err)}
+                ); 
 
-   this.http.get(WC_url + '/wp-json/wc/v2/products?per_page=4',options).subscribe(res=>{
-    //this.featuredProducts = res.json(); 
-    console.log(this.featuredProducts)
-    console.log(this.featuredProducts.length);
-   }) */
+                console.log(this.featuredProducts);
+                console.log(this.latestProducts);   
+
+
+                
+              //this.displayProducts =this.featuredProducts.concat(this.latestProducts);
+          
+               this.displayProducts.push(this.featuredProducts, this.latestProducts)
+                console.log(this.displayProducts);
 
   }
-
 
 /** Go to detail category page   */    
   swp_OpenDetailCategoryPage(event,category_id){
@@ -254,24 +247,24 @@ this.RestApi.getAsync("products").then (
     this.navCtrl.push(ProductDetailsPage,{product_id:product_id});
   }
 
-  /** Infinte Scroll content for more products */
-  swp_doInfinite(infiniteScroll){
-
-    setTimeout(() => {
-      if(this.featuredProducts.length)
-      for (let i = 0; i < this.featuredProducts.length; i++) {
-    // this.featuredProducts.push( this.items.length );
-      }
-
-      console.log('Async operation has ended');
-   //   infiniteScroll.complete();
-    }, 500);
-  }
+ 
 
 
-  swp_moreFeaturedProducts()
+  swp_OpenMoreProductsPage(event)
   {
-    
+    this.navCtrl.push(MoreProductsPage);
   }
+
+  swp_getFooter()
+  {
+    let param={};
+    this.http.get(WC_url + '/wp-json/swp/v1/general-settings/about-us/title',{
+      search: this.objToUrl.swp_objectToURL(param)
+    }).subscribe((res)=>{
+      console.log(res.json());
+    })
+  }
+
+
 
 }

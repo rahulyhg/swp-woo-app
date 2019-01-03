@@ -1,0 +1,76 @@
+
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+
+    <ion-buttons end (click)="swp_OpenSearchPage($event)">
+        <button ion-button icon-only>
+            <ion-icon name="search"></ion-icon>
+        </button>
+    </ion-buttons>
+    
+
+    <ion-buttons right (click)="swp_OpenCartPage($event)">
+        <button ion-button icon-only>
+            <ion-icon name="cart" ></ion-icon>
+        </button>
+    </ion-buttons>
+
+    <ion-title><img alt="logo" height="40"   src="assets/images/logo.png" ></ion-title>
+  </ion-navbar>
+  
+</ion-header>
+
+
+<ion-content padding>
+
+    <!-- products in list view-->
+    <ion-list  no-lines>  
+        <ion-item  *ngFor ="let product of products" (click)="swp_OpenProductDetailsPage(event,product.id)">
+  
+        <ion-row>
+            <ion-col col-4>
+                 <ion-thumbnail item-left>
+                     <img *ngIf= " 0 < product.images.length " src="{{product.images[0].src}}"/>
+                     <img *ngIf= "!product.images" src="assets/images/no-img.png"/>    
+             </ion-thumbnail> 
+            </ion-col>
+            <ion-col col-8 padding-2 text-wrap>
+                <ion-row>
+             <h2>{{product.name}}</h2>
+                 <br>
+                 <h3 *ngIf="product.type !='variable'" [innerHTML]="product.price_html"></h3>
+                <!-- <span [innerHTML]="product.short_description.substr(0,50) + '...'"></span>  -->
+             </ion-row>
+           <!-- <ion-row class=" button-row">
+                 <button end *ngIf="product.type !='variable'" ion-button outline round (tap)="addToCart($event,product)">
+                         Add to Cart
+                 </button>
+ 
+                 <button end *ngIf="product.type=='variable'" ion-button outline round >
+                         Choose Options
+                 </button>
+             </ion-row> --> 
+            </ion-col>
+         </ion-row>
+    
+        </ion-item>
+  </ion-list> 
+ 
+ 
+
+
+
+
+
+   <!-- infinite scroll-->
+   <ion-infinite-scroll (ionInfinite)="swp_doInfinite($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+</ion-content>

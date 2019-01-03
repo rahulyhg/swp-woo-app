@@ -67,10 +67,11 @@
   </div>
 
   <!-- Deals of the day-->
-  <ion-card>
-  <ion-row nowrap center mark absolute width-100 height-80 *ngFor = "let number of [1,2]"> <!-- Add ngIF-->
+  <ion-card  *ngIf = "deals && deals.length != 0" >
+  <ion-row nowrap center mark absolute width-100 height-100 *ngFor = "let deal of deals"> <!-- Add ngIF-->
     <ion-item no-lines> 
-        <img src= "./assets/images/{{number}}.jpg"/>  
+      <!-- <img src= "./assets/images/{{number}}.jpg"/>   -->
+      <img [src] = "deal.slider_images">
     </ion-item>
   </ion-row>
 </ion-card>
@@ -92,18 +93,19 @@
          </div>
       </ion-col>
     </ion-row>
-    <button ion-button *ngIf="featuredProducts && featuredProducts.length != 0" clear block color="gray" (click)="swp_moreFeaturedProducts()">More Products</button>
+    <button ion-button *ngIf="featuredProducts && featuredProducts.length != 0" clear block color="gray" (click)="swp_OpenMoreProductsPage($event)">More Products</button>
 
-  
-    <!-- infinite scroll-->
-    <ion-infinite-scroll (ionInfinite)="swp_doInfinite($event)">
-      <ion-infinite-scroll-content
-        loadingSpinner="bubbles"
-        loadingText="Loading more data...">
-      </ion-infinite-scroll-content>
-    </ion-infinite-scroll>
-
+   
     <!--Footer-->
+
+    <div no padding class="footer" primary>
+      
+      <ion-row>
+        Title
+      </ion-row>
+
+   
+    </div>
 
     
 

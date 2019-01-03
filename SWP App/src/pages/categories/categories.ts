@@ -32,7 +32,7 @@ RestApi: any;
         let temp :any [] = JSON.parse(data.body);
         for (let i =0 ; i< temp.length; i++)
         {
-          if(temp[i].parent == 0) 
+          if(temp[i].parent == 0 && temp[i].swp_cat_hide_on_mobile != '1' ) 
           {
             this.categories.push(temp[i]);
           }

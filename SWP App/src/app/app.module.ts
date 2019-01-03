@@ -29,11 +29,11 @@ import {SigninPage} from '../pages/signin/signin';
 import { MyordersPage } from '../pages/myorders/myorders';
 import { MenuPage } from '../pages/menu/menu';
 import { AuthServiceProvider } from '../providers/auth-service/auth-service';
-import { ValidationProvider } from '../providers/validation/validation';
 import { ExpandableComponent } from '../components/expandable/expandable';
 import { AddressPage } from '../pages/address/address';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { ObjectToUrlProvider } from '../providers/object-to-url/object-to-url';
+import { MoreProductsPage } from '../pages/more-products/more-products';
 
 
 
@@ -55,7 +55,8 @@ import { ObjectToUrlProvider } from '../providers/object-to-url/object-to-url';
     MyordersPage,
     MenuPage,
     ExpandableComponent,
-    AddressPage
+    AddressPage,
+    MoreProductsPage
    
    
   ],
@@ -82,7 +83,8 @@ import { ObjectToUrlProvider } from '../providers/object-to-url/object-to-url';
     MyordersPage,
     MenuPage,
     ExpandableComponent,
-    AddressPage
+    AddressPage,
+    MoreProductsPage
  
   ],
   providers: [
@@ -91,7 +93,6 @@ import { ObjectToUrlProvider } from '../providers/object-to-url/object-to-url';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     HttpClientModule,
     AuthServiceProvider,
-    ValidationProvider,
     InAppBrowser,
     ObjectToUrlProvider
   ]
