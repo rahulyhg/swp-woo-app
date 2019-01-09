@@ -148,7 +148,7 @@ if( !class_exists( 'SWPappslider' ) ){
                                     <span>?</span>
                                 </div>
                                 <div class="tooltip-support-input">
-                                    <?php echo sprintf(__('When user click this picture, the URL will be openned. %s','mobiconnector'),'<a target="_blank" href="https://taydoapp.com/knowledge-base/how-to-add-link-for-a-image-in-slideshow/">Read More</a>'); ?>
+                                    <?php echo sprintf(__('When user click this picture, the URL will be openned.','swp')); ?>
                                 </div>
                             </div>
                         </div>
@@ -179,7 +179,7 @@ if( !class_exists( 'SWPappslider' ) ){
                     )
                 );
             }
-    //		swp_app_add_notice(__('Successfully Update','mobiconnector')); 
+    //		swp_app_add_notice(__('Successfully Update','swp')); 
             wp_redirect( admin_url( "admin.php?page=app-slider" ) );
         }
 
@@ -197,7 +197,7 @@ if( !class_exists( 'SWPappslider' ) ){
             if(is_plugin_active('mobiconnector/mobiconnector.php')){
                 $usekey = get_option('mobiconnector_settings-use-security-key');
                 if ($usekey == 1 && ! bamobile_mobiconnector_rest_check_post_permissions( $request ) ) {
-                    return new WP_Error( 'mobiconnector_rest_cannot_view', __( 'Sorry, you cannot list resources.', 'mobiconnector' ), array( 'status' => rest_authorization_required_code() ) );
+                    return new WP_Error( 'mobiconnector_rest_cannot_view', __( 'Sorry, you cannot list resources.', 'swp' ), array( 'status' => rest_authorization_required_code() ) );
                 }
             }
             return true;
@@ -335,7 +335,7 @@ if( !class_exists( 'SWPappslider' ) ){
                     }
                 }
             }
-    //		swp_app_add_notice(__('Successfully Update','mobiconnector'));   
+    //		swp_app_add_notice(__('Successfully Update','swp'));   
             wp_redirect( admin_url( "admin.php?page=app-slider" ) );
         }
     }

@@ -71,7 +71,7 @@ if( !class_exists( 'SWPsettingaboutus' ) ){
 ?>
             <textarea rows='10' class="tab-content" name='swp_app_about_us_option[swp_app_about_us_description]'> 
                 <?php echo $options['swp_app_about_us_description']; ?>
-            </textarea>;
+            </textarea>
 <?php
 
         }

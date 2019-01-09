@@ -86,8 +86,8 @@ if( !class_exists( 'SWPsettingfooter' ) ){
                 'swp_app_footer_social_facebook',                      
                 'Facebook',               
                 array( $this, 'swp_app_footer_social_facebook_callback' ),   
-                'swp_app_footer_social_link',                     
-                'swp_app_footer_social_header',
+                'swp_app_footer_option',                     
+                'swp_app_footer_header',
                 array(
                     'swp_app_footer_social_facebook' 
                 ) 
@@ -96,18 +96,18 @@ if( !class_exists( 'SWPsettingfooter' ) ){
                 'swp_app_footer_social_instagram',                      
                 'Instagram',               
                 array( $this, 'swp_app_footer_social_instagram_callback' ),   
-                'swp_app_footer_social_link',                     
-                'swp_app_footer_social_header',
+                'swp_app_footer_option',                     
+                'swp_app_footer_header',
                 array(
                     'swp_app_footer_social_instagram' 
                 ) 
             );
             add_settings_field(  
                 'swp_app_footer_social_twitter',                      
-                'Twiiter',               
+                'Twitter',               
                 array( $this, 'swp_app_footer_social_twitter_callback' ),   
-                'swp_app_footer_social_link',                     
-                'swp_app_footer_social_header',
+                'swp_app_footer_option',                     
+                'swp_app_footer_header',
                 array(
                     'swp_app_footer_social_twitter' 
                 ) 
@@ -116,8 +116,8 @@ if( !class_exists( 'SWPsettingfooter' ) ){
                 'swp_app_footer_social_google_plus',                      
                 'Google+',               
                 array( $this, 'swp_app_footer_social_google_plus_callback' ),   
-                'swp_app_footer_social_link',                     
-                'swp_app_footer_social_header',
+                'swp_app_footer_option',                     
+                'swp_app_footer_header',
                 array(
                     'swp_app_footer_social_google_plus' 
                 ) 
@@ -204,9 +204,9 @@ if( !class_exists( 'SWPsettingfooter' ) ){
 
         public function swp_app_footer_social_facebook_callback($args) { 
 
-            $options = get_option('swp_app_footer_social_link'); 
+            $options = get_option('swp_app_footer_option'); 
 
-            echo '<input type="text" class="tab-content" id="' . $args[0] . '" name="swp_app_footer_social_link[' . $args[0] . ']" value="' . $options[''  . $args[0] . ''] . '"></input>';
+            echo '<input type="text" class="tab-content" id="' . $args[0] . '" name="swp_app_footer_option[' . $args[0] . ']" value="' . $options[''  . $args[0] . ''] . '"></input>';
 
         }
 
@@ -214,31 +214,30 @@ if( !class_exists( 'SWPsettingfooter' ) ){
 
             $options = get_option('swp_app_footer_social_link'); 
 
-            echo '<input type="text" class="tab-content" id="' . $args[0] . '" name="swp_app_footer_social_link[' . $args[0] . ']" value="' . $options[''  . $args[0] . ''] . '"></input>';
+            echo '<input type="text" class="tab-content" id="' . $args[0] . '" name="swp_app_footer_option[' . $args[0] . ']" value="' . $options[''  . $args[0] . ''] . '"></input>';
 
         }
 
         public function swp_app_footer_social_twitter_callback($args) { 
 
-            $options = get_option('swp_app_footer_social_link'); 
+            $options = get_option('swp_app_footer_option'); 
 
-            echo '<input type="text" class="tab-content" id="' . $args[0] . '" name="swp_app_footer_social_link[' . $args[0] . ']" value="' . $options[''  . $args[0] . ''] . '"></input>';
+            echo '<input type="text" class="tab-content" id="' . $args[0] . '" name="swp_app_footer_option[' . $args[0] . ']" value="' . $options[''  . $args[0] . ''] . '"></input>';
 
         }
 
         public function swp_app_footer_social_google_plus_callback($args) { 
 
-            $options = get_option('swp_app_footer_social_link'); 
+            $options = get_option('swp_app_footer_option'); 
 
-            echo '<input type="text" class="tab-content" id="' . $args[0] . '" name="swp_app_footer_social_link[' . $args[0] . ']" value="' . $options[''  . $args[0] . ''] . '"></input>';
+            echo '<input type="text" class="tab-content" id="' . $args[0] . '" name="swp_app_footer_option[' . $args[0] . ']" value="' . $options[''  . $args[0] . ''] . '"></input>';
 
         }
 
         public function swp_footer_setting_page(){
             settings_fields( 'swp_app_footer_option' );
             do_settings_sections( 'swp_app_footer_option' );
-            settings_fields('swp_app_footer_social_link');
-            do_settings_sections('swp_app_footer_social_link');
+           
         }
 
     }

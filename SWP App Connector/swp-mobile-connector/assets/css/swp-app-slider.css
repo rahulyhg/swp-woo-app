@@ -1,189 +1,189 @@
-.appslider .left table tr.app-slide:nth-child(odd) {
-    background: #f9f9f9;
-}
-.appslider .left table tr.app-slide {
-    height: 167px;
-}
-.appslider ul.tabs{
-    float: left;
-    width: 100%;
-    margin: 0 0 10px 0;
-    border-bottom: 1px solid #ccc;
-}
-.appslider ul.tabs li {
-    margin: 0 0 0 5px;
-    cursor: pointer;
-    padding: 3px 5px;
-    display: inline-block;
-    line-height: 14px;
-    color: #ccc;
-    position: relative;
-    top: 1px;
-    border: 1px solid transparent;
-}
-.appslider ul.tabs li.selected {
-    font-weight: bold;
-    color: #666;
-    border: 1px solid #ccc;
-    border-bottom: 1px solid white;
-}
-.appslider .left table tr.app-slide:nth-child(odd) ul.tabs li.selected {
-    border-bottom: 1px solid #f9f9f9;
-}
-.appslider .left table tr.app-slide textarea {
-    width: 93%;
-    height: 80px;
-    margin: 0 0 5px 0;
-    padding: 2px 5px;
-    resize: none;
-}
-.appslider .left table tr.app-slide input.url {
-    float:left;
-    width: 93%;
-    margin: 0;
-    padding: 4px;
-}
-.appslider .left table td {
-    border-top: 0;
-    border-bottom: 1px solid #e1e1e1;
-    padding: 12px;
-}
-.appslider .left table tr.app-slide td.col-1 .thumb{
-    position: relative;
-    height: 150px;
-    width: 150px;
-    background-size: auto 150px;
-    background-position: center;
-    border: 1px solid #ddd;
-}
-.appslider .left table tr.app-slide td.col-1 .thumb .delete-slide {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    background: transparent;
-    color: red;
-    width: 18px;
-    height: 18px;
-    float: left;
-    text-align: center;
-    opacity: 0;
-    overflow: hidden;
-    transition: opacity .25s ease-in-out;
-    -moz-transition: opacity .25s ease-in-out;
-    -webkit-transition: opacity .25s ease-in-out;
-}
-.appslider .left table tr.app-slide td.col-1 .thumb:hover .delete-slide{
-    opacity: 1;
-}
-
-.appslider .postbox-container{
-    width: 280px;
-    float: right;
-}
-.appslider .right .appslider_configuration {
-    position: relative;
-    min-width: 255px;
-    border: 1px solid #e5e5e5;
-    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.04);
-    box-shadow: 0 1px 1px rgba(0,0,0,.04);
-    background: #fff;
-    margin-bottom: 20px;
-    padding: 0;
-    line-height: 1;
-    float:right;
-}
-.appslider .right .appslider_configuration h4{
-    margin-left:10px;
-    font-size:14px;
-}
-.appslider_configuration .misc-pub-section{
-    width:93%;
-    float:right;
-}
-.appslider_configuration .misc-pub-section:before{
-    font: 400 16px/1 dashicons;
-    speak: none;
-    display: inline-block;
-    margin-left: -1px;
-    padding-right: 3px;
-    vertical-align: top;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    margin-top: 1px;
-}
-.appslider_configuration .misc-pub-post-status:before {
-    content: "\f173";
-}
-.appslider_configuration .misc-pub-visibility:before{
-    content: "\f177";
-}
-.appslider .right .appslider_publish{
-    float:right;
-    padding:10px;
-}
-.appslider .right .appslider-configuration {
-    padding: 10px;
-    line-height: 27px;
-    float: right;
-    width: 100%;
-    box-sizing: border-box;
-    border-top: 1px solid #ddd;
-    background: #f5f5f5;
-}
-.appslider .left table thead .add-slide .wp-media-buttons-icon {
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    vertical-align: text-top;
-    margin: 0 2px;
-}
-.appslider .postbox-container .appslider-element{
-    width:100%;
-    padding:6px 6px 6px 0px;
-    float:left;
-}
-.appslider .postbox-container .appslider-element .appslider-label{
-    float:left;
-    width:20%;
-    margin-top:8px;
-}
-.appslider .postbox-container .appslider-element .appslider-input{
-    float:left;
-    width:40%;
-}
-.appslider .postbox-container .appslider-element > span{
-    display: block;
-    margin-top: 7px;
-    margin-left: 10px;
-    float: left;
-}
-.support-input{
-    width:5% !important;
-    margin-top:8px !important;
-}
-.support-input .symb-support-input span {
-    margin-top: -2px !important;
-    font-size: 11px;
-    margin-left: 0px !important;
-}
-.notice-mobiconnector{
-    width:98%;
-    float:left;
-}
-.notice-mobiconnector{
-    border-left: 4px solid #fff;
-    box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
-    margin: 5px 15px 2px 0px;
-    padding: 1px 12px;
-    background: #fff;
-}
-.notice-mobiconnector.notice-success{
-    border-left-color: #46b450;
-}
-.notice-mobiconnector.notice-error{
-    border-left-color: #FF0000;
-}
-.notice-mobiconnector p{
-    margin: .5em 0;
-    padding: 2px;
+.appslider .left table tr.app-slide:nth-child(odd) {
+    background: #f9f9f9;
+}
+.appslider .left table tr.app-slide {
+    height: 167px;
+}
+.appslider ul.tabs{
+    float: left;
+    width: 100%;
+    margin: 0 0 10px 0;
+    border-bottom: 1px solid #ccc;
+}
+.appslider ul.tabs li {
+    margin: 0 0 0 5px;
+    cursor: pointer;
+    padding: 3px 5px;
+    display: inline-block;
+    line-height: 14px;
+    color: #ccc;
+    position: relative;
+    top: 1px;
+    border: 1px solid transparent;
+}
+.appslider ul.tabs li.selected {
+    font-weight: bold;
+    color: #666;
+    border: 1px solid #ccc;
+    border-bottom: 1px solid white;
+}
+.appslider .left table tr.app-slide:nth-child(odd) ul.tabs li.selected {
+    border-bottom: 1px solid #f9f9f9;
+}
+.appslider .left table tr.app-slide textarea {
+    width: 93%;
+    height: 80px;
+    margin: 0 0 5px 0;
+    padding: 2px 5px;
+    resize: none;
+}
+.appslider .left table tr.app-slide input.url {
+    float:left;
+    width: 93%;
+    margin: 0;
+    padding: 4px;
+}
+.appslider .left table td {
+    border-top: 0;
+    border-bottom: 1px solid #e1e1e1;
+    padding: 12px;
+}
+.appslider .left table tr.app-slide td.col-1 .thumb{
+    position: relative;
+    height: 150px;
+    width: 150px;
+    background-size: auto 150px;
+    background-position: center;
+    border: 1px solid #ddd;
+}
+.appslider .left table tr.app-slide td.col-1 .thumb .delete-slide {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background: transparent;
+    color: red;
+    width: 18px;
+    height: 18px;
+    float: left;
+    text-align: center;
+    opacity: 0;
+    overflow: hidden;
+    transition: opacity .25s ease-in-out;
+    -moz-transition: opacity .25s ease-in-out;
+    -webkit-transition: opacity .25s ease-in-out;
+}
+.appslider .left table tr.app-slide td.col-1 .thumb:hover .delete-slide{
+    opacity: 1;
+}
+
+.appslider .postbox-container{
+    width: 280px;
+    float: right;
+}
+.appslider .right .appslider_configuration {
+    position: relative;
+    min-width: 255px;
+    border: 1px solid #e5e5e5;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.04);
+    box-shadow: 0 1px 1px rgba(0,0,0,.04);
+    background: #fff;
+    margin-bottom: 20px;
+    padding: 0;
+    line-height: 1;
+    float:right;
+}
+.appslider .right .appslider_configuration h4{
+    margin-left:10px;
+    font-size:14px;
+}
+.appslider_configuration .misc-pub-section{
+    width:93%;
+    float:right;
+}
+.appslider_configuration .misc-pub-section:before{
+    font: 400 16px/1 dashicons;
+    speak: none;
+    display: inline-block;
+    margin-left: -1px;
+    padding-right: 3px;
+    vertical-align: top;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin-top: 1px;
+}
+.appslider_configuration .misc-pub-post-status:before {
+    content: "\f173";
+}
+.appslider_configuration .misc-pub-visibility:before{
+    content: "\f177";
+}
+.appslider .right .appslider_publish{
+    float:right;
+    padding:10px;
+}
+.appslider .right .appslider-configuration {
+    padding: 10px;
+    line-height: 27px;
+    float: right;
+    width: 100%;
+    box-sizing: border-box;
+    border-top: 1px solid #ddd;
+    background: #f5f5f5;
+}
+.appslider .left table thead .add-slide .wp-media-buttons-icon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    vertical-align: text-top;
+    margin: 0 2px;
+}
+.appslider .postbox-container .appslider-element{
+    width:100%;
+    padding:6px 6px 6px 0px;
+    float:left;
+}
+.appslider .postbox-container .appslider-element .appslider-label{
+    float:left;
+    width:20%;
+    margin-top:8px;
+}
+.appslider .postbox-container .appslider-element .appslider-input{
+    float:left;
+    width:40%;
+}
+.appslider .postbox-container .appslider-element > span{
+    display: block;
+    margin-top: 7px;
+    margin-left: 10px;
+    float: left;
+}
+.support-input{
+    width:5% !important;
+    margin-top:8px !important;
+}
+.support-input .symb-support-input span {
+    margin-top: -2px !important;
+    font-size: 11px;
+    margin-left: 0px !important;
+}
+.notice-mobiconnector{
+    width:98%;
+    float:left;
+}
+.notice-mobiconnector{
+    border-left: 4px solid #fff;
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+    margin: 5px 15px 2px 0px;
+    padding: 1px 12px;
+    background: #fff;
+}
+.notice-mobiconnector.notice-success{
+    border-left-color: #46b450;
+}
+.notice-mobiconnector.notice-error{
+    border-left-color: #FF0000;
+}
+.notice-mobiconnector p{
+    margin: .5em 0;
+    padding: 2px;
 }

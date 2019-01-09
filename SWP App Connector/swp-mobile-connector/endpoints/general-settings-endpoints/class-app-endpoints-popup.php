@@ -32,14 +32,14 @@ if( !class_exists( 'swp_endpoint_popup' ) ){
         /***** create popup function for fetching value  *****/
         public function swp_app_get_popup($request){
             $params = $request->get_params();
-            $popup =  get_option('wooconnector-popup-homepage');
-            $url = get_option('wooconnector-popup-homepage-link');
+            $popup =  get_option('swp-popup-homepage');
+            $url = get_option('swp-popup-homepage-link');
             $newurl = '';
             if(isset($url) && $url != ''){            
                 $product_id = url_to_postid($url);
                 if(!empty($product_id)) {
-                    $newurl =  str_replace($url, 'link://product/'.$product_id, $url);
-                }elseif(strpos($url,'link://') !== false){
+                    $newurl =  str_replace($url, 'url://product/'.$product_id, $url);
+                }elseif(strpos($url,'shop://') !== false){
                     $newurl = $url;
                 }elseif(strpos($url,'product-category') !== false){
                     $url_split = explode('#', $url);
@@ -61,24 +61,24 @@ if( !class_exists( 'swp_endpoint_popup' ) ){
                     $slugs = explode('/', $url);				
                     $category = $this->swp_get_product_category_by_slug('/'.end($slugs));
                     if(!empty($category)){
-                        $newurl =  'link://product-category/'.$category->term_id;
+                        $newurl =  'shop://product-category/'.$category->term_id;
                     }
                 }
                 elseif(strpos($url,'about-us') != false){
-                    $newurl = 'link://about-us';
-                }elseif(strpos($url,'bookmark') != false){
-                    $newurl = 'link://bookmark';
+                    $newurl = 'shop://about-us';
+                }elseif(strpos($url,'wishlist') != false){
+                    $newurl = 'shop://wishlist';
                 }elseif(strpos($url,'term-and-conditions') != false){
-                    $newurl = 'link://term-and-conditions';
+                    $newurl = 'shop://term-and-conditions';
                 }elseif(strpos($url,'privacy-policy') != false){
-                    $newurl = 'link://privacy-policy';
+                    $newurl = 'shop://privacy-policy';
                 }elseif(strpos($url,'contact-us') != false){
-                    $newurl = 'link://contact-us';
+                    $newurl = 'shop://contact-us';
                 }else{
                     $newurl = $url;
                 }
             }
-            $check = get_option('wooconnector-popup-homepage-check');
+            $check = get_option('swp-popup-homepage-check');
             $dt = false;
             if(!empty($check) && $check == 1){
                 $dt = true;
@@ -87,7 +87,7 @@ if( !class_exists( 'swp_endpoint_popup' ) ){
                              
             $return = array(
                 'popup' => $popup,
-                'link_popup' => $newurl
+                'popup_link' => $newurl
                 );
             if(!empty($popup)){
                 return $return;
@@ -96,8 +96,7 @@ if( !class_exists( 'swp_endpoint_popup' ) ){
             }
         }
         
-                
-        /***** function for retrive value by product category *****/
+       /***** function for retrive value by product category *****/
         public function swp_get_product_category_by_slug( $slug  ) {
             $category = get_term_by( 'slug', $slug, 'product_cat' );
             if ( $category )

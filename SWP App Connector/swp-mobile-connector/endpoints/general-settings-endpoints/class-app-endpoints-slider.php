@@ -17,7 +17,7 @@ if( !class_exists('swp_endpoint_slider') ){
         /***** create construct function *****/
         public function __construct(){
              add_action( 'rest_api_init', array( $this, 'swp_app_register_slider_api'));
-            require_once('/home/ecommerceway/public_html/test/wp-content/plugins/swp-mobile-connector/settings/slider/class-app-connector-slider.php');
+            require_once(ABSPATH.'/wp-content/plugins/swp-mobile-connector/settings/slider/class-app-connector-slider.php');
          }
         
         /***** slider Add slider - endpoint *****/    
@@ -79,7 +79,7 @@ if( !class_exists('swp_endpoint_slider') ){
                 $oldurl = apply_filters('post_title',trim($oldurl,'/'));
                 if(!empty($oldurl)) {		
                     $post_id = url_to_postid($oldurl);	
-                    if(strpos($oldurl, 'link://') !== false){
+                    if(strpos($oldurl, 'shop://') !== false){
                         $listimages[] = array(
                             'slider_images' => $wp_upload_dir['baseurl']."/". get_post_meta($imageid, 'swp_app_slider_large', true),
                             'caption' => apply_filters('post_title',$slider->post_excerpt),
@@ -87,7 +87,7 @@ if( !class_exists('swp_endpoint_slider') ){
                         );			
                     }						
                     elseif(!empty($post_id) && get_post_type($post_id) == 'product') {					
-                        $newurl =  str_replace($oldurl, 'link://product/'.$post_id, $oldurl);							
+                        $newurl =  str_replace($oldurl, 'shop://product/'.$post_id, $oldurl);							
                         $listimages[] = array(
                             'slider_images' => $wp_upload_dir['baseurl']."/". get_post_meta($imageid, 'swp_app_slider_large', true),
                             'caption' => apply_filters('post_title',$slider->post_excerpt),
@@ -116,7 +116,7 @@ if( !class_exists('swp_endpoint_slider') ){
                         $category = $this->swp_app_get_product_category_by_slug('/'.end($slugs));
                         if(!empty($category))
                         {
-                            $newurl =  str_replace($oldurl, 'link://product-category/'.$category['term_id'], $oldurl);
+                            $newurl =  str_replace($oldurl, 'shop://product-category/'.$category['term_id'], $oldurl);
                             $listimages[] = array(
                                 'slider_images' => $wp_upload_dir['baseurl']."/". get_post_meta($imageid, 'swp_app_slider_large', true),
                                 'caption' => apply_filters('post_title',$slider->post_excerpt),
@@ -131,31 +131,31 @@ if( !class_exists('swp_endpoint_slider') ){
                         $listimages[] = array(
                             'slider_images' => $wp_upload_dir['baseurl']."/". get_post_meta($imageid, 'swp_app_slider_large', true),
                             'caption' => apply_filters('post_title',$slider->post_excerpt),
-                            'url' => 'link://contact-us'
+                            'url' => 'shop://contact-us'
                         );	
                     }elseif($oldurl == $home.'/about-us'){					
                         $listimages[] = array(
                             'slider_images' => $wp_upload_dir['baseurl']."/". get_post_meta($imageid, 'swp_app_slider_large', true),
                             'caption' => apply_filters('post_title',$slider->post_excerpt),
-                            'url' => 'link://about-us'
+                            'url' => 'shop://about-us'
                         );	
                     }elseif($oldurl == $home.'/bookmark'){					
                         $listimages[] = array(
                             'slider_images' => $wp_upload_dir['baseurl']."/". get_post_meta($imageid, 'swp_app_slider_large', true),
                             'caption' => apply_filters('post_title',$slider->post_excerpt),
-                            'url' => 'link://bookmark'
+                            'url' => 'shop://bookmark'
                         );	
                     }elseif($oldurl == $home.'/term-and-conditions'){					
                         $listimages[] = array(
                             'slider_images' => $wp_upload_dir['baseurl']."/". get_post_meta($imageid, 'swp_app_slider_large', true),
                             'caption' => apply_filters('post_title',$slider->post_excerpt),
-                            'url' => 'link://term-and-conditions'
+                            'url' => 'shop://term-and-conditions'
                         );	
                     }elseif($oldurl == $home.'/privacy-policy'){					
                         $listimages[] = array(
                             'slider_images' => $wp_upload_dir['baseurl']."/". get_post_meta($imageid, 'swp_app_slider_large', true),
                             'caption' => apply_filters('post_title',$slider->post_excerpt),
-                            'url' => 'link://privacy-policy'
+                            'url' => 'shop://privacy-policy'
                         );	
                     }else{
                         $listimages[] = array(

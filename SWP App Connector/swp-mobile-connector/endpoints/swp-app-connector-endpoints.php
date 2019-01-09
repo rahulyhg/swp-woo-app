@@ -26,7 +26,7 @@ if( !class_exists( 'swp_app_setting_endpoints' ) ){
         
         /***** Includes *****/
         public function includes() {
-            require_once('general-settings-endpoints/class-app-endpoints-general-setting.php');
+            require_once('general-settings-endpoints/class-app-endpoints-general-settings.php');
             require_once('general-settings-endpoints/class-app-endpoints-about-us.php');
             require_once('general-settings-endpoints/class-app-endpoints-slider.php');
             require_once('general-settings-endpoints/class-app-endpoints-popup.php');

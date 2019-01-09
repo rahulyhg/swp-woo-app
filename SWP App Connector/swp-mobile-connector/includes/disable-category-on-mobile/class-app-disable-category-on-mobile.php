@@ -36,7 +36,7 @@ if( !class_exists( 'swp_product_cat_on_mobile' ) ){
             <div class="form-field">
                 <label for="swp_cat_hide_on_mobile"><?php _e('Hide On Mobile App', 'swp'); ?></label>
                 <input type="checkbox" name="swp_cat_hide_on_mobile" id="swp_cat_hide_on_mobile" value="1" >
-                <p class="description"><?php _e(' Mobile App can access category if checkbox is enable ', 'swp'); ?></p>
+                <p class="description"><?php _e(' Checked if category hide on mobile app. ', 'swp'); ?></p>
             </div>
 
             <?php
@@ -55,7 +55,7 @@ if( !class_exists( 'swp_product_cat_on_mobile' ) ){
                 <td>
                     <input type="checkbox" id="swp_cat_hide_on_mobile" name="swp_cat_hide_on_mobile" value="1" <?php echo ( $swp_cat_hide_on_mobile ) ? checked( $swp_cat_hide_on_mobile, '1' ) : ''; ?>/>
 
-                    <p class="description"><?php _e(' Mobile App can access category if checkbox is enable ', 'swp'); ?></p>
+                    <p class="description"><?php _e(' Checked if category hide on mobile app. ', 'swp'); ?></p>
                 </td>
             </tr>
 

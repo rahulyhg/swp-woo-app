@@ -4,22 +4,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /******************************************************
-* @param slider function
+* @param deals function
 * add sections, fields also register
-* @return
+* @return array and string
 *******************************************************/
 
 if( !class_exists( 'SWPappdeal' ) ){
     class SWPappdeal{
         
-        private $slides;
+        private $deals;
             
         public function __construct(){
             add_action( 'admin_menu',array($this,'swp_app_deals_submenu'));
-            $this->swp_app_register_slider_routes();
+            $this->swp_app_register_deals_routes();
             add_action( 'save_post', array( $this, 'swp_app_update_thumbnail_deals'), 100, 2);
             add_action( 'admin_enqueue_scripts', array( $this , 'register_admin_scripts' ));
-            add_action( 'admin_post_swp_delete_slide', array( $this, 'swp_app_delete_deal' ) );
+            add_action( 'admin_post_swp_delete_deal', array( $this, 'swp_app_delete_deal' ) );
             require_once('class-core.php');
         
         }
@@ -42,8 +42,8 @@ if( !class_exists( 'SWPappdeal' ) ){
         }
 
         public function swp_app_render_deals_template(){
-            $widthDB = get_option('swp_app_settings-width-slider');
-            $heightDB = get_option('swp_app_settings-height-slider');
+            $widthDB = get_option('swp_app_settings_width_deals');
+            $heightDB = get_option('swp_app_settings_height_deals');
             if(empty($widthDB) && empty($heightDB)){
                 $widthDB = 752;
                 $heightDB = 564;
@@ -51,7 +51,7 @@ if( !class_exists( 'SWPappdeal' ) ){
             ?>
             <div class="wrap appdeal">
                 <h1><?php echo __('Deals Setting','swp')?></h1>
-                <form accept-charset="UTF-8" action="?page=deals" method="post" id="settings_slider">
+                <form accept-charset="UTF-8" action="?page=deals" method="post" id="settings_deal">
                 <input type="hidden" name="deal-task" value="deal">
                     <div id='poststuff'>
                         <div id='post-body' class='metabox-holder columns-2'>
@@ -60,20 +60,20 @@ if( !class_exists( 'SWPappdeal' ) ){
                                     <table class="widefat sortable">
                                         <thead>
                                             <tr>
-                                                <th style="width: 100px;">
+                                                <th>
                                                     <h3><?php _e( "Deals", "deals" ) ?></h3>
                                                     <p>Maximum 2 deals images can use</p>
-                                                </th>
+                                                 </th>
                                                 <th>
-                                                    <a id="add-slide" class='button alignright add-slide' data-editor='content' title='<?php _e( "Add Slide", "deals" ) ?>'>
-                                                        <span style="background:url('<?php echo admin_url( '/images/media-button.png') ?>') no-repeat top left;" class='wp-media-buttons-icon'></span> <?php _e( "Add Slide", "deals" ) ?>
+                                                    <a id="add-deal" class='button alignright add-deal' data-editor='content' title='<?php _e( "Add Deal", "deals" ) ?>'>
+                                                        <span style="background:url('<?php echo admin_url( '/images/media-button.png') ?>') no-repeat top left;" class='wp-media-buttons-icon'></span> <?php _e( "Add Deal", "deals" ) ?>
                                                     </a>
                                                 </th>
                                             </tr>
                                         </thead>
-                                        <tbody id="woo-list-slide">
+                                        <tbody id="woo-list-deal">
                                             <?php
-                                                $this->render_admin_slides();
+                                                $this->swp_render_admin_deals();
                                             ?>
                                         </tbody>
                                     </table>
@@ -84,11 +84,11 @@ if( !class_exists( 'SWPappdeal' ) ){
                     <div id="postbox-container-1" class="postbox-container">
                         <div class='right'>
                             <div class="appdeal_configuration" id="appdeal_configuration_1">
-                                <h4><?php _e('Resize Images for Slider','swp'); ?></h4>
+                                <h4><?php _e('Resize Images for Deals','swp'); ?></h4>
                                 <hr>
                                 <div class="appdeal_publish">
-                                    <div class="appdeal-element"><label for="width-slider" class="appdeal-label"><?php _e('Width','swp'); ?> : </label><input class="appdeal-input" type="number" id="width-slider" name="swp_app_settings-width-slider" value="<?php echo $widthDB ?>"/><span><?php esc_html_e(__('Pixel')); ?></span></div>
-                                    <div class="appdeal-element"><label for="height-slider" class="appdeal-label"><?php _e('Height','swp'); ?> : </label><input class="appdeal-input" type="number" id="height-slider" name="swp_app_settings-height-slider" value="<?php echo $heightDB ?>"/><span><?php esc_html_e(__('Pixel')); ?></span></div>
+                                    <div class="appdeal-element"><label for="width-deal" class="appdeal-label"><?php _e('Width','swp'); ?> : </label><input class="appdeal-input" type="number" id="width-deal" name="swp_app_settings_width_deals" value="<?php echo $widthDB ?>"/><span><?php esc_html_e(__('Pixel')); ?></span></div>
+                                    <div class="appdeal-element"><label for="height-deal" class="appdeal-label"><?php _e('Height','swp'); ?> : </label><input class="appdeal-input" type="number" id="height-deal" name="swp_app_settings_height_deals" value="<?php echo $heightDB ?>"/><span><?php esc_html_e(__('Pixel')); ?></span></div>
                                 </div>
                             </div>
                             <div class="appdeal_configuration">
@@ -98,7 +98,7 @@ if( !class_exists( 'SWPappdeal' ) ){
                                     <div class="misc-pub-section" id="catalog-visibility"><?php _e( "Catalog visibility", "swp" ) ?>: <strong id="catalog-visibility-display"><?php _e( "Visible", "swp" ) ?></strong></div>
                                 </div>
                                 <div class='appdeal-configuration'>
-                                    <input class='alignright button button-primary' type='submit' name='save' id='ms-save' value='<?php _e( "Save Sliders", "swp" ) ?>' />								
+                                    <input class='alignright button button-primary' type='submit' name='save' id='ms-save' value='<?php _e( "Save Deals", "swp" ) ?>' />								
                                     <span class="spinner"></span>
                                 </div>
                             </div>
@@ -109,7 +109,7 @@ if( !class_exists( 'SWPappdeal' ) ){
             <?php
         }	
 
-        private function swp_app_get_slides() {
+        private function swp_app_get_deals() {
             $args = array(
                 'force_no_custom_order' => true,
                 'orderby' => 'menu_order',
@@ -119,26 +119,26 @@ if( !class_exists( 'SWPappdeal' ) ){
                 'suppress_filters' => 1,
                 'posts_per_page' => -1,
             );
-            $slides = get_posts($args);
-            return $slides;
+            $deals = get_posts($args);
+            return $deals;
         }
 
-        private function render_admin_slides(){
-            $slides = $this->swp_app_get_slides();
-            foreach($slides as $slide){
-                $id = $slide->ID;
+        private function swp_render_admin_deals(){
+            $deals = $this->swp_app_get_deals();
+            foreach($deals as $deal){
+                $id = $deal->ID;
                 $attachment_id = get_post_thumbnail_id($id);
-                $attachment = wp_get_attachment_image_src($attachment_id,'thumbnail');
-                $deletelink = wp_nonce_url(admin_url('admin-post.php?action=swp_delete_slide&slide_id='.$id),'swp_delete_slide');
+                $attachment = wp_get_attachment_image_src($attachment_id,'full');
+                $deletelink = wp_nonce_url(admin_url('admin-post.php?action=swp_delete_deal&deal_id='.$id),'swp_delete_deal');
                 $url = esc_attr( get_post_meta( $id, 'app_deals_link', true ) );
                 ?>
             <tr class="app-deals">
                 <td class="col-1">
                     <div class="thumb" style="background-image: url(<?php echo $attachment[0]; ?>)">
-                        <a title="Delete slide" class="tipsy-tooltip-top delete-slide dashicons dashicons-trash" href="<?php echo $deletelink; ?>"><?php _e('Delete slide','swp'); ?></a>				
+                        <a title="Delete Deal" class="tipsy-tooltip-top delete-deal dashicons dashicons-trash" href="<?php echo $deletelink; ?>"><?php _e('Delete Deals','swp'); ?></a>				
                     </div>
                     <div class="deals-url-section">
-                        <input class="url app-deals-link" type="text" name="swp-app-slide-attachment[<?php echo $id; ?>][url]" placeholder="complate url: Ex- https://www.example.com/< page, post, product-cat, Product-id, external link >" value="<?php echo apply_filters('post_title',$url);?>">
+                        <input class="url app-deals-link" type="text" name="swp-app-deal-attachment[<?php echo $id; ?>][url]" placeholder="complate url: Ex- https://www.example.com/< page, post, product-cat, Product-id, external link >" value="<?php echo apply_filters('post_title',$url);?>">
                     </div>
                 </td>
             </tr>
@@ -146,22 +146,22 @@ if( !class_exists( 'SWPappdeal' ) ){
             }
         }
 
-        public function update_slide(){
+        public function update_deal(){
 
         }
 
         public function swp_app_delete_deal() {
             // check nonce
-            check_admin_referer( "swp_delete_slide" );
+            check_admin_referer( "swp_delete_deal" );
             $capability = apply_filters( 'appdeal_capability', 'edit_others_posts' );
             if ( ! current_user_can( $capability ) ) {
                 return;
             }
-            $slide_id = absint( $_GET['slide_id'] );
-            // For new format slides - also trash the slide
-            if ( get_post_type( $slide_id ) === 'app_deals' ) {
+            $deal_id = absint( $_GET['deal_id'] );
+            // For new format deals - also trash the deal
+            if ( get_post_type( $deal_id ) === 'app_deals' ) {
                 $id = wp_update_post( array(
-                        'ID' => $slide_id,
+                        'ID' => $deal_id,
                         'post_status' => 'trash'
                     )
                 );
@@ -170,7 +170,7 @@ if( !class_exists( 'SWPappdeal' ) ){
             wp_redirect( admin_url( "admin.php?page=deals" ) );
         }
 
-        public function swp_app_register_slider_routes() {
+        public function swp_app_register_deals_routes() {
               }
 
         
@@ -213,8 +213,8 @@ if( !class_exists( 'SWPappdeal' ) ){
 
         
         public function swp_app_get_deals_size_thumbnail(){
-            $widthDB = get_option('swp_app_settings-width-slider');
-            $heightDB = get_option('swp_app_settings-height-slider');
+            $widthDB = get_option('swp_app_settings_width_deals');
+            $heightDB = get_option('swp_app_settings_height_deals');
             if(empty($widthDB) && empty($heightDB)){
                 $widthDB = 752;
                 $heightDB = 564;
@@ -231,31 +231,30 @@ if( !class_exists( 'SWPappdeal' ) ){
             $post_thumbnail_id = get_post_thumbnail_id( $post_ID );
             if(empty($post_thumbnail_id))
                 return true;
-            /// ki?m tra xem d� t?n t?i thumnail chua
+            
             $swp_app_deals_large = get_post_meta($post_thumbnail_id, 'swp_app_deals_large', true);
             if(!empty($swp_app_deals_large))
-                return true; // d� t?n t?i r?i ko t?o n?a
-            // l?y th�ng tin c?a ?nh
+                return true; 
+            
             $relative_pathto_file = get_post_meta( $post_thumbnail_id, '_wp_attached_file', true);
             $wp_upload_dir = wp_upload_dir();
             $absolute_pathto_file = $wp_upload_dir['basedir'].'/'.$relative_pathto_file;
-            // ki?m tra file g?c c� t?n t?i hay kh�ng?
+            
             if(!file_exists($absolute_pathto_file))
-                return true; // file ko t?n t?i
-            ////////////////
-
+                return true; 
+            
             $path_parts = pathinfo($relative_pathto_file);
             $ext = strtolower($path_parts['extension']);
             $basename = strtolower($path_parts['basename']);
             $dirname = strtolower($path_parts['dirname']);
             $filename = strtolower($path_parts['filename']);
-            // t?o ?nh 
+             
             $thumbnails = $this->swp_app_get_deals_size_thumbnail();
             foreach($thumbnails as $key => $value){
                 $path = $dirname.'/'.$filename.'_'.$key.'_'.$value['width'].'_'.$value['height'].'.'.$ext;
                 $dest = $wp_upload_dir['basedir'].'/'.$path;
                 SWPresizeimage:: resize_image($absolute_pathto_file, $dest, $value['width'], $value['height']);
-                // c?p nh?t post meta for thumnail
+                
                 update_post_meta ($post_thumbnail_id, $key, $path);
             }
             return true;
@@ -263,7 +262,7 @@ if( !class_exists( 'SWPappdeal' ) ){
 
         public function swp_app_save_deals(){
             global $wpdb;
-            $attachments = @$_POST['swp-app-slide-attachment'];
+            $attachments = @$_POST['swp-app-deal-attachment'];
             foreach($attachments as $post_id => $value){
                 $update_to_post = array(
                     'ID'           => $post_id,
@@ -272,53 +271,53 @@ if( !class_exists( 'SWPappdeal' ) ){
                 wp_update_post($update_to_post);
                 update_post_meta($post_id,'app_deals_link',$value['url']);
             }
-            $width = @$_POST['swp_app_settings-width-slider'];
-            $height = @$_POST['swp_app_settings-height-slider'];
-            $widthDB = get_option('swp_app_settings-width-slider');
-            $heightDB = get_option('swp_app_settings-height-slider');
-            $checkfirst = get_option('swp_app_settings-slider-first-settings');
+            $width = @$_POST['swp_app_settings_width_deals'];
+            $height = @$_POST['swp_app_settings_height_deals'];
+            $widthDB = get_option('swp_app_settings_width_deals');
+            $heightDB = get_option('swp_app_settings_height_deals');
+            $checkfirst = get_option('swp_app_settings-deal-first-settings');
             if($checkfirst == 1){
                 if(!empty($width) && !empty($height)){
                     if($width != $widthDB || $height != $heightDB){
                         $sql = 'DELETE FROM ' . $wpdb->prefix . 'postmeta WHERE meta_key = "swp_app_deals_large"';
                         $wpdb->query($sql);
-                        update_option('swp_app_settings-width-slider',$width);
-                        update_option('swp_app_settings-height-slider',$height);
-                        update_option('swp_app_settings-slider-first-settings',1);
+                        update_option('swp_app_settings_width_deals',$width);
+                        update_option('swp_app_settings_height_deals',$height);
+                        update_option('swp_app_settings-deal-first-settings',1);
                     }
                 }else{
                     if($widthDB != 752 && $heightDB != 564){
                         $sql = 'DELETE FROM ' . $wpdb->prefix . 'postmeta WHERE meta_key = "swp_app_deals_large"';
                         $wpdb->query($sql);
-                        update_option('swp_app_settings-width-slider',752);
-                        update_option('swp_app_settings-height-slider',564);
-                        update_option('swp_app_settings-slider-first-settings',1);
+                        update_option('swp_app_settings_width_deals',752);
+                        update_option('swp_app_settings_height_deals',564);
+                        update_option('swp_app_settings-deal-first-settings',1);
                     }
                 }
             }else{
                 if(empty($attachments)){
                     if(!empty($width) && !empty($height)){
-                        update_option('swp_app_settings-width-slider',$width);
-                        update_option('swp_app_settings-height-slider',$height);
-                        update_option('swp_app_settings-slider-first-settings',1);
+                        update_option('swp_app_settings_width_deals',$width);
+                        update_option('swp_app_settings_height_deals',$height);
+                        update_option('swp_app_settings-deal-first-settings',1);
                     }else{
-                        update_option('swp_app_settings-width-slider',752);
-                        update_option('swp_app_settings-height-slider',564);
-                        update_option('swp_app_settings-slider-first-settings',1);
+                        update_option('swp_app_settings_width_deals',752);
+                        update_option('swp_app_settings_height_deals',564);
+                        update_option('swp_app_settings-deal-first-settings',1);
                     }
                 }else{
                     if(!empty($width) && !empty($height)){
                         $sql = 'DELETE FROM ' . $wpdb->prefix . 'postmeta WHERE meta_key = "swp_app_deals_large"';
                         $wpdb->query($sql);
-                        update_option('swp_app_settings-width-slider',$width);
-                        update_option('swp_app_settings-height-slider',$height);
-                        update_option('swp_app_settings-slider-first-settings',1);
+                        update_option('swp_app_settings_width_deals',$width);
+                        update_option('swp_app_settings_height_deals',$height);
+                        update_option('swp_app_settings-deal-first-settings',1);
                     }else{
                         $sql = 'DELETE FROM ' . $wpdb->prefix . 'postmeta WHERE meta_key = "swp_app_deals_large"';
                         $wpdb->query($sql);
-                        update_option('swp_app_settings-width-slider',752);
-                        update_option('swp_app_settings-height-slider',564);
-                        update_option('swp_app_settings-slider-first-settings',1);
+                        update_option('swp_app_settings_width_deals',752);
+                        update_option('swp_app_settings_height_deals',564);
+                        update_option('swp_app_settings-deal-first-settings',1);
                     }
                 }
             }

@@ -1,50 +1,94 @@
-[20-Dec-2018 10:18:57 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
-[21-Dec-2018 05:53:10 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
-[21-Dec-2018 05:54:59 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
-[21-Dec-2018 05:58:10 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
-[21-Dec-2018 05:59:39 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
-[21-Dec-2018 06:07:01 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
-[21-Dec-2018 06:15:23 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
-[21-Dec-2018 06:18:55 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
-[21-Dec-2018 06:19:39 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
-[21-Dec-2018 06:23:17 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
-[21-Dec-2018 06:25:37 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
-[21-Dec-2018 06:30:22 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
-[21-Dec-2018 06:40:34 UTC] PHP Parse error:  syntax error, unexpected '=' in /home/ecommerceway/public_html/test/wp-content/plugins/swp-mobile-connector/settings/deals/swp-app-connector-deals-ajax.php on line 53
-[21-Dec-2018 06:40:53 UTC] PHP Parse error:  syntax error, unexpected '=' in /home/ecommerceway/public_html/test/wp-content/plugins/swp-mobile-connector/settings/deals/swp-app-connector-deals-ajax.php on line 53
-[21-Dec-2018 06:41:08 UTC] PHP Parse error:  syntax error, unexpected '=' in /home/ecommerceway/public_html/test/wp-content/plugins/swp-mobile-connector/settings/deals/swp-app-connector-deals-ajax.php on line 53
-[21-Dec-2018 06:43:25 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
-[21-Dec-2018 06:43:40 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
-[21-Dec-2018 06:44:09 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
-[21-Dec-2018 06:46:03 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
-[21-Dec-2018 06:46:03 UTC] PHP Notice:  Undefined variable: i in /home/ecommerceway/public_html/test/wp-content/plugins/swp-mobile-connector/settings/deals/swp-app-connector-deals-ajax.php on line 53
-[21-Dec-2018 06:46:14 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
-[21-Dec-2018 06:46:14 UTC] PHP Notice:  Undefined variable: i in /home/ecommerceway/public_html/test/wp-content/plugins/swp-mobile-connector/settings/deals/swp-app-connector-deals-ajax.php on line 53
-[21-Dec-2018 06:53:43 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
-[21-Dec-2018 06:55:15 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
-[21-Dec-2018 06:55:55 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
-[21-Dec-2018 06:56:43 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
-[21-Dec-2018 06:56:52 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
-[21-Dec-2018 06:57:00 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
-[21-Dec-2018 07:04:12 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
-[21-Dec-2018 07:04:20 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
-[21-Dec-2018 07:04:26 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
-[21-Dec-2018 07:04:31 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
-[21-Dec-2018 07:10:17 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
-[21-Dec-2018 07:21:25 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
-[21-Dec-2018 07:23:51 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
-[21-Dec-2018 07:24:38 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
-[21-Dec-2018 07:26:38 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
-[21-Dec-2018 07:28:51 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
-[21-Dec-2018 07:30:44 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
-[21-Dec-2018 08:29:57 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
-[21-Dec-2018 10:22:38 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
-[21-Dec-2018 10:24:23 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
-[21-Dec-2018 10:24:40 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
-[21-Dec-2018 10:27:05 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
-[21-Dec-2018 10:28:06 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
-[21-Dec-2018 10:28:26 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
-[21-Dec-2018 10:30:05 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
-[21-Dec-2018 11:50:23 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
-[21-Dec-2018 13:08:55 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
-[21-Dec-2018 13:09:11 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[20-Dec-2018 10:18:57 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[21-Dec-2018 05:53:10 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[21-Dec-2018 05:54:59 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[21-Dec-2018 05:58:10 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[21-Dec-2018 05:59:39 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[21-Dec-2018 06:07:01 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[21-Dec-2018 06:15:23 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[21-Dec-2018 06:18:55 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[21-Dec-2018 06:19:39 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[21-Dec-2018 06:23:17 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[21-Dec-2018 06:25:37 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[21-Dec-2018 06:30:22 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[21-Dec-2018 06:40:34 UTC] PHP Parse error:  syntax error, unexpected '=' in /home/ecommerceway/public_html/test/wp-content/plugins/swp-mobile-connector/settings/deals/swp-app-connector-deals-ajax.php on line 53
+[21-Dec-2018 06:40:53 UTC] PHP Parse error:  syntax error, unexpected '=' in /home/ecommerceway/public_html/test/wp-content/plugins/swp-mobile-connector/settings/deals/swp-app-connector-deals-ajax.php on line 53
+[21-Dec-2018 06:41:08 UTC] PHP Parse error:  syntax error, unexpected '=' in /home/ecommerceway/public_html/test/wp-content/plugins/swp-mobile-connector/settings/deals/swp-app-connector-deals-ajax.php on line 53
+[21-Dec-2018 06:43:25 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[21-Dec-2018 06:43:40 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[21-Dec-2018 06:44:09 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[21-Dec-2018 06:46:03 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[21-Dec-2018 06:46:03 UTC] PHP Notice:  Undefined variable: i in /home/ecommerceway/public_html/test/wp-content/plugins/swp-mobile-connector/settings/deals/swp-app-connector-deals-ajax.php on line 53
+[21-Dec-2018 06:46:14 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[21-Dec-2018 06:46:14 UTC] PHP Notice:  Undefined variable: i in /home/ecommerceway/public_html/test/wp-content/plugins/swp-mobile-connector/settings/deals/swp-app-connector-deals-ajax.php on line 53
+[21-Dec-2018 06:53:43 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[21-Dec-2018 06:55:15 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[21-Dec-2018 06:55:55 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[21-Dec-2018 06:56:43 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[21-Dec-2018 06:56:52 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[21-Dec-2018 06:57:00 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[21-Dec-2018 07:04:12 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[21-Dec-2018 07:04:20 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[21-Dec-2018 07:04:26 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[21-Dec-2018 07:04:31 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[21-Dec-2018 07:10:17 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[21-Dec-2018 07:21:25 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[21-Dec-2018 07:23:51 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[21-Dec-2018 07:24:38 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[21-Dec-2018 07:26:38 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[21-Dec-2018 07:28:51 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[21-Dec-2018 07:30:44 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[21-Dec-2018 08:29:57 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[21-Dec-2018 10:22:38 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[21-Dec-2018 10:24:23 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[21-Dec-2018 10:24:40 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[21-Dec-2018 10:27:05 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[21-Dec-2018 10:28:06 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[21-Dec-2018 10:28:26 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[21-Dec-2018 10:30:05 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[21-Dec-2018 11:50:23 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[21-Dec-2018 13:08:55 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[21-Dec-2018 13:09:11 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[28-Dec-2018 08:00:36 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[28-Dec-2018 08:00:36 UTC] PHP Notice:  Use of undefined constant WOOCONNECTOR_PLUGIN_BASENAME - assumed 'WOOCONNECTOR_PLUGIN_BASENAME' in /home/ecommerceway/public_html/test/wp-content/plugins/swp-mobile-connector/hooks/wooconnector-core.php on line 463
+[28-Dec-2018 08:46:39 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[28-Dec-2018 08:46:39 UTC] PHP Notice:  Use of undefined constant WOOCONNECTOR_PLUGIN_BASENAME - assumed 'WOOCONNECTOR_PLUGIN_BASENAME' in /home/ecommerceway/public_html/test/wp-content/plugins/swp-mobile-connector/hooks/wooconnector-core.php on line 463
+[28-Dec-2018 08:50:16 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[28-Dec-2018 08:50:17 UTC] PHP Notice:  Use of undefined constant WOOCONNECTOR_PLUGIN_BASENAME - assumed 'WOOCONNECTOR_PLUGIN_BASENAME' in /home/ecommerceway/public_html/test/wp-content/plugins/swp-mobile-connector/hooks/wooconnector-core.php on line 463
+[28-Dec-2018 08:59:30 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[28-Dec-2018 08:59:30 UTC] PHP Notice:  Use of undefined constant WOOCONNECTOR_PLUGIN_BASENAME - assumed 'WOOCONNECTOR_PLUGIN_BASENAME' in /home/ecommerceway/public_html/test/wp-content/plugins/swp-mobile-connector/hooks/wooconnector-core.php on line 463
+[28-Dec-2018 09:13:33 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[28-Dec-2018 09:13:33 UTC] PHP Notice:  Use of undefined constant WOOCONNECTOR_PLUGIN_BASENAME - assumed 'WOOCONNECTOR_PLUGIN_BASENAME' in /home/ecommerceway/public_html/test/wp-content/plugins/swp-mobile-connector/hooks/wooconnector-core.php on line 463
+[28-Dec-2018 09:18:40 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[28-Dec-2018 09:18:40 UTC] PHP Notice:  Use of undefined constant WOOCONNECTOR_PLUGIN_BASENAME - assumed 'WOOCONNECTOR_PLUGIN_BASENAME' in /home/ecommerceway/public_html/test/wp-content/plugins/swp-mobile-connector/hooks/wooconnector-core.php on line 463
+[28-Dec-2018 09:30:14 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[28-Dec-2018 09:30:14 UTC] PHP Notice:  Use of undefined constant WOOCONNECTOR_PLUGIN_BASENAME - assumed 'WOOCONNECTOR_PLUGIN_BASENAME' in /home/ecommerceway/public_html/test/wp-content/plugins/swp-mobile-connector/hooks/wooconnector-core.php on line 463
+[28-Dec-2018 09:36:25 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[28-Dec-2018 09:36:25 UTC] PHP Notice:  Use of undefined constant WOOCONNECTOR_PLUGIN_BASENAME - assumed 'WOOCONNECTOR_PLUGIN_BASENAME' in /home/ecommerceway/public_html/test/wp-content/plugins/swp-mobile-connector/hooks/wooconnector-core.php on line 463
+[28-Dec-2018 10:17:08 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[28-Dec-2018 10:17:08 UTC] PHP Notice:  Use of undefined constant WOOCONNECTOR_PLUGIN_BASENAME - assumed 'WOOCONNECTOR_PLUGIN_BASENAME' in /home/ecommerceway/public_html/test/wp-content/plugins/swp-mobile-connector/hooks/wooconnector-core.php on line 463
+[28-Dec-2018 10:22:34 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[28-Dec-2018 10:22:34 UTC] PHP Notice:  Use of undefined constant WOOCONNECTOR_PLUGIN_BASENAME - assumed 'WOOCONNECTOR_PLUGIN_BASENAME' in /home/ecommerceway/public_html/test/wp-content/plugins/swp-mobile-connector/hooks/wooconnector-core.php on line 463
+[28-Dec-2018 10:37:51 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[28-Dec-2018 10:37:51 UTC] PHP Notice:  Use of undefined constant WOOCONNECTOR_PLUGIN_BASENAME - assumed 'WOOCONNECTOR_PLUGIN_BASENAME' in /home/ecommerceway/public_html/test/wp-content/plugins/swp-mobile-connector/hooks/wooconnector-core.php on line 463
+[28-Dec-2018 10:38:23 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[28-Dec-2018 10:38:23 UTC] PHP Notice:  Use of undefined constant WOOCONNECTOR_PLUGIN_BASENAME - assumed 'WOOCONNECTOR_PLUGIN_BASENAME' in /home/ecommerceway/public_html/test/wp-content/plugins/swp-mobile-connector/hooks/wooconnector-core.php on line 463
+[28-Dec-2018 10:38:41 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[28-Dec-2018 10:38:42 UTC] PHP Notice:  Use of undefined constant WOOCONNECTOR_PLUGIN_BASENAME - assumed 'WOOCONNECTOR_PLUGIN_BASENAME' in /home/ecommerceway/public_html/test/wp-content/plugins/swp-mobile-connector/hooks/wooconnector-core.php on line 463
+[28-Dec-2018 10:39:11 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[28-Dec-2018 10:39:11 UTC] PHP Notice:  Use of undefined constant WOOCONNECTOR_PLUGIN_BASENAME - assumed 'WOOCONNECTOR_PLUGIN_BASENAME' in /home/ecommerceway/public_html/test/wp-content/plugins/swp-mobile-connector/hooks/wooconnector-core.php on line 463
+[28-Dec-2018 10:45:53 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[28-Dec-2018 10:45:53 UTC] PHP Notice:  Use of undefined constant WOOCONNECTOR_PLUGIN_BASENAME - assumed 'WOOCONNECTOR_PLUGIN_BASENAME' in /home/ecommerceway/public_html/test/wp-content/plugins/swp-mobile-connector/hooks/wooconnector-core.php on line 463
+[28-Dec-2018 10:48:27 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[28-Dec-2018 10:48:27 UTC] PHP Notice:  Use of undefined constant WOOCONNECTOR_PLUGIN_BASENAME - assumed 'WOOCONNECTOR_PLUGIN_BASENAME' in /home/ecommerceway/public_html/test/wp-content/plugins/swp-mobile-connector/hooks/wooconnector-core.php on line 463
+[28-Dec-2018 10:51:01 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[28-Dec-2018 10:51:01 UTC] PHP Notice:  Use of undefined constant WOOCONNECTOR_PLUGIN_BASENAME - assumed 'WOOCONNECTOR_PLUGIN_BASENAME' in /home/ecommerceway/public_html/test/wp-content/plugins/swp-mobile-connector/hooks/wooconnector-core.php on line 463
+[28-Dec-2018 10:55:08 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[28-Dec-2018 10:55:08 UTC] PHP Notice:  Use of undefined constant WOOCONNECTOR_PLUGIN_BASENAME - assumed 'WOOCONNECTOR_PLUGIN_BASENAME' in /home/ecommerceway/public_html/test/wp-content/plugins/swp-mobile-connector/hooks/wooconnector-core.php on line 463
+[28-Dec-2018 10:57:13 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[28-Dec-2018 10:57:13 UTC] PHP Notice:  Use of undefined constant WOOCONNECTOR_PLUGIN_BASENAME - assumed 'WOOCONNECTOR_PLUGIN_BASENAME' in /home/ecommerceway/public_html/test/wp-content/plugins/swp-mobile-connector/hooks/wooconnector-core.php on line 463
+[28-Dec-2018 12:43:39 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[28-Dec-2018 12:43:39 UTC] PHP Notice:  Use of undefined constant WOOCONNECTOR_PLUGIN_BASENAME - assumed 'WOOCONNECTOR_PLUGIN_BASENAME' in /home/ecommerceway/public_html/test/wp-content/plugins/swp-mobile-connector/hooks/wooconnector-core.php on line 463
+[28-Dec-2018 12:58:02 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[28-Dec-2018 12:58:02 UTC] PHP Notice:  Use of undefined constant WOOCONNECTOR_PLUGIN_BASENAME - assumed 'WOOCONNECTOR_PLUGIN_BASENAME' in /home/ecommerceway/public_html/test/wp-content/plugins/swp-mobile-connector/hooks/wooconnector-core.php on line 463
+[08-Jan-2019 17:53:47 UTC] PHP Notice:  Undefined offset: 1 in /home/ecommerceway/public_html/test/wp-includes/vars.php on line 31
+[08-Jan-2019 17:53:47 UTC] PHP Notice:  Use of undefined constant SWP_PLUGIN_BASENAME - assumed 'SWP_PLUGIN_BASENAME' in /home/ecommerceway/public_html/test/wp-content/plugins/swp-mobile-connector/hooks/wooconnector-core.php on line 925

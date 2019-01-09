@@ -1,362 +1,543 @@
 <?php
-class SWPappsettings
-{
-    /**
-     * Holds the values to be used in the fields callbacks
-     */
-    private $options;
 
-    /**
-     * Start up
-     */
-    public function __construct(){
-        $this->init_hooks();
-    }
-
-    /**
-	 * Hook into actions and filters.
-	 */
-    public function init_hooks(){
-        add_action( 'admin_menu',array($this,'swpapp_create_menu'));
-        //add_action( 'admin_enqueue_scripts', array( $this, 'swpapp_admin_style' ));
-        //add_action( 'wp_ajax_mobiconnector_show_url', array($this,'bamobile_mobiconnector_process_show_url_function' ));
-        require_once('class-app-connector-backend-about-us.php');
-        require_once( 'class-app-connector-backend-slider-settings.php' );
-        require_once( 'class-app-connector-backend-popup-settings.php' );
-        require_once( 'class-app-connector-backend-footer.php' );
-    }
-    /**
-     * Add options page
-     */
-    public function swpapp_create_menu(){
-		add_menu_page(
-			__('App Connector','appconnector'),
-			__('App Connector','appconnector'),
-			'manage_options',
-			'appconnector-settings',
-			array($this,'swpapp_redirect_to_app_connector'),
-            '',
-            50
-        );
-        add_submenu_page(
-            'appconnector-settings',
-            __('General Setting','appconnector'),
-            __('General Setting','appconnector'),
-            'manage_options',
-            'swp-app-settings',
-            array($this,'swpapp_redirect_to_general_setting')
-        );
-        add_submenu_page(
-            'appconnector-settings',
-            __('Push Notification','appconnector'),
-            __('Push Notification','appconnector'),
-            'manage_options',
-            'swpapp-notification',
-            array($this,'swpapp_redirect_to_notification')
-        );
-        add_submenu_page(
-            'appconnector-settings',
-            __('One Signal API','appconnector'),
-            __('One Signal API','appconnector'),
-            'manage_options',
-            'swpapp-popup',
-            array($this,'swpapp_redirect_to_one_signal')
-        );
-        add_submenu_page(
-            'appconnector-settings',
-            __('Product Review','appconnector'),
-            __('Product Review','appconnector'),
-            'manage_options',
-            'swpapp-slider',
-            array($this,'swpapp_redirect_to_product_review')
-        );
-        add_action( 'admin_init', array( $this, 'swp_page_init' ) );
-       
-    }
-    
-
-
-    /**
-     * Options page callback
-     */
-    public function swpapp_redirect_to_app_connector()
-    {
-    }
-
-    /**
-     * Register and add settings
-     */
-    public function swp_page_init()
-    {        
-        register_setting(
-            'swp-option-group', // Option group
-            'swp_app_options', // Option name
-            array( $this, 'swp_app_register_settings' ) // Sanitize
-        );
-
-        add_settings_section(
-            'swp_app_general_setting_section', // ID
-            'General Settings', // Title
-            array( $this, 'print_section_info' ), // Callback
-            'swp-app-general-setting' // Page
-        );  
-
-        add_settings_field(
-            'swp_product_title_for_buyer', // ID
-            'Product Title', // Title 
-            array( $this, 'swp_product_title_for_buyer_callback' ), // Callback
-            'swp-app-general-setting', // Page
-            'swp_app_general_setting_section' // Section           
-        );      
-
-        add_settings_field(
-            'swp_buyer_product_description', 
-            'Description of Buyer Product', 
-            array( $this, 'swp_buyer_product_description_callback' ), 
-            'swp-app-general-setting', 
-            'swp_app_general_setting_section'
-        ); 
-       add_settings_field(
-            'swp_terms_of_use_title', 
-            'Terms Of Use (Title)', 
-            array( $this, 'swp_terms_of_use_title_callback' ), 
-            'swp-app-general-setting', 
-            'swp_app_general_setting_section'
-        );
-        add_settings_field(
-            'swp_terms_of_use_description', 
-            'Terms Of Use (Description)', 
-            array( $this, 'swp_terms_of_use_description_callback' ), 
-            'swp-app-general-setting', 
-            'swp_app_general_setting_section'
-        );
-        add_settings_field(
-            'swp_privacy_policy_title', 
-            'Privacy Policy (Title)', 
-            array( $this, 'swp_privacy_policy_title_callback' ), 
-            'swp-app-general-setting', 
-            'swp_app_general_setting_section'
-        );
-        add_settings_field(
-            'swp_privacy_policy_description', 
-            'Privacy Policy (Description)', 
-            array( $this, 'swp_privacy_policy_description_callback' ), 
-            'swp-app-general-setting', 
-            'swp_app_general_setting_section'
-        ); 
-        add_settings_field(
-            'swp_privacy_policy_description', 
-            'Privacy Policy (Description)', 
-            array( $this, 'swp_privacy_policy_description_callback' ), 
-            'swp-app-general-setting', 
-            'swp_app_general_setting_section'
-        ); 
-        
-    }
-
-    /**
-     * Sanitize each setting field as needed
-     *
-     * @param array $input Contains all settings fields as array keys
-     */
-    public function swp_app_register_settings( $input )
-    {
-        $new_input = array();
-        if( isset( $input['swp_product_title_for_buyer'] ) )
-            $new_input['swp_product_title_for_buyer'] = sanitize_text_field( $input['swp_product_title_for_buyer'] );
-
-    //    if( isset( $input['swp_buyer_product_description'] ) )
-      //      $new_input['swp_buyer_product_description'] =  $swp_buyer_product_description ;
-     
-        if( isset( $input['swp_terms_of_use_title'] ) )
-                $new_input['swp_terms_of_use_title'] = sanitize_text_field( $input['swp_terms_of_use_title'] );
-        
-        if( isset( $input['swp_terms_of_use_description'] ) )
-                $new_input['swp_terms_of_use_description'] = sanitize_text_field( $input['swp_terms_of_use_description'] );
-
-        if( isset( $input['swp_privacy_policy_title'] ) )
-                $new_input['swp_privacy_policy_title'] = sanitize_text_field( $input['swp_privacy_policy_title'] );
-
-        if( isset( $input['swp_privacy_policy_description'] ) )
-                $new_input['swp_privacy_policy_description'] = sanitize_text_field( $input['swp_privacy_policy_description'] );
-        //About us
-        if( isset( $input['swp_about_us_title'] ) )
-                $new_input['swp_about_us_title'] = sanitize_text_field( $input['swp_about_us_title'] );
-       
-        if( isset( $input['swp_about_us_description'] ) )
-                $new_input['swp_about_us_description'] = sanitize_text_field( $input['swp_about_us_description'] );
-
-        return $new_input;
-    }
-
-    /** 
-     * Print the Section text
-     */
-    public function print_section_info()
-    {
-        print 'Enter your mobile app settings:';
-    }
-
-    /** 
-     * Get the settings option array and print one of its values
-     */
-    public function swp_product_title_for_buyer_callback()
-    {
-        printf(
-            '<input type="text" id="swp_product_title_for_buyer" name="swp_app_options[swp_product_title_for_buyer]" value="%s" />',
-            isset( $this->options['swp_product_title_for_buyer'] ) ? esc_attr( $this->options['swp_product_title_for_buyer']) : ''
-        );
-    }
-    
-
-    /** 
-     * Get the settings option array and print one of its values
-     */
-    public function swp_buyer_product_description_callback()
-    {
-        
-        $settings = array(
-        'tinymce' => false,
-        'textarea_rows' => 10,
-        'tabindex' => 1,
-        'media_buttons' => false,
-        'quicktags' => false,
-        'textarea_rows' => 6
-        );
-        //$content = $_POST['swp_buyer_product_description'];
-        wp_editor('', 'swp_buyer_product_description', $settings);
-                  
-    }
-    /** 
-     * Get the settings option array and print one of terms of use title
-     */
-    public function swp_terms_of_use_title_callback()
-    {
-        
-        printf(
-            '<input type="text" id="swp_terms_of_use_title" rows="20" cols="10" name="swp_app_options[swp_terms_of_use_title]" value="%s" />',
-        isset( $this->options['swp_terms_of_use_title'] ) ? esc_attr( $this->options['swp_terms_of_use_title']) : '');
-        
-    }
-   
-    public function swp_terms_of_use_description_callback()
-    {
-        
-//        printf(
-//            '<input type="text" id="swp_terms_of_use_description" rows="20" cols="10" name="swp_app_options[swp_terms_of_use_description]" value="%s" />',
-//        isset( $this->options['swp_terms_of_use_description'] ) ? esc_attr( $this->options['swp_terms_of_use_description']) : '');
-     $settings = array(
-        'tinymce' => false,
-        'textarea_rows' => 10,
-        'tabindex' => 1,
-        'media_buttons' => false,
-        'quicktags' => false,
-        'textarea_rows' => 6
-        );
-        //$content = $_POST['swp_buyer_product_description'];
-        wp_editor('', 'swp_buyer_product_description', $settings);
-   
-    }
-    public function swp_privacy_policy_title_callback()
-    {
-        
-        printf(
-            '<input type="text" id="swp_privacy_policy_title" rows="20" cols="10" name="swp_app_options[swp_privacy_policy_title]" value="%s" />',
-        isset( $this->options['swp_privacy_policy_title'] ) ? esc_attr( $this->options['swp_privacy_policy_title']) : '');
-        
-    }
-    
-    public function swp_privacy_policy_description_callback()
-    {
-        
-//        printf(
-//            '<input type="text" id="swp_privacy_policy_description" rows="20" cols="10" name="swp_app_options[swp_privacy_policy_description]" value="%s" />',
-//        isset( $this->options['swp_privacy_policy_description'] ) ? esc_attr( $this->options['swp_privacy_policy_description']) : '');
-        $settings = array(
-        'tinymce' => false,
-        'textarea_rows' => 10,
-        'tabindex' => 1,
-        'media_buttons' => false,
-        'quicktags' => false,
-        'textarea_rows' => 6
-        );
-        //$content = $_POST['swp_buyer_product_description'];
-        wp_editor('', 'swp_privacy_policy_description', $settings);
-        
-    }
-    
-    public function swpapp_redirect_to_general_setting(){
-      // Set class property
-        ?>
-         <?php
-                if( isset( $_GET[ 'tab' ] ) ) {
-                    $active_tab = $_GET[ 'tab' ];
-                } // end if
-                ?>
-        <h2 class="nav-tab-wrapper">
-            <a href="?page=swp-app-settings&tab=swp_app_settings_tab" class="nav-tab <?php echo $active_tab == 'swp_app_settings_tab' ? 'nav-tab-active' : ''; ?>">General Setting</a>
-            <a href="?page=swp-app-settings&tab=swp_app_about_us_tab" class="nav-tab <?php echo $active_tab == 'swp_app_about_us_tab' ? 'nav-tab-active' : ''; ?>">About Us</a>
-            <a href="?page=swp-app-settings&tab=swp_app_slider_settings_tab" class="nav-tab <?php echo $active_tab == 'swp_app_slider_settings_tab' ? 'nav-tab-active' : ''; ?>">Slider</a>
-            <a href="?page=swp-app-settings&tab=swp_app_popup_settings_tab" class="nav-tab <?php echo $active_tab == 'swp_app_popup_settings_tab' ? 'nav-tab-active' : ''; ?>">Popup</a>
-            <a href="?page=swp-app-settings&tab=swp_app_footer_settings_tab" class="nav-tab <?php echo $active_tab == 'swp_app_footer_settings_tab' ? 'nav-tab-active' : ''; ?>">Footer</a>
-        </h2>
-        <?php settings_errors() ?>
-
-        <?php if(isset($_POST['swp_buyer_product_description'])){
-            update_option('swp_buyer_product_description',$_POST['swp_buyer_product_description']); 
-        }
-        $this->options = get_option( 'swp_app_options' );
-        
-        //$SWPaboutus->optionss = get_option('swp_app_about_us_options');
-        ?>
-        <div class="wrap">
-            <form method="post" action="options.php">
-                <?php $active_tab = $_GET[ 'tab' ]; ?>
-                <?php if ( $active_tab == 'swp_app_settings_tab'  ){ ?>
-                <?php
-                    // This prints out all hidden setting fields
-                    settings_fields( 'swp-option-group' );
-                    do_settings_sections( 'swp-app-general-setting' );
-                    submit_button();
-                } elseif( $active_tab == 'swp_app_about_us_tab' ){
-                   //$this->optionss = get_option( 'swp_app_about_us_options' );
-                    // This prints out all hidden setting fields
-                    $SWPaboutus = new SWPaboutus();
-                    $SWPaboutus->swp_setting_fields();
-
-                }elseif( $active_tab == 'swp_app_slider_settings_tab' ){
-                    // This prints out all hidden setting fields
-                    settings_fields( 'swp-slider-settings-option-group' );
-                    do_settings_sections( 'swp-app-slider-settings' );
-                    submit_button();
-
-                }elseif( $active_tab == 'swp_app_popup_settings_tab' ){
-                    // This prints out all hidden setting fields
-                    settings_fields( 'swp-popup-settings-option-group' );
-                    do_settings_sections( 'swp-app-popup-settings' );
-                    submit_button();
-
-                }elseif( $active_tab == 'swp_app_footer_settings_tab' ){
-                    // This prints out all hidden setting fields
-                    settings_fields( 'swp-footer-option-group' );
-                    do_settings_sections( 'swp-app-footer-settings' );
-                    do_settings_sections( 'swp-app-footer-social-link-settings' );
-                    submit_button();
-
-                }else{
-                    settings_fields( 'swp-option-group' );
-                    do_settings_sections( 'swp-app-general-setting' );
-                    submit_button();
-                }
-                ?>
-              </form>
-        </div>
-        <?php
-    }
-//    public function swpapp_redirect_to_notification(){}
-//    public function swpapp_redirect_to_one_signal(){}
-//    public function swpapp_redirect_to_product_review(){}
+if( !defined( 'ABSPATH' ) ){
+    /****** EXIT if access directly ******/
+    exit;
 }
 
-if( is_admin() )
+/******************************************************
+* @param settings function
+* callback values
+* @return
+******************************************************/
+if( !class_exists( 'SWPappsettings' ) ){
+    class SWPappsettings
+    {
+        /**** Holds the values to be used in the fields callbacks *****/
+        private $options;
+
+        /******* Start up *****/
+        public function __construct(){
+            $this->init_hooks();
+        }
+
+        /***** Hook into actions and filters. ******/
+        public function init_hooks(){
+            //require_once('class-app-connector-backend-about-us.php');
+            require_once('general-settings/general-settings.php');
+            require_once( 'popup/class-app-connector-popup.php' );
+            require_once( 'deals/class-app-connector-deals.php' );
+            require_once( 'slider/class-core.php' );
+            require_once( 'slider/class-app-connector-slider.php' );
+            
+            add_action( 'admin_menu',array($this, 'create_menu_to_admin' ) );
+            //require_once( 'class-app-connector-backend-footer.php' );
+                        
+        }
+        
+        public function create_menu_to_admin(){
+		
+            $parent_slug = 'appconnector-settings';
+            add_submenu_page(
+                $parent_slug,
+                __('One Signal'),
+                __('One Signal'),
+                'manage_options',
+                'swp-one-signal',
+                array($this,'action_onesignal_menu')
+            );
+        }
+        
+        public function action_onesignal_menu(){
+            $task = isset($_REQUEST['wootask']) ? $_REQUEST['wootask'] : '';
+            $tab = isset($_REQUEST['wootab']) ? $_REQUEST['wootab'] : 'settings';
+            if($tab == 'api'){
+                require_once( SWP_ABSPATH.'settings/onesignal/onesignal-form.php');
+            }elseif($tab == 'new'){
+                require_once( SWP_ABSPATH.'settings/onesignal/content-setting.php');
+            }elseif($tab == 'list'){
+                require_once( SWP_ABSPATH.'settings/onesignal/list-notification.php');
+            }elseif($tab == 'player'){
+                require_once( SWP_ABSPATH.'settings/onesignal/list-user.php');
+            }elseif($tab == 'viewnotification'){
+                require_once( SWP_ABSPATH.'settings/onesignal/details-notification.php');
+            }else{
+                require_once(SWP_ABSPATH.'settings/onesignal/onesignal-form.php');
+            }	
+            if(!empty($task) || $task != ''){	
+                switch($task){
+                    case 'saveonesignal':
+                    $this->Woo_SaveOnesignal();
+                    break;
+                    case 'saveonesignal-content':
+                        $this->Woo_SaveContent();
+                    break;
+                    case 'changeTesttype':
+                        $nonce = esc_attr( $_REQUEST['_wpnonce'] );
+                        if ( ! wp_verify_nonce( $nonce, 'wooconnector_change_testtype' ) ) {
+                        die( 'Go get a life script kiddies' );
+                        }
+                        else {
+                            $player = $_REQUEST['player'];
+                            $device = $_REQUEST['device'];
+                            $section = 	$_REQUEST['section'];
+                            $this->update_type_player($player,$device,$section);
+                        }
+                    break;
+                }
+            }			
+        }
+        
+        private function Woo_SaveOnesignal(){
+            $apiid = esc_sql(@$_POST["wooconnector-app-id-onesignal"]);
+            $restapikey = esc_sql(@$_POST["wooconnector-rest-api-key-onesignal"]);
+            if(strlen($apiid) != 36){
+//                bamobile_mobiconnector_add_notice(__('Your APP ID must be 36 characters. Please retype','wooconnector'),'error'); 
+                wp_redirect( '?page=swp-one-signal&wootab=api' );
+                return true;
+            }
+            if(strlen($restapikey ) != 48){
+//                bamobile_mobiconnector_add_notice(__('Your REST API KEY must be 48 characters. Please retype','wooconnector'),'error'); 
+                wp_redirect( '?page=swp-one-signal&wootab=api' );
+                return true;
+            }
+            $apiid = trim($apiid);   
+            $restapikey = trim($restapikey);
+            update_option('wooconnector_settings-api',$apiid);
+            update_option('wooconnector_settings-restkey',$restapikey);
+            $mobiapi = get_option('mobiconnector_settings-onesignal-api');
+            $mobirest = get_option('mobiconnector_settings-onesignal-restkey');
+            if(empty($mobiapi) && empty($mobirest)){
+                update_option('mobiconnector_settings-onesignal-api',$apiid);
+                update_option('mobiconnector_settings-onesignal-restkey',$restapikey);
+            }
+            global $wpdb;
+            $table_name = $wpdb->prefix . "wooconnector_data_api";
+            $table_mobi_name = $wpdb->prefix . "mobiconnector_data_api";
+            $datas = $wpdb->get_results(
+                "
+                SELECT * 
+                FROM $table_name
+                WHERE api_key = '$apiid'
+                "
+            );
+            $checkdata = $wpdb->get_results(
+                "
+                SELECT * 
+                FROM $table_mobi_name
+                WHERE api_key = '$apiid'
+                "
+            );
+            if(empty($datas)){
+                $table_name = $wpdb->prefix . "wooconnector_data_api";			
+                $wpdb->insert(
+                    "$table_name",array(
+                        "api_key" => $apiid,
+                        "rest_api" => $restapikey,				
+                    ),
+                    array( 
+                        '%s', 
+                        '%s'
+                    ) 
+                );
+            }	
+            if(empty($checkdata)){              	
+                $wpdb->insert(
+                    "$table_mobi_name",array(
+                        "api_key" => $apiid,
+                        "rest_api" => $restapikey,				
+                    ),
+                    array( 
+                        '%s', 
+                        '%s'
+                    ) 
+                );
+            }	
+            echo __('Successfully Update','mobiconnector'); 
+            wp_redirect( '?page=swp-one-signal&wootab=api' );
+        }
+        
+        /***** update player *****/
+         public function update_type_player($player,$device,$section){	
+            if($section == 'addtotest'){
+                preg_match("/iPhone|iPad|iPod|webOS/", $device, $matches);
+                $os = current($matches);
+                if($os){
+                    $testtype = 2;
+                }else{
+                    $testtype = 1;
+                }
+            }elseif($section == 'deletetotest'){
+                $testtype = 0;
+            }
+            $api = get_option('wooconnector_settings-api');
+            global $wpdb;
+            $table_name = $wpdb->prefix . "wooconnector_data_api";
+            $datas = $wpdb->get_results(
+                "
+                SELECT * 
+                FROM $table_name
+                WHERE api_key = '$api'
+                "
+            );
+            $idwooconnectorapi = 0;
+            if(!empty($datas)){
+                foreach($datas as $data){
+                    $idwooconnectorapi = $data->api_id;
+                }	
+            }
+            $table_update = $wpdb->prefix . "wooconnector_data_player";
+            $wpdb->update( 
+                $table_update, 
+                array( 				
+                    'test_type' => 	$testtype
+                ), 
+                array( 
+                    'api_id' => $idwooconnectorapi,
+                    'player_id' => $player
+                ), 
+                array( 				
+                    '%s'	
+                ), 
+                array( 
+                    '%d', 
+                    '%s'
+                ) 
+            );
+            wp_redirect( '?page=swp-one-signal&wootab=player' );
+        }
+        
+        private function Woo_SaveContent(){		
+
+            $title = esc_sql(@$_POST['wooconnector-web-title-notification']);
+            update_option('wooconnector_settings-title',$title);
+
+            $content = esc_sql(@$_POST['wooconnector-web-content-notification']);
+            update_option('wooconnector_settings-content',$content);
+
+            $images = @$_POST['wooconnector-web-icon-notification'];	
+            if(isset($images) && $images != ''){	
+                $this->update_thumnail_wooconnector($images,'wooconnector_notification_icon');
+                update_option('wooconnector_settings-id-icon',$images);
+            }else{
+                update_option('wooconnector_settings-id-icon',$images);
+                update_option('wooconnector_notification_icon','');
+            }	
+
+            $small = @$_POST['wooconnector-web-smicon-notification'];
+            if(isset($small) && $small != ''){
+                $this->update_thumnail_wooconnector($small,'wooconnector_notification_icon_small');
+                update_option('wooconnector_settings-sm-icon',$small);
+            }else{
+                update_option('wooconnector_notification_icon_small','');
+                update_option('wooconnector_settings-sm-icon',$small);
+            }		
+
+            $selectedurl = @$_POST['wooconnector-web-url-select-notification'];
+            update_option('wooconnector_settings-url-selected',$selectedurl);
+            if($selectedurl == 'url-product'){
+                $url = @$_POST['wooconnector-web-url-notification-url-product'];			
+                if(isset($url) && $url != ''){
+                    if(strpos($url,'link://') !== false){
+                        update_option('wooconnector_settings-push-url',$url);				
+                    }else{
+                        update_option('wooconnector_settings-url',$url);
+                        $product_id = url_to_postid($url);
+                        if(!empty($product_id)) {
+                            $newurl =  str_replace($url, 'link://product/'.$product_id, $url);
+                            update_option('wooconnector_settings-push-url',$newurl);
+                        }else{
+//                            bamobile_mobiconnector_add_notice(__('Your URL is not Product URL. Please retype','wooconnector'),'error'); 
+                            wp_redirect( '?page=swp-one-signal&wootab=api' );
+                            return true;
+                        }
+                    }
+                }
+            }elseif($selectedurl == 'url-category'){
+                $url = @$_POST['wooconnector-web-url-notification-url-category'];
+                if(isset($url) && $url != ''){
+                    update_option('wooconnector_settings-url',$url);
+                    if(strpos($url,'link://') !== false){
+                        update_option('wooconnector_settings-push-url',$url);
+                    }elseif(strpos($url,'product-category') !== false){
+                        $url_split = explode('#', $url);
+                        $url = $url_split[0];
+
+                                // Get rid of URL ?query=string
+                        $url_split = explode('?', $url);
+                        $url = $url_split[0];
+
+                        $scheme = parse_url( home_url(), PHP_URL_SCHEME );
+                        $url = set_url_scheme( $url, $scheme );
+
+                        if ( false !== strpos(home_url(), '://www.') && false === strpos($url, '://www.') )
+                        $url = str_replace('://', '://www.', $url);
+
+                        if ( false === strpos(home_url(), '://www.') )
+                        $url = str_replace('://www.', '://', $url);
+
+                        $url = trim($url, "/");
+                        $slugs = explode('/', $url);				
+                        $category = $this->get_product_category_by_slug('/'.end($slugs));
+                        if(!empty($category)){
+                            $newurl =  'link://product-category/'.$category->term_id;
+                            update_option('wooconnector_settings-push-url',$newurl);	
+                        }
+                        else{
+//                            bamobile_mobiconnector_add_notice(__('Your URL is not Product Category URL. Please retype','wooconnector'),'error');
+                            wp_redirect( '?page=swp-one-signal&wootab=api' );
+                            return true;
+                        }
+                    }else{
+//                        bamobile_mobiconnector_add_notice(__('Your URL is not Product Category URL. Please retype','wooconnector'),'error');
+                        wp_redirect( '?page=swp-one-signal&wootab=api' );
+                        return true;
+                    }
+                }
+            }elseif($selectedurl == 'url-about-us'){			
+                $newurl = 'link://about-us';
+                update_option('wooconnector_settings-push-url',$newurl);	
+            }elseif($selectedurl == 'url-bookmark'){			
+                $newurl = 'link://bookmark';
+                update_option('wooconnector_settings-push-url',$newurl);	
+            }elseif($selectedurl == 'url-term-and-conditions'){			
+                $newurl = 'link://term-and-conditions';
+                update_option('wooconnector_settings-push-url',$newurl);	
+            }elseif($selectedurl == 'url-privacy-policy'){			
+                $newurl = 'link://privacy-policy';
+                update_option('wooconnector_settings-push-url',$newurl);	
+            }elseif($selectedurl == 'url-contact-us'){			
+                $newurl = 'link://contact-us';
+                update_option('wooconnector_settings-push-url',$newurl);
+            }
+            $subtitle = @$_POST['wooconnector-web-subtitle-notification'];
+            update_option('wooconnector_settings-subtitle',$subtitle);
+
+            $sound = @$_POST['wooconnector-web-sound-notification'];
+            update_option('wooconnector_settings-sound',$sound);
+
+            $bigimage = @$_POST['wooconnector-web-bigimages-notification'];
+            if(isset($bigimage) && $bigimage != ''){
+                $this->update_thumnail_wooconnector($bigimage,'wooconnector_notification_bigimages');		
+                update_option('wooconnector_settings-bigimages',$bigimage);
+            }else{
+                update_option('wooconnector_notification_bigimages','');
+                update_option('wooconnector_settings-bigimages',$bigimage);
+            }
+
+            $responsecolortitle = @$_POST['wooconnector-web-title-color-response-notification'];
+            update_option('wooconnector_settings-response-title-color',$responsecolortitle);
+
+            $colortitle = @$_POST['wooconnector-web-title-color-notification'];
+            update_option('wooconnector_settings-title-color',$colortitle);
+
+            $responsecolorcontent = @$_POST['wooconnector-web-content-color-response-notification'];
+            update_option('wooconnector_settings-response-content-color',$responsecolorcontent);
+
+            $colorcontent = @$_POST['wooconnector-web-content-color-notification'];
+            update_option('wooconnector_settings-content-color',$colorcontent);
+
+            $bgimage = @$_POST['wooconnector-web-bgimages-notification'];
+            if(isset($bgimage) && $bgimage != ''){
+                $this->update_thumnail_wooconnector($bgimage,'wooconnector_notification_background');
+                update_option('wooconnector_settings-bgimages',$bgimage);
+            }else{
+                update_option('wooconnector_notification_background','');
+                update_option('wooconnector_settings-bgimages',$bgimage);
+            }
+
+            $responsecolorled = @$_POST['wooconnector-web-led-color-response-notification'];
+            update_option('wooconnector_settings-response-led-color',$responsecolorled);
+
+            $colorled = @$_POST['wooconnector-web-led-color-notification'];
+            update_option('wooconnector_settings-led-color',$colorled);
+
+            $responsecoloraccent = @$_POST['wooconnector-web-accent-color-response-notification'];
+            update_option('wooconnector_settings-response-accent-color',$responsecoloraccent);
+
+            $coloraccent = @$_POST['wooconnector-web-accent-color-notification'];
+            update_option('wooconnector_settings-accent-color',$coloraccent);
+
+            if(isset($_POST['saveandsend'])){
+                $api = get_option('wooconnector_settings-api');
+                $rest = get_option('wooconnector_settings-restkey');
+                if(empty($api)){
+//                    bamobile_mobiconnector_add_notice(__('Please input your api key!','wooconnector'),'error');
+                    wp_redirect( '?page=swp-one-signal&wootab=api' );
+                    return true;			
+                }
+                elseif(empty($rest)){
+//                    bamobile_mobiconnector_add_notice(__('Please input your rest api key!','wooconnector'),'error');
+                    wp_redirect( '?page=swp-one-signal&wootab=api' );
+                    return true;			
+                }
+                global $wpdb;
+                $table_name = $wpdb->prefix . "wooconnector_data_api";
+                $datas = $wpdb->get_results(
+                    "
+                    SELECT * 
+                    FROM $table_name
+                    WHERE api_key = '$api'
+                    "
+                );
+                foreach($datas as $data){
+                    $idwooconnectorapi = $data->api_id;
+                }
+                if(isset($_POST['checksegment']) && $_POST['checksegment'] == 'sendeveryone' ){
+                    $notification = sendWooconnectorMessage();				
+                }elseif(isset($_POST['checksegment']) && $_POST['checksegment'] == 'sendtoparticular'){
+                    if(empty($_POST['include_segment'])){
+//                        bamobile_mobiconnector_add_notice(__('Send to segments empty!','wooconnector'),'error');
+                        wp_redirect( '?page=swp-one-signal&wootab=api' );
+                        return true;				
+                    }
+                    $segment = explode(',',trim($_POST['include_segment'],','));
+                    $exsegment = explode(',',trim($_POST['exclude_segment'],','));
+                    $notification = sendWooconnectorMessageBySegment($segment,$exsegment);
+                }elseif(isset($_POST['checksegment']) && $_POST['checksegment'] == 'sendtotest'){
+                    if(empty($_POST['list_test_player'])){
+//                        bamobile_mobiconnector_add_notice(__('List test player empty!','wooconnector'),'error');
+                        wp_redirect( '?page=swp-one-signal&wootab=api' );
+                        return true;				
+                    }
+                    $players = $_POST['list_test_player'];
+                    $notification = sendWooconnectorMessageByPlayer($players);
+                }				
+                $noti = json_decode($notification);
+                if(!empty($noti->errors)){
+                    $errornoti = $noti->errors;
+                    $invalids = $errornoti->invalid_player_ids;				
+                    if(!empty($invalids)){
+                        foreach($invalids as $invalid){
+                            $iderrors[] = $invalid;
+                        }
+                        $iderror = implode(',',$iderrors);
+                        $iderror = trim($iderror,',');
+//                        bamobile_mobiconnector_add_notice(__('Invalid player ids','wooconnector'),'error');
+                        wp_redirect( '?page=swp-one-signal&wootab=api' );
+                        return true;
+                    }else{
+//                        bamobile_mobiconnector_add_notice(__('All included players are not subscribed','wooconnector'),'error');
+                        wp_redirect( '?page=swp-one-signal&wootab=api' );
+                        return true;					
+                    }				
+                }
+                $notificationId = $noti->id;
+                $notificationRecipients = $noti->recipients;						
+                $return = getNotificationById($notificationId);			
+                $failed = $return->failed;
+                $remaining = $return->remaining;
+                $successful = $return->successful;
+                $total = ($failed + $remaining + $successful);
+                $converted = $return->converted;
+                $datenow = new DateTime();
+                $date = $datenow->format('Y-m-d H:i:s');			
+                $table_name = $wpdb->prefix . "wooconnector_data_notification";			
+                $wpdb->insert(
+                    "$table_name",array(
+                        "notification_id" => $notificationId,
+                        "api_id" => $idwooconnectorapi,
+                        "recipients" => $notificationRecipients,
+                        "failed" => $failed,
+                        "remaining" => $remaining,
+                        "converted" => $converted,  	
+                        "successful" => $successful,	
+                        "total" => $total,
+                        "create_date" => $date	
+                    ),
+                    array( 
+                        '%s',
+                        '%d',	
+                        '%d',
+                        '%d',
+                        '%d',
+                        '%d',
+                        '%d',
+                        '%d',
+                        '%s'	
+                    ) 
+                );
+//                bamobile_mobiconnector_add_notice(__('Successfully Send Notice','mobiconnector')); 
+                wp_redirect( '?page=swp-one-signal&wootab=new' );	
+                return true;
+            }
+//            bamobile_mobiconnector_add_notice(__('Successfully Save Notice','mobiconnector')); 
+            wp_redirect( '?page=swp-one-signal&wootab=new' );
+            return true;		
+        }
+        
+        
+        function WooconnectordisplayNotification(){
+
+            require_once( WOOCONNECTOR_ABSPATH . 'hooks/class-wooconnector-create-table.php');	
+
+            $notification = new WooconnectorTable();
+
+            echo $notification->current_action();
+
+            $notification->prepare_items();
+
+            $notification->display();
+
+        }
+        
+        public function update_thumnail_wooconnector($url,$type) {					
+		$wp_upload_dir = wp_upload_dir();	
+		if(!empty($url) || $url != ''){
+			$fileurl = str_replace($wp_upload_dir['baseurl'],'',$url);
+			$absolute_pathto_file = $wp_upload_dir['basedir'].'/'.$fileurl;
+			$path_parts = pathinfo($fileurl);
+			$ext = strtolower($path_parts['extension']);
+			$basename = strtolower($path_parts['basename']);
+			$dirname = strtolower($path_parts['dirname']);
+			$filename = strtolower($path_parts['filename']);				
+			foreach($this->thumnails as $key => $value){
+				if($key == $type){
+					if($key == 'wooconnector_notification_bigimages'){
+						list($width, $height) = getimagesize($absolute_pathto_file);
+						if($width < 512 || $height < 256){
+							$path = $dirname.'/'.$filename.'_'.$key.'_512_256.'.$ext;
+							$dest = $wp_upload_dir['basedir'].'/'.$path;
+							if(!file_exists($dest)){
+								WooConnectorCore:: resize_image($absolute_pathto_file, $dest, 512, 256);
+							}					
+							update_option($key, $wp_upload_dir['baseurl'].$path);
+						}elseif($width > 2048 || $height > 1024){
+							$path = $dirname.'/'.$filename.'_'.$key.'_2048_1024.'.$ext;
+							$dest = $wp_upload_dir['basedir'].'/'.$path;
+							if(!file_exists($dest)){
+								WooConnectorCore:: resize_image($absolute_pathto_file, $dest, 2048, 1024);		
+							}			
+							update_option($key, $wp_upload_dir['baseurl'].$path);
+						}else{
+							update_option($key, $url);
+						}
+					}
+					else{						
+						$path = $dirname.'/'.$filename.'_'.$key.'_'.$value['width'].'_'.$value['height'].'.'.$ext;
+						$dest = $wp_upload_dir['basedir'].'/'.$path;
+						if(!file_exists($dest)){
+							WooConnectorCore:: resize_image($absolute_pathto_file, $dest, $value['width'], $value['height']);		
+						}			
+						update_option($key, $wp_upload_dir['baseurl'].$path);						
+					}			
+						
+				}
+			}
+		}else{
+			foreach($this->thumnails as $key){
+				if($key == $type){
+					update_option($key,'');
+				}
+			}
+		}
+		
+		return true;
+	}
+
+
+
+    }
+    if( is_admin() )
     $SWPappsettings = new SWPappsettings();
+}

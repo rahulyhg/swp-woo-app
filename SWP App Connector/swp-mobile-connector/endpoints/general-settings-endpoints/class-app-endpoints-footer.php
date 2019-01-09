@@ -13,6 +13,7 @@ if( !class_exists( 'swp_endpoint_footer' ) ){
     class swp_endpoint_footer{
         
         public function __construct(){
+            add_action( 'rest_api_init', array( $this, 'swp_endpoint_footer_details' ) );    
             add_action( 'rest_api_init', array( $this, 'swp_endpoint_footer_title' ) );    
             add_action( 'rest_api_init', array( $this, 'swp_endpoint_footer_address' ) ); 
             add_action( 'rest_api_init', array( $this, 'swp_endpoint_footer_email' ) );
@@ -24,12 +25,78 @@ if( !class_exists( 'swp_endpoint_footer' ) ){
             add_action( 'rest_api_init', array( $this, 'swp_endpoint_footer_social_google_plus_link' ) );    
         }
         
+        /***** footer details - endpoint *****/    
+        function swp_endpoint_footer_details(){
+            //register slider title
+            register_rest_route(
+                'swp/v1/general-settings',
+                '/footer-details/',
+                array(
+                    'methods' => 'GET',
+                    'callback' => array( $this, 'swp_endpoint_footer_details_callback' ),
+                )
+            );
+         }
+        
+        function swp_endpoint_footer_details_callback(){
+            $options  = get_option('swp_app_footer_option');
+            $facebook = $options['swp_app_footer_social_facebook'];
+            $instagram = $options['swp_app_footer_social_instagram'];
+            $twitter  = $options['swp_app_footer_social_twitter'];
+            $google   = $options['swp_app_footer_social_google_plus'];
+            
+            /***** url validation *****/
+//            if (filter_var($facebook, FILTER_VALIDATE_URL) === false) {
+//               $facebook_url='Not a valid URL';
+//            } else {
+//                $facebook_url = $facebook;
+//            }
+            
+            if ( !preg_match("/\b(?:(?:https):\/\/.*\www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i",$facebook ) ) {
+                $facebook_url = "Invalid url"; 
+            }else{
+                $facebook_url = $facebook;
+            }
+            
+            if(!preg_match("/\b(?:(?:https):\/\/.*\www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i",$instagram ) )
+            {
+                $instagram_url = "Invalid url"; 
+            }else{
+                $instagram_url = $instagram;
+            }
+            if(!preg_match("/\b(?:(?:https):\/\/.*\www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i",$twitter ) )
+            {
+                $twitter_url = "Invalid url"; 
+            }else{
+                $twitter_url = $twitter;
+            }
+            if(!preg_match("/\b(?:(?:https):\/\/.*\www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i",$google ) )
+            {
+                $google_url = "Invalid url"; 
+            }else{
+                $google_url = $google;
+            }
+            
+            return array(
+                'Footer_Title'  => $options['swp_app_footer_title'],
+                'Footer_Address'=> $options['swp_app_footer_address'],
+                'Footer_Email'  => $options['swp_app_footer_email'],
+                'Footer_Contact'=> $options['swp_app_footer_contact'],
+                'Facebook_Link' => $facebook_url,
+                'Instagram_Link'=> $instagram_url,
+                'Twitter_Link'  => $twitter_url,
+                'Google_Plus_Link'=> $google_url
+            
+            );
+        }
+
+        
         /***** footer title details - endpoint *****/    
         function swp_endpoint_footer_title(){
             //register slider title
             register_rest_route(
                 'swp/v1/general-settings',
-                '/footer/title/',
+                '/footer/title',
                 array(
                     'methods' => 'GET',
                     'callback' => array( $this, 'swp_endpoint_footer_title_callback' ),
@@ -39,7 +106,8 @@ if( !class_exists( 'swp_endpoint_footer' ) ){
        
         function swp_endpoint_footer_title_callback(){
             $options = get_option('swp_app_footer_option');
-            return $options['swp_app_footer_title'];
+            return  $options['swp_app_footer_title'];
+               
         }
 
 

@@ -4,7 +4,7 @@ if( !defined( 'ABSPATH' )){
     exit;
 } 
 /******************************************************
-* @param create slider endpoints
+* @param create deals endpoints
 * return array
 *
 *******************************************************/
@@ -19,7 +19,7 @@ if( !class_exists('SWPappendpointsdeals') ){
              add_action( 'rest_api_init', array( $this, 'swp_app_register_deals_api'));
          }
         
-        /***** slider Add slider - endpoint *****/    
+        /*****  Add deals - endpoint *****/    
         
         public function swp_app_register_deals_api() {
             register_rest_route( $this->endpoint_url, '/deals', array(
@@ -41,7 +41,7 @@ if( !class_exists('SWPappendpointsdeals') ){
         }
         
         public function swp_app_get_deals($request){	
-            require_once('/home/ecommerceway/public_html/test/wp-content/plugins/swp-mobile-connector/settings/deals/class-app-connector-deals.php');
+            require_once(ABSPATH.'/wp-content/plugins/swp-mobile-connector/settings/deals/class-app-connector-deals.php');
             $parameters = $request->get_params();
             $post_per_page = $parameters['post_per_page'];
             $post_num_page = $parameters['post_num_page'];
@@ -61,17 +61,17 @@ if( !class_exists('SWPappendpointsdeals') ){
                 'post_status'      => 'publish',
                 'suppress_filters' => true 
             );
-            $sliders = get_posts($args);
+            $deals = get_posts($args);
             $wp_upload_dir = wp_upload_dir();	
             $listimages = array();
             $home = get_home_url();	
-            foreach($sliders as $slider){
-                $imageid = get_post_thumbnail_id($slider->ID);		
-                $oldurl = get_post_meta($slider->ID, 'app_deals_link', true);	
-                $slider_large = get_post_meta($imageid, 'swp_app_deals_large', true);
-                if(empty($slider_large))
+            foreach($deals as $deal){
+                $imageid = get_post_thumbnail_id($deal->ID);		
+                $oldurl = get_post_meta($deal->ID, 'app_deals_link', true);	
+                $deal_large = get_post_meta($imageid, 'swp_app_deals_large', true);
+                if(empty($deal_large))
                 {
-                    $post_ID = $slider->ID;
+                    $post_ID = $deal->ID;
                     $post = get_post($post_ID);
                    $SWPappdeal = new SWPappdeal();
                    $SWPappdeal->swp_app_update_thumbnail_deals($post_ID,$post);
@@ -79,16 +79,16 @@ if( !class_exists('SWPappendpointsdeals') ){
                 $oldurl = apply_filters('post_title',trim($oldurl,'/'));
                 if(!empty($oldurl)) {		
                     $post_id = url_to_postid($oldurl);	
-                    if(strpos($oldurl, 'link://') !== false){
+                    if(strpos($oldurl, 'shop://') !== false){
                         $listimages[] = array(
-                            'slider_images' => $wp_upload_dir['baseurl']."/". get_post_meta($imageid, 'swp_app_deals_large', true),
+                            'deals_image' => $wp_upload_dir['baseurl']."/". get_post_meta($imageid, 'swp_app_deals_large', true),
                             'url' => $oldurl
                         );			
                     }						
                     elseif(!empty($post_id) && get_post_type($post_id) == 'product') {					
-                        $newurl =  str_replace($oldurl, 'link://product/'.$post_id, $oldurl);							
+                        $newurl =  str_replace($oldurl, 'shop://product/'.$post_id, $oldurl);							
                         $listimages[] = array(
-                            'slider_images' => $wp_upload_dir['baseurl']."/". get_post_meta($imageid, 'swp_app_deals_large', true),
+                            'deals_image' => $wp_upload_dir['baseurl']."/". get_post_meta($imageid, 'swp_app_deals_large', true),
                             'url' => $newurl
                         );						
                     }
@@ -114,9 +114,9 @@ if( !class_exists('SWPappendpointsdeals') ){
                         $category = $this->swp_app_get_product_category_by_slug('/'.end($slugs));
                         if(!empty($category))
                         {
-                            $newurl =  str_replace($oldurl, 'link://product-category/'.$category['term_id'], $oldurl);
+                            $newurl =  str_replace($oldurl, 'shop://product-category/'.$category['term_id'], $oldurl);
                             $listimages[] = array(
-                                'slider_images' => $wp_upload_dir['baseurl']."/". get_post_meta($imageid, 'swp_app_deals_large', true),
+                                'deals_image' => $wp_upload_dir['baseurl']."/". get_post_meta($imageid, 'swp_app_deals_large', true),
                                 'url' => $newurl
                             );	
                         }
@@ -126,39 +126,39 @@ if( !class_exists('SWPappendpointsdeals') ){
                     }
                     elseif($oldurl == $home.'/contact-us'){					
                         $listimages[] = array(
-                            'slider_images' => $wp_upload_dir['baseurl']."/". get_post_meta($imageid, 'swp_app_deals_large', true),
-                            'url' => 'link://contact-us'
+                            'deals_image' => $wp_upload_dir['baseurl']."/". get_post_meta($imageid, 'swp_app_deals_large', true),
+                            'url' => 'shop://contact-us'
                         );	
                     }elseif($oldurl == $home.'/about-us'){					
                         $listimages[] = array(
-                            'slider_images' => $wp_upload_dir['baseurl']."/". get_post_meta($imageid, 'swp_app_deals_large', true),
-                            'url' => 'link://about-us'
+                            'deals_image' => $wp_upload_dir['baseurl']."/". get_post_meta($imageid, 'swp_app_deals_large', true),
+                            'url' => 'shop://about-us'
                         );	
                     }elseif($oldurl == $home.'/bookmark'){					
                         $listimages[] = array(
-                            'slider_images' => $wp_upload_dir['baseurl']."/". get_post_meta($imageid, 'swp_app_deals_large', true),
-                            'url' => 'link://bookmark'
+                            'deals_image' => $wp_upload_dir['baseurl']."/". get_post_meta($imageid, 'swp_app_deals_large', true),
+                            'url' => 'shop://bookmark'
                         );	
                     }elseif($oldurl == $home.'/term-and-conditions'){					
                         $listimages[] = array(
-                            'slider_images' => $wp_upload_dir['baseurl']."/". get_post_meta($imageid, 'swp_app_deals_large', true),
-                            'url' => 'link://term-and-conditions'
+                            'deals_image' => $wp_upload_dir['baseurl']."/". get_post_meta($imageid, 'swp_app_deals_large', true),
+                            'url' => 'shop://term-and-conditions'
                         );	
                     }elseif($oldurl == $home.'/privacy-policy'){					
                         $listimages[] = array(
-                            'slider_images' => $wp_upload_dir['baseurl']."/". get_post_meta($imageid, 'swp_app_deals_large', true),
-                            'url' => 'link://privacy-policy'
+                            'deals_image' => $wp_upload_dir['baseurl']."/". get_post_meta($imageid, 'swp_app_deals_large', true),
+                            'url' => 'shop://privacy-policy'
                         );	
                     }else{
                         $listimages[] = array(
-                            'slider_images' => $wp_upload_dir['baseurl']."/". get_post_meta($imageid, 'swp_app_deals_large', true),
+                            'deals_image' => $wp_upload_dir['baseurl']."/". get_post_meta($imageid, 'swp_app_deals_large', true),
                             'url' => $oldurl
                         );
                     }					
                 }
                 else{
                     $listimages[] = array(
-                        'slider_images' => $wp_upload_dir['baseurl']."/". get_post_meta($imageid, 'swp_app_deals_large', true),
+                        'deals_image' => $wp_upload_dir['baseurl']."/". get_post_meta($imageid, 'swp_app_deals_large', true),
                         'url' => null
                     );	
                 }
