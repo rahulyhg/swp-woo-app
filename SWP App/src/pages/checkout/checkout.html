@@ -1,18 +1,132 @@
-<!--
-  Generated template for the CheckoutPage page.
 
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>checkout</ion-title>
+  <ion-navbar hideBackButton>
+    <ion-title>Checkout</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+<!--
+    <ion-list>
+        <button detail-none (click)="expandItem(item)" ion-item *ngFor="let item of items">
+          <ion-thumbnail item-start>
+            <img src="http://placehold.it/100">
+          </ion-thumbnail>
+          <h2>My Neighbor Totoro</h2>
+          <p>Hayao Miyazaki • 1988</p>
+          <expandable [expandHeight]="80" [expanded]="item.expanded">
+              Hello people
+          </expandable>
+          <button ion-button clear item-end>View</button>
+        </button>
+      </ion-list>  
 
+      
+      <ion-list no-lines>
+         
+        <button detail-none (click)="expandItem(item)" ion-item *ngFor="let item of items">
+              {{item.title}}
+              <expandable [expandHeight]="120" [expanded]="item.expanded">
+                
+               <div  *ngFor="let data of item.Data">
+            
+                <ion-item *ngIf ="item.title == 'Address'"> 
+                {{data[0].billing.address_1}}
+                </ion-item>
+
+                <ion-item *ngIf ="item.title == 'Shipping Methods'"> 
+                  <ion-select [(ngModel)]="shippingMethod" >
+              <ion-option *ngFor="let s of shippingMethod " value="{{s.id}}">{{s.title}}</ion-option>
+                 
+           
+                </ion-select>
+                {{data[0].title}}
+
+                </ion-item>
+
+                <ion-item *ngIf ="item.title == 'Address'"> 
+                
+                 </ion-item>
+
+                <ion-item *ngIf ="item.title == 'Payment Methods'"> 
+                    <ion-select [(ngModel)]="paymentMethod" >
+                        <ion-option *ngFor="let payment of data " value="{{payment.method_id}}">{{payment.method_title}}</ion-option>
+                        </ion-select>
+
+                {{data[0].method_id}} 
+
+                 </ion-item>
+
+                </div>
+              </expandable>
+            </button>
+        </ion-list> -->
+
+        
+
+
+<!-- Address -->
+<ion-list class = " checkoutaddress" *ngIf="user" [(ngModel)]="newOrder"  ngDefaultControl>
+    <ion-item-divider >
+      <ion-icon name="location" item-left></ion-icon>
+      <ion-label><b dark>Address</b></ion-label>
+      <button ion-button clear item-right [navPush]="AddressPage">
+        <span>change</span>
+      </button>
+    </ion-item-divider>
+    <ion-item no-border>
+      <span this-title><b>Delivary Address</b></span>
+      <div this-content>
+			<p>{{newOrder.shipping.address_1}} {{newOrder.shipping.address_2}}</p>
+			<p>{{newOrder.shipping_city}}, {{newOrder.shipping_state}} {{newOrder.shipping_postcode}}</p>
+			<p>{{newOrder.shipping_country}}</p>
+      </div>
+    </ion-item> 
+    <ion-item color="light" no-border>
+      <span this-title><b>Billing Address</b></span>
+      <div this-content>
+      	<p>{{newOrder.billing.address_1}} {{newOrder.billing.address_2}}</p>
+			<p>{{newOrder.billing.city}}, {{newOrder.billing.state}} {{newOrder.billing.postcode}}</p>
+			<p>{{newOrder.billing.country}}</p>
+        
+      </div>
+    </ion-item> 
+  </ion-list>
+
+  <ion-row>
+    Order Details
+  </ion-row>
+
+  <ion-row>
+    Total
+  </ion-row>
+
+<ion-row>    
+    <ion-item>
+        <ion-label>Shipping methods</ion-label>
+        <ion-select [(ngModel)]="shippingMethod" >
+        <ion-option *ngFor="let s of shippingMethods"value="{{s.id}}">{{s.title}}</ion-option>
+      </ion-select>
+      </ion-item>
+</ion-row>
+
+
+<ion-row>
+  <ion-item>
+      <ion-label>Payment Method</ion-label>
+      <ion-select [(ngModel)]="paymentMethod">
+        <ion-option *ngFor="let p of paymentMethods" value="{{p.method_id}}">{{ p.method_title }}</ion-option>
+      </ion-select>
+    </ion-item>
+</ion-row>
+<ion-row>
+  T&C
+</ion-row>
 </ion-content>
+<ion-footer>
+    <button ion-button outline block (click)="swp_placeOrder()">Place Order</button>
+    <button ion-button outline block (click)="swp_backToCart()">to cart</button>
+</ion-footer>

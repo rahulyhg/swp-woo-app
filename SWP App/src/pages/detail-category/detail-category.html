@@ -3,11 +3,12 @@
 
   <ion-navbar>
     <ion-title>{{categoryDetails.name}}</ion-title>
-    <ion-buttons right>
-        <button ion-button icon-only>
-            <ion-icon name="cart" (click)="swp_OpenCartPage()"></ion-icon>
-        </button>
-    </ion-buttons>
+    
+    <ion-buttons right >
+            <button ion-button icon-only (click)="swp_OpenCartPage($event)">
+                <ion-icon name="cart" ></ion-icon>
+            </button>
+        </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -15,20 +16,32 @@
 
 <ion-content  class="outer-content">
    <!-- products in list view-->
-   <!--<ion-list  *ngIf="0 < categoryProducts.length">  -->
+   <!--<ion-list  no-lines *ngIf="0 < categoryProducts.length">  -->
       <ion-item  *ngFor ="let product of categoryProducts" (click)="swp_OpenProductDetailsPage(event,product.id)">
    <ion-card>
        <ion-row>
            <ion-col col-4>
-                <ion-thumbnail item-left>  <!--item left to show thumbnail at left -->
-                    <img src="{{product.images[0].src}}"/>              
+                <ion-thumbnail item-left>
+                    <img *ngIf= " 0 < product.images.length " src="{{product.images[0].src}}"/>
+                    <img *ngIf= "!product.images" src="assets/images/no-img.png"/>    
             </ion-thumbnail> 
            </ion-col>
            <ion-col col-8 padding-2 text-wrap>
-                <h2>{{product.name}}</h2>
+               <ion-row>
+            <h2>{{product.name}}</h2>
                 <br>
-                <h3 [innerHTML]="product.price_html"></h3>
-                <span [innerHTML]="product.short_description.substr(0,50) + '...'"></span> 
+                <h3 *ngIf="product.type !='variable'" [innerHTML]="product.price_html"></h3>
+               <!-- <span [innerHTML]="product.short_description.substr(0,50) + '...'"></span>  -->
+            </ion-row>
+            <ion-row class=" button-row">
+                <button end *ngIf="product.type !='variable'" ion-button outline round (tap)="addToCart($event,product)">
+                        Add to Cart
+                </button>
+
+                <button end *ngIf="product.type=='variable'" ion-button outline round >
+                        Choose Options
+                </button>
+            </ion-row>
            </ion-col>
         </ion-row>
     </ion-card>

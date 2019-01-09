@@ -1,0 +1,41 @@
+
+<ion-menu [content]="content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-list>
+      <ion-item>
+       <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+          <ion-icon [name]="p.icon" item-left></ion-icon>
+        {{p.title}}
+       </button>
+      
+       <button menuClose ion-item (click)="OpenSigninPage()"  *ngIf="!isloggedin">
+          <ion-icon name ="log-in" item-left></ion-icon>
+          <h2> Sign In</h2>
+        </button>
+
+      <button menuClose ion-item (click)="OpenMyOrdersPage()"  *ngIf="isloggedin">
+          <ion-icon name ="reorder" item-left></ion-icon>
+        <h2> My Orders Page</h2>
+      </button>
+
+      <button *ngIf="isloggedin" menuClose ion-item (click)="OpenLogoutPage()">
+          <ion-icon name ="log-out" item-left></ion-icon>
+    <h2> Log Out</h2>
+      </button>
+    </ion-item>
+  
+  </ion-list>
+
+
+   
+
+  </ion-content>
+
+</ion-menu>
+<ion-nav #content [root]="homePage" swipeBackEnabled="false" persistent="true"></ion-nav>

@@ -1,0 +1,169 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Address Details</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+        <ion-list class="AddressForm" no-margin nolines>
+          
+          <form [formGroup]="formAddress">
+              
+               <ion-item  bg-transparent>
+                  <ion-label floating><span >First Name :</span></ion-label>
+                  <ion-input light formControlName="Billing_first_name"></ion-input>
+                </ion-item>
+
+                <ion-item  bg-transparent>
+                    <ion-label floating><span >Last Name :</span></ion-label>
+                    <ion-input light formControlName="Billing_last_name"></ion-input>
+                  </ion-item>
+
+                <ion-item  bg-transparent>
+                    <ion-label floating><span >Email</span></ion-label>
+                    <ion-input light formControlName="userEmail"></ion-input>
+                  </ion-item>
+
+                  <ion-item  bg-transparent>
+                      <ion-label floating><span >Contact</span></ion-label>
+                      <ion-input light formControlName="Billing_phone"></ion-input>
+                    </ion-item>
+                  
+                <ion-label>Billing Address</ion-label>
+
+                <ion-item  bg-transparent>
+                    <ion-label floating><span >Address 1</span></ion-label>
+                    <ion-input light formControlName="Billing_address_1"></ion-input>
+                  </ion-item>
+
+                  
+                <ion-item  bg-transparent>
+                    <ion-label floating><span >Address 2</span></ion-label>
+                    <ion-input light formControlName="Billing_address_2"></ion-input>
+                  </ion-item>
+
+                  <ion-item  bg-transparent>
+                      <ion-label floating><span >Country</span></ion-label>
+                      <ion-input light formControlName="Billing_country"></ion-input>
+                    </ion-item>
+  
+                    
+                  <ion-item  bg-transparent>
+                      <ion-label floating><span >State</span></ion-label>
+                    <!-- <ion-input light formControlName="Billing_state"></ion-input>  -->  
+
+                    <ion-select formControlName="Billing_state">
+                        <ion-option value="New Delhi">New Delhi</ion-option>
+                        <ion-option value="Uttar Pradesh">Uttar Pradesh</ion-option>
+                        <ion-option value="Maharashtra">Maharashtra</ion-option>
+                        <ion-option value="Tamil Nadu">Tamil Nadu</ion-option>
+                        <ion-option value="Madhya Pradesh">Madhya Pradesh</ion-option>
+                      </ion-select>
+                    </ion-item>
+
+
+                    <ion-item  bg-transparent>
+                        <ion-label floating><span >City </span></ion-label>
+                        <ion-input light formControlName="Billing_city"></ion-input>
+                      </ion-item>
+
+                      <ion-item  bg-transparent>
+                          <ion-label floating><span >Zipcode</span></ion-label>
+                          <ion-input light formControlName="Billing_zipcode"></ion-input>
+                      </ion-item>
+
+                    
+            </form>
+          </ion-list>
+          
+      <ion-item>
+          <ion-label>Same Shipping Details</ion-label>        
+        <ion-checkbox (ionChange)="swp_checkisShippingSame()"></ion-checkbox>
+        </ion-item>
+
+                  <ion-list class="AddressForm" no-margin nolines>
+                    
+                            <form [formGroup]="formAddress">
+                        <ion-item  bg-transparent >
+                            <ion-label floating><span >First Name :</span></ion-label>
+                            <ion-input light formControlName="Shipping_first_name"></ion-input>
+                          </ion-item>
+
+                          <ion-item  bg-transparent >
+                              <ion-label floating><span >last Name :</span></ion-label>
+                              <ion-input light formControlName="Shipping_last_name"></ion-input>
+                            </ion-item>
+
+                <ion-item  bg-transparent >
+                    <ion-label floating><span >Address 1</span></ion-label>
+                    <ion-input light formControlName="Shipping_address_1"></ion-input>
+                  </ion-item>
+
+                  
+                <ion-item  bg-transparent >
+                    <ion-label floating><span >Address 2</span></ion-label>
+                    <ion-input light formControlName="Shipping_address_2"></ion-input>
+                  </ion-item>
+
+                  <ion-item  bg-transparent >
+                      <ion-label floating><span >Country</span></ion-label>
+                      <ion-input light formControlName="Shipping_country"></ion-input>
+                    </ion-item>
+  
+                    
+                  <ion-item  bg-transparent >
+                      <ion-label floating><span >State</span></ion-label>
+                    <!-- <ion-input light formControlName="Billing_state"></ion-input>  -->  
+
+                    <ion-select formControlName="Shipping_state">
+                        <ion-option value="New Delhi">New Delhi</ion-option>
+                        <ion-option value="Uttar Pradesh">Uttar Pradesh</ion-option>
+                        <ion-option value="Maharashtra">Maharashtra</ion-option>
+                        <ion-option value="Tamil Nadu">Tamil Nadu</ion-option>
+                        <ion-option value="Madhya Pradesh">Madhya Pradesh</ion-option>
+                      </ion-select>
+                    </ion-item>
+
+
+                    <ion-item  bg-transparent >
+                        <ion-label floating><span >City </span></ion-label>
+                        <ion-input light formControlName="Shipping_city"></ion-input>
+                      </ion-item>
+
+                      <ion-item  bg-transparent >
+                          <ion-label floating><span >Zipcode</span></ion-label>
+                          <ion-input light formControlName="Shipping_zipcode"></ion-input>
+                      </ion-item>
+
+
+                      <button ion-button round center text-uppercase (click)="swp_confirmAddress()">
+                          <span>Confirm</span>
+                        </button>
+
+                        
+                                </form>
+                                </ion-list>
+                            
+
+
+                        
+
+
+
+    
+  
+
+
+
+
+
+
+
+
+
+
+</ion-content>

@@ -1,3 +1,31 @@
 page-checkout {
+    button {
+        align-items: baseline;
+    }
 
+    .card-header{
+        background-color: map-get($colors, primary);
+        color: #fff;
+    }
+    .card-content {
+        padding: 0px 16px; 
+        max-height: 0px;
+    }
+
+    .checkoutaddress{
+		hide-show .hide-show-content{border-top:none;}
+	}
+	hide-show{
+		.button-change{
+			height:50px;
+			[this-title]{
+				line-height:28px;
+				.icon{
+					float:left;
+					margin-right:8px;
+				}
+			}
+		}
+		.hide-show-content{border-top:$item-md-divider-border-bottom;}
+	}
 }

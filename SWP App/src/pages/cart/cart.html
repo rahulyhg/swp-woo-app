@@ -1,45 +1,55 @@
 
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>Shopping Cart</ion-title>
+  <ion-navbar hideBackButton>
+    <ion-title center >Shopping Cart</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content>
-
-
-    <ion-list>
+  
+    <ion-list no-lines *ngIf =" cartItems && 0 < cartItems.length ">
         <ion-item-sliding *ngFor="let item of cartItems; let i= index ">
-         
-          <ion-item> 
-          <ion-thumbnail item-left *ngIf =" item.product.attributes == 0"  >  <!--item left to show thumbnail at left -->
-               <img src="{{item.product.images[0].src}}"/>   
-               <!-- <img  src="{{item.variation.images[0].src}}"/>    featured img at 0 position-->    
-          </ion-thumbnail> 
-          <ion-thumbnail item-left *ngIf ="item.product.attributes !=0"  >  <!--item left to show thumbnail at left -->
-            <img src="{{item.product.image.src}}"/>   
-            <!-- <img  src="{{item.variation.images[0].src}}"/>    featured img at 0 position-->    
-       </ion-thumbnail> 
-          
-          <h3>{{item.product.name}} </h3>
-          <br>
-          <p>{{item.qty}} * {{item.product.price}} </p> <br>
-          <p>{{item.amount}}</p>
+          <ion-item>
+              <ion-card>
+                <ion-row>
+                  <ion-col col-3>
+                      <ion-thumbnail item-left> 
+                          <img  *ngIf= "!item.parentProduct" src="{{item.product.images[0].src}}"/>             
+                          <img  *ngIf= "item.parentProduct" src="{{item.parentProduct.images[0].src}}"/>   
+                     </ion-thumbnail> 
+                  </ion-col>
+                  <ion-col col-9>
+                      <span class="product-name" *ngIf= "item.parentProduct">{{item.parentProduct.name}} </span>
+                      <span class="product-name" *ngIf= "! item.parentProduct">{{item.product.name}} </span>
+                      <ion-row>
+                          <span >{{item.product.price}} </span>
+                      </ion-row>
+                      <ion-row padding-4 class="qtyrow">
+                        <ion-col col-2>
+                          <span> Qty :</span>
+                        </ion-col>
+                        <ion-col col-2 float-left class="smallButtons" nopadding margin-0>
+                            
+                                <ion-icon small name="add" (click)="swp_increaseQty(item,i)"></ion-icon>
+                             
+                        </ion-col>
+                        <ion-col float-left col-2 nopadding margin-0>
+                            {{item.qty}}
+                        </ion-col>
+                        <ion-col float-left col-2 class=" smallButtons" nopadding margin-0>
+                           
+                                <ion-icon small name="remove" (click)="swp_decreaseQty(item,i)"></ion-icon>
+                              
+                        </ion-col>
+                      </ion-row>
+                  </ion-col>
+                </ion-row>
+             </ion-card>
+          </ion-item>
        
-          <div class = "button">
-              <button primary large>
-                <ion-icon name="add" (click)="swp_increaseQty(item,i)"></ion-icon>
-              </button>
-              <p>{{item.qty}}</p>
-              <button primary large>
-                <ion-icon name="remove" (click)="swp_decreaseQty(item,i)"></ion-icon>
-              </button>
-            </div>
-          
-        </ion-item>
         <ion-item-options>
           <button drager (click)="swp_removeFromCart(item,i)" ion-button>
              <ion-icon name="trash"></ion-icon>
@@ -47,13 +57,16 @@
           </button>
         </ion-item-options>   
           </ion-item-sliding>
-      </ion-list>
-      
-      <ion-grid>
+        </ion-list> 
+
+     
+    
+    
+      <ion-card *ngIf ="cartItems && 0 < cartItems.length">
+        <ion-card-title>
+          Total
+        </ion-card-title>
         <ion-row>
-          <ion-col col-3>
-           <h3> Total </h3>
-          </ion-col>
           
           <ion-col col-3>
       
@@ -67,23 +80,24 @@
             
         </ion-row>
         
-      </ion-grid>
-      
-      
-      <!-- <ion-card>
-        <ion-card-content>
-          
-         <button ion-button full 
-            (click)="proceedToCheckout()"
-            [disabled]="0 === cart.items.length">Checkout</button>
-          </ion-card-content>
-      </ion-card> -->
-      
+      </ion-card>
+
+      <!--Cart Empty-->
+      <div class="empty-cart" *ngIf =" !cartItems">
+      </div>
 
 </ion-content>
 
+<ion-footer >
+    <ion-toolbar>
+      <ion-grid>
+            <button ion-button outline block (click)="swp_ContinueShop()">Continue Shopping</button>
+      </ion-grid>
+    </ion-toolbar>
+  </ion-footer>
 
-<ion-footer>
+
+<ion-footer *ngIf ="cartItems && 0 < cartItems.length " >
     <ion-toolbar>
       <ion-grid>
         <ion-row>
@@ -91,7 +105,7 @@
             <button ion-button outline block (click)="swp_Modalclose()">Back</button>
           </ion-col>
           <ion-col>
-            <button ion-button block (click)="swp_checkout()">Checkout</button>
+            <button  ion-button block (click)="swp_checkout()">Checkout</button>
           </ion-col>
         </ion-row>
       </ion-grid>

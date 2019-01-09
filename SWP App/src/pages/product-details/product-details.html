@@ -1,11 +1,14 @@
-
 <ion-header>
-
   <ion-navbar>
     <ion-title>{{product.name}}</ion-title>
-    <ion-buttons right>
-            <button ion-button icon-only>
-                <ion-icon name="cart" (click)="swp_OpenCartPage()"></ion-icon>
+    <ion-buttons end>
+        <button ion-button icon-only (click)="swp_goBack($event)">
+            <ion-icon name="arrow" ></ion-icon>
+        </button>
+    </ion-buttons>
+    <ion-buttons right >
+            <button ion-button icon-only (click)="swp_OpenCartPage($event)">
+                <ion-icon name="cart" ></ion-icon>
             </button>
         </ion-buttons>
   </ion-navbar>
@@ -14,6 +17,13 @@
 
 <ion-content class="outer-content">
 
+<!-- Home Fab button -->  
+<ion-fab right bottom>
+        <button ion-fab primary (click)="swp_goHome()"><ion-icon name="home"></ion-icon></button>
+</ion-fab>
+
+
+<!--Product images-->
 <div relative padding-4 light-bg *ngIf="product.images && 0 < product.images.length">
 		<ion-slides *ngIf="product.images"  pager="true">
 			<ion-slide *ngFor="let image of product.images">
@@ -21,43 +31,74 @@
 				<img float-left *ngIf="!image.src" src = "assets/images/no-img.png" />
 			</ion-slide>
 		</ion-slides>
-        
-        <div absolute bottom primary-bg>
-        <ion-row padding-2>
-            <ion-col col-3 float-left class="product-price">
-                    <span light >{{product.price}}</span>
-                   <!-- <span light *ngIf="isVariation" [innerHTML]="selectedVariationDetails.price"></span>
-                    [color]="addToFav ? 'danger' : 'dark'" 
-            --></ion-col>
-            <ion-col float-right>
-                <ion-icon float-right name="heart"  [color]="addToFav ? 'danger' : 'dark'"  (click)="addtoW($event,product)"></ion-icon>
-                 </ion-col>
-          </ion-row>
-         
-         
-         <ion-row>
-            <ion-col col-2>
-                <button primary small>
-                  <ion-icon name="add" (click)= "swp_increaseQty()" ></ion-icon>
-                </button>
-            </ion-col >
-            <ion-col col-2>
-                 <ion-input type="text" [(ngModel)]="EnteredQty"></ion-input>
+</div> 
+	
+<!--Product details-->
+
+       <!-- <div absolute bottom primary-bg> -->
+        <ion-row nopadding>
+            <ion-col col-10 float-left  dark extra-large textR  >
+                <ion-row class="product-price">
+                        <span [innerHTML]="product.price_html"></span>
+                </ion-row>
+                <ion-row class="product-name">
+                        <span>{{product.name}}</span>
+                </ion-row>
             </ion-col>
-            <ion-col col-2>
-                <button primary small>
-                  <ion-icon name="remove"  (click)= "swp_decreaseQty()"></ion-icon>
-                </button>
-            </ion-col>
-            <ion-col col-6>
-                <p> Total: 20</p>
+
+            <!--fav    -->
+            <ion-col float-right> 
+                <ion-icon class="large-icon" absolute float-right name="heart" [color]=" addToFav ?'primary':'gray'" (click)="swp_addToFav($event,product)"></ion-icon>
             </ion-col>
           </ion-row>
 
-        <ion-row padding-2>
-             <span class="product-name" light [innerHTML]="product.name"></span> 
-            <span class= "discription" light top-margin-20px float-right [innerHTML]="product.short_description"></span> 
-        </ion-row>
+
+         <ion-card>
+             <ion-card-title>
+                 <ion-row>
+                     <ion-col col-6> <span>Quantity</span></ion-col>
+                     <ion-col col-6> <span float-right>Total</span></ion-col>
+                 </ion-row>
+             </ion-card-title>
+         <ion-row >
+            <ion-col col-6>
+               <!-- <span>Quantity</span>-->
+                <ion-row>
+                    <ion-col col-2>
+                            <ion-icon  class="price-qty" small name="add-circle" (click)= "swp_increaseQty()" ></ion-icon>
+                    </ion-col>
+                    <ion-col col-2>
+                            <ion-input class="price-qty" type="text" ngDefaultControl [(ngModel)]="EnteredQty"></ion-input>
+                    </ion-col>
+                    <ion-col col-2>
+                            <ion-icon class="price-qty" small name="remove-circle" (click)= "swp_decreaseQty()"></ion-icon>
+                    </ion-col>
+                    <ion-col col-6>
+
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+            <ion-col col-6>
+              <!-- <ion-row>
+                        <span> Total</span>
+                </ion-row>-->
+                <ion-row float-right>
+                        <span class="price-qty">{{totalDisplayed}} </span>
+                </ion-row>
+            </ion-col>
+            </ion-row>
+        </ion-card>
+
+
+<ion-card>
+    <ion-card-title>
+            About this Product
+    </ion-card-title>
+    <ion-row padding-2>
+        <span class= "discription" light top-margin-20px float-right [innerHTML]="product.short_description"></span> 
+    </ion-row>
+</ion-card>
+        
        
         
 
@@ -88,32 +129,16 @@
                 </ng-container>
             </div>
 
-      
-      <!--
-        <div *ngIf="productDetails.attributes && 0 < productDetails.attributes.length">
-        <ion-item-divider>Product options</ion-item-divider>
-        <ng-container *ngFor="let attribute of productDetails.attributes">
-          <ion-item *ngIf="attribute.variation">
-            <ion-label> {{ attribute.name }}</ion-label>
-            <ion-select interface="popover" [(ngModel)]="selectedVariation[attribute.name]" (ionChange)="swp_checkProductVariations(attribute.name)">
-              <ion-option *ngFor="let option of attribute.options" [style.background]="option">{{ option }}</ion-option>
-            </ion-select>
-            </ion-item>
-        </ng-container>
-    </div>  -->
 
-</div>
-</div>
-
-<!--About this PRoduct-->
-<div>
-    About this Product
-</div>
 
 
 <!--reviews-->
-<ion-item-divider>Reviews</ion-item-divider>
 <div *ngIf= "reviews.length > 0">
+<ion-card >
+    <ion-card-title>
+        Reviews
+    </ion-card-title>
+
 <ion-row *ngFor = "let review of reviews">
         <ion-col col-5>
             {{review.name}}
@@ -139,17 +164,41 @@
         </ion-col>
       </ion-row>
       <span>{{product.review}}</span>
-    </div>
+</ion-card>
+</div>
 
     
-    <!--Simillar Products-->
-    <ion-item-divider>Simillar Products</ion-item-divider>
+<!--Simillar Products-->
+<div *ngIf="4 < similarProducts.length ">
+<ion-card >
+ <ion-card-title>
+        Simillar Products
+    </ion-card-title>
+<ion-row  wrap padding-4 >
+        <ion-col col-6 width-50 *ngFor="let product of similarProducts |slice :4:50" 
+        padding-4 [navPush]="ProductDetailsPage" [navParams]="{product_id:product.id}"  >
+          <div relative size-full overflow (click) = " swp_OpenProductDetailsPage($event,product.id)">
+            <ion-card  >
+            <img max-height-100 src="assets/images/11.jpg"> 
+            <ion-row mark absolute top left width-100 height-100 center>
+              <ion-col text-center light>
+                  <div [innerHTML]="product.price_html"></div>
+                  <div  text-wrap >{{product.name | slice :0:50}} </div>
+              </ion-col>
+            </ion-row>
+          </ion-card>
+           </div>
+        </ion-col>
+      </ion-row>
+</ion-card>
+</div>
+
 
 </ion-content>
 
 <ion-footer>
 
-        <button ion-button block icon-start [disabled]="requireOptions && product.type =='variable'" (click)="addToCart($event,product)">
+        <button ion-button block icon-start [disabled]="requireOptions && product.type =='variable'" (click)="swp_addToCart($event,product)">
                 <ion-icon name="ios-cart-outline"></ion-icon>
                 Add to Cart
         </button>

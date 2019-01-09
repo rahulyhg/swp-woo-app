@@ -1,15 +1,17 @@
-import { Component, ComponentFactoryResolver } from '@angular/core';
+import { Component} from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { Http,Headers} from '@angular/http';
 import { FormControl } from '@angular/forms';
+import {Storage} from '@ionic/Storage';
+
 
 import 'rxjs/add/operator/debounceTime';
- 
+
+//Pages 
 import {ProductDetailsPage} from '../../pages/product-details/product-details';
 import {CartPage} from '../../pages/cart/cart';
 
-import {Storage} from '@ionic/Storage';
-import {WC_url} from '..';
+//providers
+import {AuthServiceProvider} from '../../providers/auth-service/auth-service';
 
 
 @Component({
@@ -24,16 +26,21 @@ export class SearchPage {
     token: any;
     searching: any = false;
     temp: any [] = [] ;
+    RestApi: any;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, 
-    public http: Http, public storage: Storage) {
+  constructor(public navCtrl: NavController,
+     public navParams: NavParams, 
+    public storage: Storage,
+    public WcAuth: AuthServiceProvider) {
+    this.RestApi= this.WcAuth.init();
+
     this.searchControl = new FormControl();
     this.products =[];
     this.temp = [];
    
 
-    this.storage.get("AdminUser").then((admin)=>{
+   /* this.storage.get("AdminUser").then((admin)=>{
       this.token = admin.token;
 
       let headers = new Headers();
@@ -49,7 +56,18 @@ export class SearchPage {
          
       })
      
-    })
+    })*/
+
+    //Get Products
+    this.RestApi.getAsync("products").then (
+      (data)=>{
+        //  this.products= JSON.parse(data.body
+this.products = this.json2array(data);
+this.temp = this.products;
+          console.log(this.products);
+              },
+      (err)=>{console.log(err)}
+          ); 
   }
   
 //filter Product list based on term passed
@@ -94,7 +112,22 @@ swp_OpenProductDetailsPage(event,product_id){
   this.navCtrl.push(ProductDetailsPage,{product_id:product_id});
 }
 
-swp_OpenCartPage(){
+swp_OpenCartPage(event)
+{
   this.navCtrl.push(CartPage);
+}
+
+ /** Infinte Scroll content for more products */
+ swp_doInfinite(infiniteScroll){
+
+  setTimeout(() => {
+    if(this.products.length)
+    for (let i = 0; i < this.products.length; i++) {
+  // this.featuredProducts.push( this.items.length );
+    }
+
+    console.log('Async operation has ended');
+ //   infiniteScroll.complete();
+  }, 500);
 }
 }
